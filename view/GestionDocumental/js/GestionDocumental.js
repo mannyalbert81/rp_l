@@ -317,8 +317,8 @@ $("#id_subcategorias").click(function() {
 	if ( id_subcategorias == 83  ) 
 
 	  	{
-			console.log('hola')
-			_numero_credito.removeAttr('disabled');
+			
+		  _numero_credito.removeAttr('disabled');
 		  _nombre_tipo_documentos.removeAttr('disabled');
 	  	  _fecha_documento_legal.removeAttr('disabled');
 	  	  _id_carton_documentos.removeAttr('disabled');
@@ -327,7 +327,20 @@ $("#id_subcategorias").click(function() {
 		  
 	  	}
 
-	  	
+	if ( id_subcategorias == 84  ) 
+
+  	{
+		
+		 _cedula_capremci.removeAttr('disabled');
+	      _nombres_capremci.removeAttr('disabled');
+	  	  _numero_credito.removeAttr('disabled');
+	  	  _nombre_tipo_documentos.removeAttr('disabled');
+	  	  _fecha_documento_legal.removeAttr('disabled');
+	  	  _id_carton_documentos.removeAttr('disabled');
+	  	  _monto_documento.removeAttr('disabled');
+	  	  _Guardar.removeAttr('disabled');
+	  
+  	}
 	});
 
 
@@ -424,7 +437,20 @@ $("#id_subcategorias").change(function() {
 		  
 	  	}
 
-	  	
+		if ( id_subcategorias == 84  ) 
+
+	  	{
+			
+			 _cedula_capremci.removeAttr('disabled');
+		      _nombres_capremci.removeAttr('disabled');
+		  	  _numero_credito.removeAttr('disabled');
+		  	  _nombre_tipo_documentos.removeAttr('disabled');
+		  	  _fecha_documento_legal.removeAttr('disabled');
+		  	  _id_carton_documentos.removeAttr('disabled');
+		  	  _monto_documento.removeAttr('disabled');
+		  	  _Guardar.removeAttr('disabled');
+		  
+	  	}
 	});
 
 

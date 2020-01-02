@@ -12,8 +12,10 @@ class IndexacionController extends ControladorBase{
         
         $bancos = new BancosModel();
         
-        require_once 'core/EntidadBase_128.php';
-        $db = new EntidadBase_128();
+        //require_once 'core/EntidadBase_128.php';
+      //  require_once 'core/EntidadBase.php';
+      //  $db = new EntidadBase();
+        //$db = new EntidadBase_128();
         
         
         session_start();
@@ -50,14 +52,18 @@ class IndexacionController extends ControladorBase{
   
     public function cargaBancos(){
     
-    	require_once 'core/EntidadBase_128.php';
-    	$db = new EntidadBase_128();
-    
+    	//require_once 'core/EntidadBase_128.php';
+    	//require_once 'core/EntidadBase.php';
+    	//$db = new EntidadBase_128();
+    	//$db = new EntidadBase();
+    	
+    	$bancos = new BancosModel();
+    	
     	$columnas="id_bancos, nombre_bancos";
     	$tabla = "tes_bancos";
     	$where = "local_bancos = 'TRUE' ";
     	$id="nombre_bancos";
-    	$resulset = $db->getCondiciones($columnas,$tabla,$where,$id);
+    	$resulset = $bancos->getCondiciones($columnas,$tabla,$where,$id);
     
     	if(!empty($resulset) && count($resulset)>0){
     
@@ -69,14 +75,17 @@ class IndexacionController extends ControladorBase{
 
     public function cargaCartonDocumentos(){
     
-    	require_once 'core/EntidadBase_128.php';
-    	$db = new EntidadBase_128();
+    	$bancos = new BancosModel();
+    	//require_once 'core/EntidadBase_128.php';
+    	//require_once 'core/EntidadBase.php';
+    	//$db = new EntidadBase_128();
+    	//$db = new EntidadBase();
     
     	$columnas="id_carton_documentos, numero_carton_documentos";
     	$tabla = "carton_documentos";
     	$where = "estado_carton_documentos = 'FALSE'";
     	$id="numero_carton_documentos";
-    	$resulset = $db->getCondiciones($columnas,$tabla,$where,$id);
+    	$resulset = $bancos->getCondiciones($columnas,$tabla,$where,$id);
     
     	if(!empty($resulset) && count($resulset)>0){
     
@@ -87,14 +96,18 @@ class IndexacionController extends ControladorBase{
     
     public function cargaTipoDocumentos(){
     
-    	require_once 'core/EntidadBase_128.php';
-    	$db = new EntidadBase_128();
+    	$bancos = new BancosModel();
+    	
+    	//require_once 'core/EntidadBase_128.php';
+    	//require_once 'core/EntidadBase.php';
+    	//$db = new EntidadBase_128();
+    	//$db = new EntidadBase();
     
     	$columnas="id_tipo_documentos, nombre_tipo_documentos";
     	$tabla = "tipo_documentos";
     	$where = "1=1";
     	$id="nombre_tipo_documentos";
-    	$resulset = $db->getCondiciones($columnas,$tabla,$where,$id);
+    	$resulset = $bancos->getCondiciones($columnas,$tabla,$where,$id);
     
     	if(!empty($resulset) && count($resulset)>0){
     
@@ -109,14 +122,16 @@ class IndexacionController extends ControladorBase{
   
     public function cargaCategoria(){
         
-        require_once 'core/EntidadBase_128.php';
-        $db = new EntidadBase_128();
-        
+    	$bancos = new BancosModel();
+    	//require_once 'core/EntidadBase_128.php';
+    	//require_once 'core/EntidadBase.php';
+        //$db = new EntidadBase_128();
+        //$db = new EntidadBase();
         $columnas="id_categorias, nombre_categorias";
         $tabla = "categorias";
         $where = "1=1";
         $id="id_categorias";
-        $resulset = $db->getCondiciones($columnas,$tabla,$where,$id);
+        $resulset = $bancos->getCondiciones($columnas,$tabla,$where,$id);
         
         if(!empty($resulset) && count($resulset)>0){
             
@@ -129,9 +144,12 @@ class IndexacionController extends ControladorBase{
     
     public function cargaSubCategoria(){
         
-        require_once 'core/EntidadBase_128.php';
-        $db = new EntidadBase_128();
-        
+    	$bancos = new BancosModel();
+    	
+    	//require_once 'core/EntidadBase_128.php';
+    	//require_once 'core/EntidadBase.php';
+        //$db = new EntidadBase_128();
+        //$db = new EntidadBase();
         
         $id_categorias = (isset($_POST['id_categorias'])) ? $_POST['id_categorias'] : 0;
         
@@ -140,7 +158,7 @@ class IndexacionController extends ControladorBase{
             $tabla = "subcategorias";
             $where = "id_categorias='$id_categorias'";
             $id="id_subcategorias";
-            $resulset = $db->getCondiciones($columnas,$tabla,$where,$id);
+            $resulset = $bancos->getCondiciones($columnas,$tabla,$where,$id);
             
             if(!empty($resulset) && count($resulset)>0){
                 
@@ -231,8 +249,11 @@ class IndexacionController extends ControladorBase{
     
     public function GenerarReporte(){
         
-        require_once 'core/EntidadBase_128.php';
-        $db = new EntidadBase_128();
+    	$bancos = new BancosModel();
+    	
+        //require_once 'core/EntidadBase_128.php';
+    	//require_once 'core/EntidadBase.php';
+        //$db = new EntidadBase_128();
         
         session_start();
         $entidades = new EntidadesModel();

@@ -4,7 +4,7 @@
          
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Capremci</title>
+    <title>Liventy</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="icon" type="image/png" href="view/bootstrap/otros/login/images/icons/favicon.ico"/>
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -108,7 +108,7 @@
         		      <div class="col-xs-12 col-md-3 col-lg-3">
         		     <div class="form-group">
                           <label for="nombres_capremci" class="control-label">Nombre:</label>
-                          <input type="text" class=" form-control" id="nombres_capremci" name="nombres_capremci" readonly value=""  placeholder="Nombre..">
+                          <input type="text" class=" form-control" id="nombres_capremci" name="nombres_capremci"  value=""  placeholder="Nombre..">
                            <div id="mensaje_nombres_capremci" class="errores"></div> 
                   <span class="help-block"></span>
                      </div>
@@ -227,7 +227,7 @@
    <script src="view/bootstrap/plugins/input-mask/jquery.inputmask.js"></script>
    <script src="view/bootstrap/plugins/input-mask/jquery.inputmask.extensions.js"></script>
    <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
-   <script src="view/GestionDocumental/js/GestionDocumental.js?0.70"></script> 
+   <script src="view/GestionDocumental/js/GestionDocumental.js?0.71"></script> 
        
 
 
