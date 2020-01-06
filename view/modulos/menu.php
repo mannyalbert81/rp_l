@@ -683,6 +683,7 @@ $controladores=$_SESSION['controladores'];
               </a>
               <ul class="treeview-menu">
          <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index5"><i class="fa fa-circle-o"></i>Matriz de Juicios</a></li>
+	    <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index6"><i class="fa fa-circle-o"></i>Agregar Juicios</a></li>
 		         	
              </ul>
             </li>
