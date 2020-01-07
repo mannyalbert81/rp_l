@@ -74,57 +74,8 @@
             
                 <form id="frm_juicio" action="<?php echo $helper->url("MatrizJuicios","AgregarJuicio"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12 col-md-12 col-xs-12">
           		         	  <div class="row">
-                      	  
-                      	   <div class="col-xs-6 col-md-3 col-lg-3">
- 						 <div class='form-group'>
-			  			 <label for='id_origen_juicio' class='control-label'>Origen Juicio</label>
-			  			<select name="id_origen_juicio" id="id_origen_juicio"  class="form-control" >
-			  			 <option value="" selected="selected">--Seleccione--</option>
-						<?php foreach($resultOrigen as $res) {?>
-						<option value="<?php echo $res->id_origen_juicio; ?>" ><?php echo $res->nombre_origen_juicio; ?></option>
-						            
-						<?php } ?>
-						</select> 
-						  <div id="mensaje_id_origen_juicio" class="errores"></div>
-			  			</div>
-						</div>
-						
-							  	<div class="col-xs-6 col-md-3 col-lg-3 ">
-                    			<div class="form-group">
-                                    <label for="regional_juicios" class="control-label">Regional:</label>
-                                    <input type="text" class="form-control" id="regional_juicios" name="regional_juicios" value=""  placeholder="Regional" >
-                                     <input type="hidden"  id="regional_juicios" name="regional_juicios" value="0" >
-                                    <div id="mensaje_cedula_usuarios" class="errores"></div>
-                                 </div>
-                             </div>
-                      	  
-                		  	<div class="col-xs-6 col-md-3 col-lg-3 ">
-                    			<div class="form-group">
-                                    <label for="numero_usuarios" class="control-label">N° Juicio</label>
-                                    <input type="text" class="form-control" id="numero_usuarios" name="numero_usuarios" value=""  placeholder="# Juicio" >
-                                     <input type="hidden"  id="id_juicios" name="id_juicios" value="0" >
-                                    <div id="mensaje_cedula_usuarios" class="errores"></div>
-                                 </div>
-                             </div>
-
-                            <div class="col-xs-6 col-md-3 col-lg-3 ">
-                             		 
-                             		 <div class="form-group">
-                             		 
-                             		 	<label for="anio_juicio" class="control-label">Año de Juicio:</label>
-                                        <input type="text" class="form-control" id="anio_juicio" name="anio_juicio" value="" data-fechaactual="<?php echo date('Y');?>" placeholder="Año de Juicio">
-                                        <div id="mensaje_anio_juicio" class="errores"></div>
-                                        
-                                      </div>
-                                	
-                                   </div>  
-                             
-                         
-                             </div>
-                                  
-                             <div class="row">
-                                 
-                                 <div class="col-lg-3 col-xs-6 col-md-3">
+          		         	  
+    	          <div class="col-lg-3 col-xs-6 col-md-3">
                                  	<div class="form-group">
                                  	
                                         <label for="identificacion_clientes" class="control-label">Cédula:</label>
@@ -136,19 +87,65 @@
                                 
                                 <div class="col-lg-3 col-xs-6 col-md-3">
                                 	<div class="form-group">
-                                        <label for="telefono_usuarios" class="control-label">Nombre:</label>
-                                        <input type="text" class="form-control" id="telefono_usuarios" name="telefono_usuarios" value=""  placeholder="Nombre">
+                                        <label for="nombre_clientes" class="control-label">Nombre:</label>
+                                        <input type="text" class="form-control" id="nombre_clientes" name="nombre_clientes" value=""  placeholder="Nombre">
                                        
                                       </div>
                         		    
                         	    </div>
                         	    
+                        	           <div class="col-lg-3 col-xs-6 col-md-3">
+                                	<div class="form-group">
+                                        <label for="entidad_origen_juicios" class="control-label">Entidad de Origen:</label>
+                                        <input type="text" class="form-control" id="entidad_origen_juicios" name="entidad_origen_juicios" value=""  placeholder="Entidad de Origen">
+                                       
+                                      </div>
+                        		    
+                        	    </div>
+                      	  
+              
+						
+							  	<div class="col-xs-6 col-md-3 col-lg-3 ">
+                    			<div class="form-group">
+                                    <label for="regional_juicios" class="control-label">Regional:</label>
+                                    <input type="text" class="form-control" id="regional_juicios" name="regional_juicios" value=""  placeholder="Regional" >
+                                    <div id="mensaje_regional_juicios" class="errores"></div>
+                                 </div>
+                             </div>
+                      	  
+                		 
+                             
+                         
+                             </div>
+                                  
+                             <div class="row">
+                                 
+                          	<div class="col-xs-6 col-md-3 col-lg-3 ">
+                    			<div class="form-group">
+                                    <label for="numero_juicios" class="control-label">N° Juicio</label>
+                                    <input type="text" class="form-control" id="numero_juicios" name="numero_juicios" value=""  placeholder="# Juicio" >
+                                    <div id="mensaje_numero_juicios" class="errores"></div>
+                                 </div>
+                             </div>
+
+                            <div class="col-xs-6 col-md-3 col-lg-3 ">
+                             		 
+                             		 <div class="form-group">
+                             		 
+                             		 	<label for="anio_juicios" class="control-label">Año de Juicio:</label>
+                                        <input type="text" class="form-control" id="anio_juicios" name="anio_juicios" value="" data-fechaactual="<?php echo date('Y');?>" placeholder="Año de Juicio">
+                                        <div id="mensaje_anio_juicio" class="errores"></div>
+                                        
+                                      </div>
+                                	
+                                   </div>  
                         	    
-                    		    <div class="col-lg-3 col-xs-12 col-md-3">
+                        	    
+                    		    <div class="col-lg-3 col-xs-6 col-md-3">
                         		    <div class="form-group">
-                                          <label for="correo_usuarios" class="control-label">Título Crédito:</label>
-                                          <input type="email" class="form-control" id="correo_usuarios" name="correo_usuarios" value="" placeholder="Título Crédito">
-                                          <div id="mensaje_correo_usuarios" class="errores"></div>
+                                          <label for="numero_titulo_credito_juicios" class="control-label">Número Título Crédito:</label>
+                                          <input type="text" class="form-control" id="numero_titulo_credito_juicios" name="numero_titulo_credito_juicios" value="" placeholder="Número Título Crédito">
+                                          <div id="mensaje_numero_titulo_credito_juicios" class="errores"></div>
                                     </div>
                     		    </div>
                     		    									
@@ -156,9 +153,9 @@
                              		 
                              		 <div class="form-group">
                              		 
-                             		 	<label for="fecha_nacimiento_usuarios" class="control-label">Fecha Título Crédito:</label>
-                                        <input type="text" class="form-control" id="fecha_nacimiento_usuarios" name="fecha_nacimiento_usuarios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Título Crédito">
-                                        <div id="mensaje_fecha_nacimiento_usuarios" class="errores"></div>
+                             		 	<label for="fecha_titulo_credito_juicios" class="control-label">Fecha Título Crédito:</label>
+                                        <input type="text" class="form-control" id="fecha_titulo_credito_juicios" name="fecha_titulo_credito_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Título Crédito">
+                                        <div id="mensaje_fecha_titulo_credito_juicios" class="errores"></div>
                                         
                                       </div>
                                 	
@@ -169,9 +166,9 @@
                             	  <div class="row">		
                     		    <div class="col-xs-6 col-md-3 col-lg-3">
                             		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">Orden Cobro:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="Orden Cobro">
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
+                                      <label for="orden_cobro_juicios" class="control-label">Orden de Cobro:</label>
+                                      <input type="text" class="form-control" id="orden_cobro_juicios" name="orden_cobro_juicios" value="" placeholder="Orden de Cobro">
+                                      <div id="mensaje_orden_cobro_juicios" class="errores"></div>
                                     </div>
                             	</div>
                             	
@@ -179,9 +176,9 @@
                              		 
                              		 <div class="form-group">
                              		 
-                             		 	<label for="fecha_nacimiento_usuarios" class="control-label">Fecha Orden Cobro:</label>
-                                        <input type="text" class="form-control" id="fecha_nacimiento_usuarios" name="fecha_nacimiento_usuarios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Orden Cobro">
-                                        <div id="mensaje_fecha_nacimiento_usuarios" class="errores"></div>
+                             		 	<label for="fecha_oden_cobro_juicios" class="control-label">Fecha Orden de Cobro:</label>
+                                        <input type="text" class="form-control" id="fecha_oden_cobro_juicios" name="fecha_oden_cobro_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Orden de Cobro">
+                                        <div id="mensaje_fecha_oden_cobro_juicios" class="errores"></div>
                                         
                                       </div>
                                 	
@@ -191,9 +188,9 @@
                              		 
                              		 <div class="form-group">
                              		 
-                             		 	<label for="fecha_nacimiento_usuarios" class="control-label">Fecha Auto Pago:</label>
-                                        <input type="text" class="form-control" id="fecha_nacimiento_usuarios" name="fecha_nacimiento_usuarios" value="" data-fechaactual="<?php echo date('Y/m/d');?>"  placeholder="Fecha Auto Pago"/>
-                                        <div id="mensaje_fecha_nacimiento_usuarios" class="errores"></div>
+                             		 	<label for="fecha_auto_pago_juicios" class="control-label">Fecha Auto Pago:</label>
+                                        <input type="text" class="form-control" id="fecha_auto_pago_juicios" name="fecha_auto_pago_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>"  placeholder="Fecha Auto Pago"/>
+                                        <div id="mensaje_fecha_auto_pago_juicios" class="errores"></div>
                                         
                                       </div>
                                 	
@@ -202,9 +199,9 @@
                             		
                     		    <div class="col-xs-6 col-md-3 col-lg-3">
                             		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">Cuantía Inicial:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="Cuantía Inicial"/>
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
+                                      <label for="cuantia_inicial_juicios" class="control-label">Cuantía Inicial:</label>
+                                      <input type="text" class="form-control" id="cuantia_inicial_juicios" name="cuantia_inicial_juicios" value="" placeholder="Cuantía Inicial"/>
+                                      <div id="mensaje_cuantia_inicial_juicios" class="errores"></div>
                                     </div>
                             	</div>
                             	
@@ -212,86 +209,62 @@
                             	
                           
                           <div class="row">                		      
-                    		
-                                <div class="col-xs-6 col-md-3 col-lg-3">
-                            		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">Etapa Procesal:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="Etapa Procesal"/>
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
-                                    </div>
-                            	</div>
-                                
-                    		    <div class="col-xs-12 col-md-3 col-lg-3">
+                    		    <div class="col-xs-6 col-md-3 col-lg-3">
                         		   <div class="form-group">
-                                      <label for="id_estado" class="control-label">Estado Procesal:</label>
-                                      <select name="id_estado" id="id_estado"  class="form-control" >
+                                      <label for="id_etapa_procesal" class="control-label">Etapa Procesal:</label>
+                                      <select name="id_etapa_procesal" id="id_etapa_procesal"  class="form-control" >
                                       <option value="0" selected="selected">--Seleccione--</option>
-    									<?php foreach($resEstado as $res) {?>
-    										<option value="<?php echo $res->id_estado; ?>" ><?php echo $res->nombre_estado; ?> </option>
+    									<?php foreach($resEtapa as $res) {?>
+    										<option value="<?php echo $res->id_etapa_procesal; ?>" ><?php echo $res->nombre_etapa_procesal; ?> </option>
     							        <?php } ?>
     								   </select> 
-                                      <div id="mensaje_id_estados" class="errores"></div>
+                                      <div id="mensaje_id_etapa_procesal" class="errores"></div>
                                     </div>
                                   </div>
                                   
-                          <div class="col-xs-6 col-md-3 col-lg-3">
-                            		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">N° Operación:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="N° Operación"/>
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
+                                   <div class="col-xs-6 col-md-3 col-lg-3">
+                        		   <div class="form-group">
+                                      <label for="id_estado_procesal" class="control-label">Estado Procesal:</label>
+                                      <select name="id_estado_procesal" id="id_estado_procesal"  class="form-control" >
+                                      <option value="0" selected="selected">--Seleccione--</option>
+    									<?php foreach($resEstado as $res) {?>
+    										<option value="<?php echo $res->id_estado_procesal; ?>" ><?php echo $res->nombre_estado_procesal; ?> </option>
+    							        <?php } ?>
+    								   </select> 
+                                      <div id="mensaje_id_estado_procesal" class="errores"></div>
                                     </div>
-                            	</div>
+                                  </div>
                             	
-                            	          <div class="col-xs-6 col-md-3 col-lg-3">
-                            		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">Embargo Bienes:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="Embargo Bienes"/>
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
-                                    </div>
-                            	</div>
-                            	
-                            		</div>
-                            		
-                            		  <div class="row">		
-                            	          <div class="col-xs-6 col-md-3 col-lg-3">
-                            		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">Detalle Embargo Bienes:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="Detalle Embargo Bienes"/>
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
-                                    </div>
-                            	</div>
-                        
-                        	
-                        	 	 <div class="col-xs-6 col-md-3 col-lg-3 ">
+                            		 <div class="col-xs-6 col-md-3 col-lg-3 ">
                              		 <div class="form-group">
-                             		 	<label for="fecha_nacimiento_usuarios" class="control-label">Fecha Última Providencia:</label>
-                                        <input type="text" class="form-control" id="fecha_nacimiento_usuarios" name="fecha_nacimiento_usuarios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Última Providencia"/>
-                                        <div id="mensaje_fecha_nacimiento_usuarios" class="errores"></div>
+                             		 	<label for="fecha_ultima_providencia_juicios" class="control-label">Fecha Última Providencia:</label>
+                                        <input type="text" class="form-control" id="fecha_ultima_providencia_juicios" name="fecha_ultima_providencia_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Última Providencia"/>
+                                        <div id="mensaje_fecha_ultima_providencia_juicios" class="errores"></div>
                                       </div>
-                                   </div>     
+                                   </div>  
                                    
-                                          	          <div class="col-xs-6 col-md-3 col-lg-3">
-                            		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">Abogado Impulsor:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="Abogado Impulsor"/>
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
+                                     <div class="col-xs-6 col-md-3 col-lg-3">
+                        		   <div class="form-group">
+                                      <label for="id_usuarios_secretario" class="control-label">Abogado:</label>
+                                      <select name="id_usuarios_secretario" id="id_usuarios_secretario"  class="form-control" >
+                                      <option value="0" selected="selected">--Seleccione--</option>
+    									<?php foreach($resEstado as $res) {?>
+    										<option value="<?php echo $res->id_usuarios_secretario; ?>" ><?php echo $res->nombre_usuarios; ?> </option>
+    							        <?php } ?>
+    								   </select> 
+                                      <div id="mensaje_id_usuarios_secretario" class="errores"></div>
                                     </div>
-                            	</div>
-                            	
-                            	             	          <div class="col-xs-6 col-md-3 col-lg-3">
-                            		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">Secretario:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="Secretario"/>
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
-                                    </div>
-                            	</div>
-                            	</div>
+                                  </div>
+                                   
+                                  
+            		</div>
+                           
                             	  <div class="row">		
-                            	    	             	          <div class="col-xs-6 col-md-3 col-lg-3">
+                            	    	             	          <div class="col-xs-12 col-md-12 col-lg-12">
                             		<div class="form-group">
-                                      <label for="clave_usuarios" class="control-label">Observaciones:</label>
-                                      <input type="password" class="form-control" id="clave_usuarios" name="clave_usuarios" value="" placeholder="Observaciones"/>
-                                      <div id="mensaje_clave_usuarios" class="errores"></div>
+                                      <label for="observaciones_juicios" class="control-label">Observaciones:</label>
+                                      <input type="text" class="form-control" id="observaciones_juicios" name="observaciones_juicios" value="" placeholder="Observaciones"/>
+                                      <div id="mensaje_observaciones_juicios" class="errores"></div>
                                     </div>
                             	</div>
                             	</div>
