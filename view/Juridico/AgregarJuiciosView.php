@@ -72,7 +72,7 @@
             
             <div class="box-body">
             
-                <form id="frm_juicio" action="<?php echo $helper->url("MatrizJuicios","AgregarJuicio"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12 col-md-12 col-xs-12">
+                <form id="frm_agregar_juicio" action="<?php echo $helper->url("MatrizJuicios","AgregarJuicio"); ?>" method="post" enctype="multipart/form-data" class="col-lg-12 col-md-12 col-xs-12">
           		         	  <div class="row">
           		         	  
     	          <div class="col-lg-3 col-xs-6 col-md-3">

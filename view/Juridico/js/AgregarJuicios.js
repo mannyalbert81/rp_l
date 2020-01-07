@@ -25,7 +25,24 @@ $("#frm_agregar_juicio").on("submit",function(event){
 	let _observaciones_juicios = document.getElementById('observaciones_juicios').value;
 	
 	
-	var parametros = {nombre_forma_pago:_nombre_forma_pago,id_forma_pago:_id_forma_pago}
+	var parametros = {identificacion_clientes:_identificacion_clientes,
+			nombre_clientes:_nombre_clientes,
+			entidad_origen_juicios:_entidad_origen_juicios,
+			regional_juicios:_regional_juicios,
+			numero_juicios:_numero_juicios,
+			anio_juicios:_anio_juicios,
+			numero_titulo_credito_juicios:_numero_titulo_credito_juicios,
+			fecha_titulo_credito_juicios:_fecha_titulo_credito_juicios,
+			orden_cobro_juicios:_orden_cobro_juicios,
+			fecha_oden_cobro_juicios:_fecha_oden_cobro_juicios,
+			fecha_auto_pago_juicios:_fecha_auto_pago_juicios,
+			cuantia_inicial_juicios:_cuantia_inicial_juicios,
+			id_etapa_procesal:_id_etapa_procesal,
+			id_estado_procesal:_id_estado_procesal,
+			id_estado_procesal:_id_estado_procesal,
+			id_estado_procesal:_id_estado_procesal,
+			
+			}
 	
 	
 	$.ajax({
