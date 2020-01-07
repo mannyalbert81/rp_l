@@ -592,6 +592,21 @@ class EmpleadosController extends ControladorBase{
         
     }
     
+    public function CalcularMulta($empleado, $valor){
+    	
+    	$multa = 0;
+    	if ($empleado = "PASANTE")
+    	{
+    		$multa = $valor * 2;
+    	}
+    	else
+    	{
+    		$multa = $valor;
+    	}
+    				
+    	echo json_encode($multa);
+    }
+    
     /************************ END GENERACION DE CUENTAS CONTABLES ANTICIPOS *********************************************/
         
 }
