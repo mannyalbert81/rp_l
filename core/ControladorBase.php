@@ -119,6 +119,17 @@ class ControladorBase{
         require_once 'view/GestionDocumental/'.$vista.'View.php';
     }
     
+    public function view_Juridico($vista,$datos){
+        foreach ($datos as $id_assoc => $valor) {
+            ${$id_assoc}=$valor;
+        }
+        
+        require_once 'core/AyudaVistas.php';
+        $helper=new AyudaVistas();
+        
+        require_once 'view/Juridico/'.$vista.'View.php';
+    }
+    
     
     public function view_tesoreria($vista,$datos){
         foreach ($datos as $id_assoc => $valor) {
