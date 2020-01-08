@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	
+	ConsultaJuicios();
 	CargaEtapaProcesal();
 	CargaEstadoProcesal();
 	CargaUsuariosSecretario();
@@ -81,7 +82,7 @@ $("#frm_agregar_juicio").on("submit",function(event){
 	}).always(function(){
 		
 		document.getElementById("frm_agregar_juicio").reset();	
-		consultaJucios();
+		ConsultaJuicios();
 	})
 
 	event.preventDefault()
@@ -187,4 +188,37 @@ $("#nombre_usuarios").on("keyup",function(){
 	
 	$(this).val($(this).val().toUpperCase());
 })
+
+function ConsultaJuicios(_page = 1){
+	
+	var buscador = $("#buscador").val();
+	$.ajax({
+		beforeSend:function(){$("#divLoaderPage").addClass("loader")},
+		url:"index.php?controller=MatrizJuicios&action=ConsultaJuicios",
+		type:"POST",
+		data:{page:_page,search:buscador,peticion:'ajax'}
+	}).done(function(datos){		
+		
+		$("#juicios_registrados").html(datos)		
+		
+	}).fail(function(xhr,status,error){
+		
+		var err = xhr.responseText
+		console.log(err);
+		
+	}).always(function(){
+		
+		$("#divLoaderPage").removeClass("loader")
+		
+	})
+	
+}
+
+
+$("#nombre_juicios").on("keyup",function(){
+	
+	$(this).val($(this).val().toUpperCase());
+})
+
+
 

@@ -4,7 +4,19 @@
    <script lang=javascript src="view/Contable/FuncionesJS/xlsx.full.min.js"></script>
    <script lang=javascript src="view/Contable/FuncionesJS/FileSaver.min.js"></script>
     
-    
+    <style type="text/css">
+        .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('view/images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+        opacity: .8;
+        }
+        
+       </style>
   
    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -284,62 +296,21 @@
       			
       			</div>
     		</section>
-      <section class="content">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Listado Usuarios</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fa fa-minus"></i></button>
-                
-              </div>
-            </div>
-            
+         <section class="content">
+      	<div class="box box-primary">
+      		<div class="box-header with-border">
+      			<h3 class="box-title">Listado de Juicios</h3>      			
+            </div> 
             <div class="box-body">
-			<div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#activos" data-toggle="tab">Juicios Activos</a></li>
-              <li><a href="#inactivos" data-toggle="tab">Juicios Inactivos</a></li>
-            </ul>
-            
-            <div class="col-md-12 col-lg-12 col-xs-12">
-            <div class="tab-content">
-             
-            <br>
-              <div class="tab-pane active" id="activos">
-              
-                
-					<div class="pull-right" style="margin-right:15px;">
-					
-						<input type="text" value="" class="form-control" id="search" name="search" onkeyup="load_usuarios(1)" placeholder="search.."/>
-					</div>
-					<div id="load_registrados" ></div>	
-					<div id="users_registrados"></div>	
-                
-              </div>
-              
-              <div class="tab-pane" id="inactivos">
-                
-                    <div class="pull-right" style="margin-right:15px;">
-					<input type="text" value="" class="form-control" id="search_inactivos" name="search_inactivos" onkeyup="load_usuarios_inactivos(1)" placeholder="search.."/>
-					</div>
-					
-					
-					<div id="load_inactivos_registrados" ></div>	
-					<div id="users_inactivos_registrados"></div>
-                
-                
-              </div>
-             
-              <button type="submit" id="btExportar" name="exportar" class="btn btn-info">Exportar</button>
-            </div>
-            </div>
-          </div>
-         
-            
-            </div>
-            </div>
-            </section>
+    			<div class="pull-right" style="margin-right:15px;">
+					<input type="text" value="" class="form-control" id="buscador" name="buscador" onkeyup="consultaJuicios(1)" placeholder="Buscar.."/>
+    			</div>  
+    			<div id="divLoaderPage" ></div>  
+    			          	
+            	<div id="juicios_registrados" ></div>
+            </div> 	
+      	</div>
+      </section> 
   </div>
  	<?php include("view/modulos/footer.php"); ?>	
    <div class="control-sidebar-bg"></div>
@@ -352,7 +323,7 @@
     <script src="view/bootstrap/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
-    <script src="view/Juridico/js/AgregarJuicios.js?0.5"></script> 
+    <script src="view/Juridico/js/AgregarJuicios.js?0.6"></script> 
   </body>
 </html>
 
