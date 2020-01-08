@@ -207,33 +207,31 @@
                             	
                             	</div>
                             	
-                          
+                         
                           <div class="row">                		      
-                    		    <div class="col-xs-6 col-md-3 col-lg-3">
-                        		   <div class="form-group">
-                                      <label for="id_etapa_procesal" class="control-label">Etapa Procesal:</label>
-                                      <select name="id_etapa_procesal" id="id_etapa_procesal"  class="form-control" >
-                                      <option value="0" selected="selected">--Seleccione--</option>
-    									<?php foreach($resEtapa as $res) {?>
-    										<option value="<?php echo $res->id_etapa_procesal; ?>" ><?php echo $res->nombre_etapa_procesal; ?> </option>
-    							        <?php } ?>
-    								   </select> 
-                                      <div id="mensaje_id_etapa_procesal" class="errores"></div>
-                                    </div>
-                                  </div>
-                                  
-                                   <div class="col-xs-6 col-md-3 col-lg-3">
-                        		   <div class="form-group">
-                                      <label for="id_estado_procesal" class="control-label">Estado Procesal:</label>
-                                      <select name="id_estado_procesal" id="id_estado_procesal"  class="form-control" >
-                                      <option value="0" selected="selected">--Seleccione--</option>
-    									<?php foreach($resEstado as $res) {?>
-    										<option value="<?php echo $res->id_estado_procesal; ?>" ><?php echo $res->nombre_estado_procesal; ?> </option>
-    							        <?php } ?>
-    								   </select> 
-                                      <div id="mensaje_id_estado_procesal" class="errores"></div>
-                                    </div>
-                                  </div>
+                    		
+                                   	  <div class="col-xs-12 col-md-3 col-md-3 ">
+            		    <div class="form-group">
+            		    					  
+                      	    <label for="id_etapa_procesal" class="control-label">Etapa Procesal:</label>
+                      	    <select  class="form-control" id="id_etapa_procesal" name="id_etapa_procesal" required>
+                          	<option value="0">--Seleccione--</option>
+                      	    </select>                         
+                       	   <div id="mensaje_id_etapa_procesal" class="errores"></div>
+                       	 </div>
+            			  </div>
+            			  
+            			               	  <div class="col-xs-12 col-md-3 col-md-3 ">
+            		    <div class="form-group">
+            		    					  
+                      	    <label for="id_estado_procesal" class="control-label">Estado Procesal:</label>
+                      	    <select  class="form-control" id="id_estado_procesal" name="id_estado_procesal" required>
+                          	<option value="0">--Seleccione--</option>
+                      	    </select>                         
+                       	   <div id="mensaje_id_estado_procesal" class="errores"></div>
+                       	 </div>
+            			  </div>
+                                 
                             	
                             		 <div class="col-xs-6 col-md-3 col-lg-3 ">
                              		 <div class="form-group">
@@ -243,18 +241,16 @@
                                       </div>
                                    </div>  
                                    
-                                     <div class="col-xs-6 col-md-3 col-lg-3">
-                        		   <div class="form-group">
-                                      <label for="id_usuarios_secretario" class="control-label">Abogado:</label>
-                                      <select name="id_usuarios_secretario" id="id_usuarios_secretario"  class="form-control" >
-                                      <option value="0" selected="selected">--Seleccione--</option>
-    									<?php foreach($resEstado as $res) {?>
-    										<option value="<?php echo $res->id_usuarios_secretario; ?>" ><?php echo $res->nombre_usuarios; ?> </option>
-    							        <?php } ?>
-    								   </select> 
-                                      <div id="mensaje_id_usuarios_secretario" class="errores"></div>
-                                    </div>
-                                  </div>
+                                      			               	  <div class="col-xs-12 col-md-3 col-md-3 ">
+            		    <div class="form-group">
+            		    					  
+                      	    <label for="id_usuarios_secretario" class="control-label">Abogado Secretario:</label>
+                      	    <select  class="form-control" id="id_usuarios_secretario" name="id_usuarios_secretario" required>
+                          	<option value="0">--Seleccione--</option>
+                      	    </select>                         
+                       	   <div id="mensaje_id_usuarios_secretario" class="errores"></div>
+                       	 </div>
+            			  </div>       
                                    
                                   
             		</div>
@@ -356,6 +352,7 @@
     <script src="view/bootstrap/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
+    <script src="view/Juridico/js/AgregarJuicios.js?0.5"></script> 
   </body>
 </html>
 

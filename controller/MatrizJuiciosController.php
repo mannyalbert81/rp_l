@@ -631,7 +631,158 @@
 	    
 	}
 	
-	public function AgregarJuicio(){}
+	public function AgregarJuicio(){
+	    
+	    session_start();
+	    
+	    $clientes = new ClientesModel();
+	    
+	    
+	    $nombre_controladores = "MatrizJuicios";
+	    $id_rol= $_SESSION['id_rol'];
+	    $resultPer = $clientes->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+	    
+	    if (!empty($resultPer)){
+
+	        $_identificacion_clientes = (isset($_POST["identificacion_clientes"])) ? $_POST["identificacion_clientes"] : "";
+	        $_nombre_clientes = (isset($_POST["nombre_clientes"])) ? $_POST["nombre_clientes"] : "" ;
+	        $_entidad_origen_juicios = (isset($_POST["entidad_origen_juicios"])) ? $_POST["entidad_origen_juicios"] : "";
+	        $_regional_juicios = (isset($_POST["regional_juicios"])) ? $_POST["regional_juicios"] : "" ;
+	        $_numero_juicios = (isset($_POST["numero_juicios"])) ? $_POST["numero_juicios"] : "";
+	        $_anio_juicios = (isset($_POST["anio_juicios"])) ? $_POST["anio_juicios"] : "" ;
+	        $_numero_titulo_credito_juicios = (isset($_POST["numero_titulo_credito_juicios"])) ? $_POST["numero_titulo_credito_juicios"] : "";
+	        $_fecha_titulo_credito_juicios = (isset($_POST["fecha_titulo_credito_juicios"])) ? $_POST["fecha_titulo_credito_juicios"] : "" ;
+	        $_orden_cobro_juicios = (isset($_POST["orden_cobro_juicios"])) ? $_POST["orden_cobro_juicios"] : "";
+	        $_fecha_oden_cobro_juicios = (isset($_POST["fecha_oden_cobro_juicios"])) ? $_POST["fecha_oden_cobro_juicios"] : "" ;
+	        $_fecha_auto_pago_juicios = (isset($_POST["fecha_auto_pago_juicios"])) ? $_POST["fecha_auto_pago_juicios"] : "";
+	        $_cuantia_inicial_juicios = (isset($_POST["cuantia_inicial_juicios"])) ? $_POST["cuantia_inicial_juicios"] : "" ;
+	        $_id_etapa_procesal = (isset($_POST["id_etapa_procesal"])) ? $_POST["id_etapa_procesal"] : 0;
+	        $_id_estado_procesal = (isset($_POST["id_estado_procesal"])) ? $_POST["id_estado_procesal"] : 0 ;
+	        $_fecha_ultima_providencia_juicios = (isset($_POST["fecha_ultima_providencia_juicios"])) ? $_POST["fecha_ultima_providencia_juicios"] : "";
+	        $_id_usuarios_secretario = (isset($_POST["id_usuarios_secretario"])) ? $_POST["id_usuarios_secretario"] : 0 ;
+	        $_observaciones_juicios = (isset($_POST["observaciones_juicios"])) ? $_POST["observaciones_juicios"] : "" ;
+	        
+	        /*si es insertado enviar en cero el id_banco a la funcion*/
+	        $funcion = "ins_legal_clientes_juicios";
+	        $respuesta = 0 ;
+	        $mensaje = "";
+	    
+	        if(!empty($_identificacion_clientes)){
+	            
+	            $parametros = " '$_identificacion_clientes',
+                                '$_nombre_clientes',
+                                '$_entidad_origen_juicios',
+                                '$_regional_juicios',
+                                '$_numero_juicios',
+                                '$_anio_juicios',
+                                '$_numero_titulo_credito_juicios',
+                                '$_fecha_titulo_credito_juicios',
+                                '$_orden_cobro_juicios',
+                                '$_fecha_oden_cobro_juicios',
+                                '$_fecha_auto_pago_juicios',
+                                '$_cuantia_inicial_juicios',
+                                '$_id_etapa_procesal',
+                                '$_fecha_ultima_providencia_juicios',
+                                '$_observaciones_juicios',
+                                '$_id_estado_procesal',
+                                '$_id_usuarios_secretario'";
+	            $clientes->setFuncion($funcion);
+	            $clientes->setParametros($parametros);
+	            $resultado = $clientes->llamafuncion();
+	            
+	            if(!empty($resultado) && count($resultado) > 0 ){
+	                
+	                foreach ( $resultado[0] as $k => $v){
+	                    
+	                    $respuesta = $v;
+	                }
+	                
+	                //
+	            }
+	        }
+	        
+	        
+	        if($respuesta > 0 ){
+	            
+	            
+	            if ( $respuesta == 1 ){
+	            $mensaje = "Jucio Actualizado Correctamente";
+	            }
+	            else 
+	            {
+	                $mensaje = "Jucio Ingresado Correctamente";
+	            }
+	            
+	            echo json_encode(array('respuesta'=>$respuesta,'mensaje'=>$mensaje));
+	            exit();
+	        }
+	        
+	        echo "Error al Ingresar";
+	        exit();
+	        
+	    }
+	    else
+	    {
+	        $this->view_Inventario("Error",array(
+	            "resultado"=>"No tiene Permisos"
+	            
+	        ));
+	        
+	        
+	    }
+	    
+	    
+	}
+	
+	public function CargaEtapaProcesal(){
+	    
+	    $etapa_procesal = null;
+	    $etapa_procesal = new EtapaProcesalModel();
+	    
+	    $query = " SELECT id_etapa_procesal, nombre_etapa_procesal FROM legal_etapa_procesal";
+	    
+	    $resulset = $etapa_procesal->enviaquery($query);
+	    
+	    if(!empty($resulset) && count($resulset)>0){
+	        
+	        echo json_encode(array('data'=>$resulset));
+	        
+	    }
+	}
+	
+	public function CargaEstadoProcesal(){
+	    
+	    $estado_procesal = null;
+	    $estado_procesal = new EstadoProcesalModel();
+	    
+	    $query = " SELECT id_estado_procesal, nombre_estado_procesal FROM legal_estado_procesal";
+	    
+	    $resulset = $estado_procesal->enviaquery($query);
+	    
+	    if(!empty($resulset) && count($resulset)>0){
+	        
+	        echo json_encode(array('data'=>$resulset));
+	        
+	    }
+	}
+	
+	public function CargaUsuariosSecretario(){
+	    
+	    $usuarios_secretario = null;
+	    $usuarios_secretario = new UsuariosModel();
+	    
+	    $query = " SELECT id_usuarios, nombre_usuarios FROM usuarios WHERE id_rol = 65";
+	    
+	    $resulset = $usuarios_secretario->enviaquery($query);
+	    
+	    if(!empty($resulset) && count($resulset)>0){
+	        
+	        echo json_encode(array('data'=>$resulset));
+	        
+	    }
+	}
+	
+	
 	
     }
 	//

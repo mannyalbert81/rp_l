@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	
-	consultaJucios();
+	CargaEtapaProcesal();
+	CargaEstadoProcesal();
+	CargaUsuariosSecretario();
 	
 })
 
@@ -39,28 +41,37 @@ $("#frm_agregar_juicio").on("submit",function(event){
 			cuantia_inicial_juicios:_cuantia_inicial_juicios,
 			id_etapa_procesal:_id_etapa_procesal,
 			id_estado_procesal:_id_estado_procesal,
-			id_estado_procesal:_id_estado_procesal,
-			id_estado_procesal:_id_estado_procesal,
-			
-			}
+			fecha_ultima_providencia_juicios:_fecha_ultima_providencia_juicios,
+			id_usuarios_secretario:_id_usuarios_secretario,
+			observaciones_juicios:_observaciones_juicios}
 	
 	
 	$.ajax({
 		beforeSend:function(){},
-		url:"index.php?controller=MatrizJuicios&action=InsertaJuicios",
+		url:"index.php?controller=MatrizJuicios&action=AgregarJuicio",
 		type:"POST",
 		dataType:"json",
 		data:parametros
 	}).done(function(datos){
 		
+		if (datos.respuesta == 2){
+			
+			swal({
+		  		  title: "Juicios",
+		  		  text: datos.mensaje,
+		  		  icon: "success",
+		  		  button: "Aceptar",
+		  		});
+		}
 		
+		else {
 	swal({
   		  title: "Juicios",
   		  text: datos.mensaje,
-  		  icon: "success",
+  		  icon: "info",
   		  button: "Aceptar",
   		});
-	
+		}
 		
 	}).fail(function(xhr,status,error){
 		
@@ -75,3 +86,105 @@ $("#frm_agregar_juicio").on("submit",function(event){
 
 	event.preventDefault()
 })
+
+
+
+function CargaEtapaProcesal(){
+	
+	let $ddlEtapaProcesal = $("#id_etapa_procesal");
+	
+	$.ajax({
+		beforeSend:function(){},
+		url:"index.php?controller=MatrizJuicios&action=CargaEtapaProcesal",
+		type:"POST",
+		dataType:"json",
+		data:null
+	}).done(function(datos){		
+		
+		$ddlEtapaProcesal.empty();
+		$ddlEtapaProcesal.append("<option value='0' >--Seleccione--</option>");
+		
+		$.each(datos.data, function(index, value) {
+			$ddlEtapaProcesal.append("<option value=\"" +value.id_etapa_procesal +"\">" + value.nombre_etapa_procesal  + "</option>");	
+  		});
+		
+	}).fail(function(xhr,status,error){
+		var err = xhr.responseText
+		console.log(err)
+		$ddlEtapaProcesal.empty();
+	})
+	
+}
+
+
+$("#nombre_etapa_procesal").on("keyup",function(){
+	
+	$(this).val($(this).val().toUpperCase());
+})
+
+function CargaEstadoProcesal(){
+	
+	let $ddlEstadoProcesal = $("#id_estado_procesal");
+	
+	$.ajax({
+		beforeSend:function(){},
+		url:"index.php?controller=MatrizJuicios&action=CargaEstadoProcesal",
+		type:"POST",
+		dataType:"json",
+		data:null
+	}).done(function(datos){		
+		
+		$ddlEstadoProcesal.empty();
+		$ddlEstadoProcesal.append("<option value='0' >--Seleccione--</option>");
+		
+		$.each(datos.data, function(index, value) {
+			$ddlEstadoProcesal.append("<option value=\"" +value.id_estado_procesal +"\">" + value.nombre_estado_procesal  + "</option>");	
+  		});
+		
+	}).fail(function(xhr,status,error){
+		var err = xhr.responseText
+		console.log(err)
+		$ddlEstadoProcesal.empty();
+	})
+	
+}
+
+
+$("#nombre_estado_procesal").on("keyup",function(){
+	
+	$(this).val($(this).val().toUpperCase());
+})
+
+function CargaUsuariosSecretario(){
+	
+	let $ddlUsuariosSecretario = $("#id_usuarios_secretario");
+	
+	$.ajax({
+		beforeSend:function(){},
+		url:"index.php?controller=MatrizJuicios&action=CargaUsuariosSecretario",
+		type:"POST",
+		dataType:"json",
+		data:null
+	}).done(function(datos){		
+		
+		$ddlUsuariosSecretario.empty();
+		$ddlUsuariosSecretario.append("<option value='0' >--Seleccione--</option>");
+		
+		$.each(datos.data, function(index, value) {
+			$ddlUsuariosSecretario.append("<option value=\"" +value.id_usuarios +"\">" + value.nombre_usuarios  + "</option>");	
+  		});
+		
+	}).fail(function(xhr,status,error){
+		var err = xhr.responseText
+		console.log(err)
+		$ddlUsuariosSecretario.empty();
+	})
+	
+}
+
+
+$("#nombre_usuarios").on("keyup",function(){
+	
+	$(this).val($(this).val().toUpperCase());
+})
+
