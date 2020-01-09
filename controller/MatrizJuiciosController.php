@@ -661,6 +661,7 @@
 	        $_fecha_ultima_providencia_juicios = (isset($_POST["fecha_ultima_providencia_juicios"])) ? $_POST["fecha_ultima_providencia_juicios"] : "";
 	        $_id_usuarios_secretario = $_SESSION["id_usuarios"];
 	        $_observaciones_juicios = (isset($_POST["observaciones_juicios"])) ? $_POST["observaciones_juicios"] : "" ;
+	        $_fecha_vencimiento_juicios = (isset($_POST["fecha_vencimiento_juicios"])) ? $_POST["fecha_vencimiento_juicios"] : "" ;
 	        
 	        /*si es insertado enviar en cero el id_banco a la funcion*/
 	        $funcion = "ins_legal_clientes_juicios";
@@ -685,7 +686,8 @@
                                 '$_fecha_ultima_providencia_juicios',
                                 '$_observaciones_juicios',
                                 '$_id_estado_procesal',
-                                '$_id_usuarios_secretario'";
+                                '$_id_usuarios_secretario',
+                                '$_fecha_vencimiento_juicios'";
 	            $clientes->setFuncion($funcion);
 	            $clientes->setParametros($parametros);
 	            $resultado = $clientes->llamafuncion();
@@ -797,6 +799,7 @@
                       legal_etapa_procesal.nombre_etapa_procesal, 
                       legal_juicios.fecha_ultima_providencia_juicios, 
                       legal_juicios.observaciones_juicios, 
+                      legal_juicios.fecha_vencimiento_juicios,
                       legal_estado_procesal.id_estado_procesal, 
                       legal_estado_procesal.nombre_estado_procesal, 
                       usuarios.id_usuarios, 
@@ -882,6 +885,7 @@
 	            $html.='<th style="text-align: left;  font-size: 12px;">Etapa Procesal</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Estado Procesal</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Fecha Ultima Providencia</th>';
+	            $html.='<th style="text-align: left;  font-size: 12px;">Fecha Vencimiento</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Abogado</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Observaciones</th>';
 	            
@@ -917,6 +921,7 @@
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_etapa_procesal.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_estado_procesal.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->fecha_ultima_providencia_juicios.'</td>';
+	                $html.='<td style="font-size: 11px;">'.$res->fecha_vencimiento_juicios.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_usuarios.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->observaciones_juicios.'</td>';
 	                
@@ -1049,6 +1054,7 @@
                       legal_etapa_procesal.id_etapa_procesal,
                       legal_etapa_procesal.nombre_etapa_procesal,
                       legal_juicios.fecha_ultima_providencia_juicios,
+                      legal_juicios.fecha_vencimiento_juicios,
                       legal_juicios.observaciones_juicios,
                       legal_estado_procesal.id_estado_procesal,
                       legal_estado_procesal.nombre_estado_procesal,

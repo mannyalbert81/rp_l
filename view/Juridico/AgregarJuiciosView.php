@@ -166,7 +166,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_titulo_credito_juicios" class="control-label">Fecha Título Crédito:</label>
-                                        <input type="text" class="form-control" id="fecha_titulo_credito_juicios" name="fecha_titulo_credito_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Título Crédito">
+                                        <input type="date" class="form-control" id="fecha_titulo_credito_juicios" name="fecha_titulo_credito_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Título Crédito">
                                         <div id="mensaje_fecha_titulo_credito_juicios" class="errores"></div>
                                         
                                       </div>
@@ -189,7 +189,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_oden_cobro_juicios" class="control-label">Fecha Orden de Cobro:</label>
-                                        <input type="text" class="form-control" id="fecha_oden_cobro_juicios" name="fecha_oden_cobro_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Orden de Cobro">
+                                        <input type="date" class="form-control" id="fecha_oden_cobro_juicios" name="fecha_oden_cobro_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Orden de Cobro">
                                         <div id="mensaje_fecha_oden_cobro_juicios" class="errores"></div>
                                         
                                       </div>
@@ -201,7 +201,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_auto_pago_juicios" class="control-label">Fecha Auto Pago:</label>
-                                        <input type="text" class="form-control" id="fecha_auto_pago_juicios" name="fecha_auto_pago_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>"  placeholder="Fecha Auto Pago"/>
+                                        <input type="date" class="form-control" id="fecha_auto_pago_juicios" name="fecha_auto_pago_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>"  placeholder="Fecha Auto Pago"/>
                                         <div id="mensaje_fecha_auto_pago_juicios" class="errores"></div>
                                         
                                       </div>
@@ -248,8 +248,16 @@
                             		 <div class="col-xs-6 col-md-3 col-lg-3 ">
                              		 <div class="form-group">
                              		 	<label for="fecha_ultima_providencia_juicios" class="control-label">Fecha Última Providencia:</label>
-                                        <input type="text" class="form-control" id="fecha_ultima_providencia_juicios" name="fecha_ultima_providencia_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Última Providencia"/>
+                                        <input type="date" class="form-control" id="fecha_ultima_providencia_juicios" name="fecha_ultima_providencia_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Última Providencia"/>
                                         <div id="mensaje_fecha_ultima_providencia_juicios" class="errores"></div>
+                                      </div>
+                                   </div>  
+                                   
+                                    <div class="col-xs-6 col-md-3 col-lg-3 ">
+                             		 <div class="form-group">
+                             		 	<label for="fecha_vencimiento_juicios" class="control-label">Fecha de Vencimiento:</label>
+                                        <input type="date" class="form-control" id="fecha_vencimiento_juicios" name="fecha_vencimiento_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha de Vencimiento"/>
+                                        <div id="mensaje_fecha_vencimiento_juicios" class="errores"></div>
                                       </div>
                                    </div>  
                                    

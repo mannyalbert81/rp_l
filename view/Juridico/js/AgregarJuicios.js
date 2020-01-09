@@ -8,6 +8,94 @@ $(document).ready(function(){
 
 $("#frm_agregar_juicio").on("submit",function(event){
 	
+	
+	var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+	var validaFecha = /([0-9]{4})\-([0-9]{2})\-([0-9]{2})/;
+
+	var $identificacion_clientes = $("#identificacion_clientes").val();
+	var $nombre_clientes = $("#nombre_clientes").val();
+	var $entidad_origen_juicios = $("#entidad_origen_juicios").val();
+	var $regional_juicios = $("#regional_juicios").val();
+	var $numero_juicios = $("#numero_juicios").val();
+	var $anio_juicios = $("#anio_juicios").val();
+	var $numero_titulo_credito_juicios = $("#numero_titulo_credito_juicios").val();
+	var $fecha_titulo_credito_juicios = $("#fecha_titulo_credito_juicios").val();
+	var $orden_cobro_juicios = $("#orden_cobro_juicios").val();
+	var $fecha_oden_cobro_juicios = $("#fecha_oden_cobro_juicios").val();
+	var $fecha_auto_pago_juicios = $("#fecha_auto_pago_juicios").val();
+	var $cuantia_inicial_juicios = $("#cuantia_inicial_juicios").val();
+	var $id_etapa_procesal = $("#id_etapa_procesal").val();
+	var $id_estado_procesal = $("#id_estado_procesal").val();
+	var $fecha_ultima_providencia_juicios = $("#fecha_ultima_providencia_juicios").val();
+	var $fecha_vencimiento_juicios = $("#fecha_vencimiento_juicios").val();
+
+	
+	if( $identificacion_clientes == "" ){
+		$("#identificacion_clientes").notify("Ingrese una Cédula",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $nombre_clientes == "" ){
+		$("#nombre_clientes").notify("Ingrese un Nombre",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $entidad_origen_juicios == "" ){
+		$("#entidad_origen_juicios").notify("Ingrese un Origen",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $regional_juicios == "" ){
+		$("#regional_juicios").notify("Ingrese una Regional",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $numero_juicios == "" ){
+		$("#numero_juicios").notify("Ingrese un Número",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $anio_juicios == "" ){
+		$("#anio_juicios").notify("Ingrese un Año",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $numero_titulo_credito_juicios == "" ){
+		$("#numero_titulo_credito_juicios").notify("Ingrese un Número",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $fecha_titulo_credito_juicios == "" ){
+		$("#fecha_titulo_credito_juicios").notify("Ingrese una Fecha",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $orden_cobro_juicios == "" ){
+		$("#orden_cobro_juicios").notify("Ingrese una Orden",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $fecha_oden_cobro_juicios == "" ){
+		$("#fecha_oden_cobro_juicios").notify("Ingrese una Fecha",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $fecha_auto_pago_juicios == "" ){
+		$("#fecha_auto_pago_juicios").notify("Ingrese una Fecha",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $cuantia_inicial_juicios == "" ){
+		$("#cuantia_inicial_juicios").notify("Ingrese una Cantidad",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $id_etapa_procesal == 0 ){
+		$("#id_etapa_procesal").notify("Selecione un Dato",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $id_estado_procesal == 0 ){
+		$("#id_estado_procesal").notify("Selecione un Dato",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $fecha_ultima_providencia_juicios == "" ){
+		$("#fecha_ultima_providencia_juicios").notify("Ingrese una Fecha",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+	if( $fecha_vencimiento_juicios == "" ){
+		$("#fecha_vencimiento_juicios").notify("Ingrese una Fecha",{ position:"buttom left", autoHideDelay: 2000});
+		return false;
+	}
+
+	
 	let _identificacion_clientes = document.getElementById('identificacion_clientes').value;
 	let _nombre_clientes = document.getElementById('nombre_clientes').value;
 	let _entidad_origen_juicios = document.getElementById('entidad_origen_juicios').value;
@@ -24,6 +112,7 @@ $("#frm_agregar_juicio").on("submit",function(event){
 	let _id_estado_procesal = document.getElementById('id_estado_procesal').value;
 	let _fecha_ultima_providencia_juicios = document.getElementById('fecha_ultima_providencia_juicios').value;
 	let _observaciones_juicios = document.getElementById('observaciones_juicios').value;
+	let _fecha_vencimiento_juicios = document.getElementById('fecha_vencimiento_juicios').value;
 	
 	
 	var parametros = {identificacion_clientes:_identificacion_clientes,
@@ -41,7 +130,8 @@ $("#frm_agregar_juicio").on("submit",function(event){
 			id_etapa_procesal:_id_etapa_procesal,
 			id_estado_procesal:_id_estado_procesal,
 			fecha_ultima_providencia_juicios:_fecha_ultima_providencia_juicios,
-			observaciones_juicios:_observaciones_juicios}
+			observaciones_juicios:_observaciones_juicios,
+			fecha_vencimiento_juicios:_fecha_vencimiento_juicios}
 	
 	
 	$.ajax({
@@ -217,6 +307,8 @@ function editJuicios(id = 0){
 			$("#id_estado_procesal").val(array.id_estado_procesal);
 			$("#fecha_ultima_providencia_juicios").val(array.fecha_ultima_providencia_juicios);			
 			$("#observaciones_juicios").val(array.observaciones_juicios);
+			$("#fecha_vencimiento_juicios").val(array.fecha_vencimiento_juicios);
+			
 			
 			$("html, body").animate({ scrollTop: $(identificacion_clientes).offset().top-120 }, tiempo);			
 		}
@@ -254,5 +346,3 @@ function cedulaCorrecta(objeto){
 	}
 	
 }
-
-
