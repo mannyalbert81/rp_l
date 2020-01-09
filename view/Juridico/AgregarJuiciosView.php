@@ -314,6 +314,7 @@
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
     <script src="view/Juridico/js/AgregarJuicios.js?0.9"></script> 
+	<script src="view/Juridico/js/validaCedula.js?0.03"></script> 
   </body>
 </html>
 
