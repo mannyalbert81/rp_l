@@ -237,4 +237,22 @@ function editJuicios(id = 0){
 	
 }
 
+function cedulaCorrecta(objeto){
+	
+	var OCed = $(objeto);
+	var textoCed = OCed.val();
+	//console.log(textoCed);
+	//console.log(textoCed.length);
+	if( textoCed.length >= 10 ){
+				
+		if( !fnvalidaCedula(OCed.attr("id")) ){
+			//OCed.val('');
+			console.log("llego Aui");
+			OCed.notify("Cedula Incorrecta",{"position":"buttom-left","HideDelay":2000});
+		}
+		
+	}
+	
+}
+
 

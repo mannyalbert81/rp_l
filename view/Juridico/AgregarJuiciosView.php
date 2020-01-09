@@ -91,7 +91,7 @@
                                  	<div class="form-group">
                                  	
                                         <label for="identificacion_clientes" class="control-label">Cédula:</label>
-                                        <input type="text" id="identificacion_clientes" name="identificacion_clientes" value="" class="form-control" placeholder="Cédula">
+                                        <input type="text" id="identificacion_clientes" name="identificacion_clientes" value="" class="form-control" placeholder="Cédula" onkeyup="cedulaCorrecta(this)">
                                         <div id="mensaje_identificacion_clientes" class="errores"></div>
                                         
                                       </div>
@@ -313,9 +313,9 @@
     <script src="view/bootstrap/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
-    <script src="view/Juridico/js/AgregarJuicios.js?0.9"></script> 
-	<script src="view/Juridico/js/validaCedula.js?0.03"></script> 
-  </body>
+    <script src="view/Juridico/js/validaCedula.js?0.03"></script>     
+    <script src="view/Juridico/js/AgregarJuicios.js?0.10"></script> 
+	  </body>
 </html>
 
  

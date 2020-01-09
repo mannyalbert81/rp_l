@@ -1,5 +1,5 @@
 
-function fnvalidaCedula(Objeto,){
+function fnvalidaCedula(Objeto){
 	let txtcedula = $("#"+Objeto);
 	
 	if (txtcedula.val() == ""){
