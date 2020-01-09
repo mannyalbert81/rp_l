@@ -3,7 +3,6 @@ $(document).ready(function(){
 	ConsultaJuicios();
 	CargaEtapaProcesal();
 	CargaEstadoProcesal();
-	CargaUsuariosSecretario();
 	
 })
 
@@ -24,7 +23,6 @@ $("#frm_agregar_juicio").on("submit",function(event){
 	let _id_etapa_procesal = document.getElementById('id_etapa_procesal').value;
 	let _id_estado_procesal = document.getElementById('id_estado_procesal').value;
 	let _fecha_ultima_providencia_juicios = document.getElementById('fecha_ultima_providencia_juicios').value;
-	let _id_usuarios_secretario = document.getElementById('id_usuarios_secretario').value;
 	let _observaciones_juicios = document.getElementById('observaciones_juicios').value;
 	
 	
@@ -43,7 +41,6 @@ $("#frm_agregar_juicio").on("submit",function(event){
 			id_etapa_procesal:_id_etapa_procesal,
 			id_estado_procesal:_id_estado_procesal,
 			fecha_ultima_providencia_juicios:_fecha_ultima_providencia_juicios,
-			id_usuarios_secretario:_id_usuarios_secretario,
 			observaciones_juicios:_observaciones_juicios}
 	
 	
@@ -156,38 +153,7 @@ $("#nombre_estado_procesal").on("keyup",function(){
 	$(this).val($(this).val().toUpperCase());
 })
 
-function CargaUsuariosSecretario(){
-	
-	let $ddlUsuariosSecretario = $("#id_usuarios_secretario");
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=MatrizJuicios&action=CargaUsuariosSecretario",
-		type:"POST",
-		dataType:"json",
-		data:null
-	}).done(function(datos){		
-		
-		$ddlUsuariosSecretario.empty();
-		$ddlUsuariosSecretario.append("<option value='0' >--Seleccione--</option>");
-		
-		$.each(datos.data, function(index, value) {
-			$ddlUsuariosSecretario.append("<option value=\"" +value.id_usuarios +"\">" + value.nombre_usuarios  + "</option>");	
-  		});
-		
-	}).fail(function(xhr,status,error){
-		var err = xhr.responseText
-		console.log(err)
-		$ddlUsuariosSecretario.empty();
-	})
-	
-}
 
-
-$("#nombre_usuarios").on("keyup",function(){
-	
-	$(this).val($(this).val().toUpperCase());
-})
 
 function ConsultaJuicios(_page = 1){
 	
@@ -220,5 +186,55 @@ $("#nombre_juicios").on("keyup",function(){
 	$(this).val($(this).val().toUpperCase());
 })
 
+function editJuicios(id = 0){
+	
+	var tiempo = tiempo || 1000;
+		
+	$.ajax({
+		beforeSend:function(){$("#divLoaderPage").addClass("loader")},
+		url:"index.php?controller=MatrizJuicios&action=editJuicios",
+		type:"POST",
+		dataType:"json",
+		data:{id_clientes:id}
+	}).done(function(datos){
+		
+		if(!jQuery.isEmptyObject(datos.data)){
+			
+			var array = datos.data[0];		
+			$("#identificacion_clientes").val(array.identificacion_clientes);			
+			$("#nombre_clientes").val(array.nombre_clientes);
+			$("#entidad_origen_juicios").val(array.entidad_origen_juicios);			
+			$("#regional_juicios").val(array.regional_juicios);
+			$("#numero_juicios").val(array.numero_juicios);			
+			$("#anio_juicios").val(array.anio_juicios);
+			$("#numero_titulo_credito_juicios").val(array.numero_titulo_credito_juicios);			
+			$("#fecha_titulo_credito_juicios").val(array.fecha_titulo_credito_juicios);
+			$("#orden_cobro_juicios").val(array.orden_cobro_juicios);			
+			$("#fecha_oden_cobro_juicios").val(array.fecha_oden_cobro_juicios);
+			$("#fecha_auto_pago_juicios").val(array.fecha_auto_pago_juicios);			
+			$("#cuantia_inicial_juicios").val(array.cuantia_inicial_juicios);
+			$("#id_etapa_procesal").val(array.id_etapa_procesal);			
+			$("#id_estado_procesal").val(array.id_estado_procesal);
+			$("#fecha_ultima_providencia_juicios").val(array.fecha_ultima_providencia_juicios);			
+			$("#observaciones_juicios").val(array.observaciones_juicios);
+			
+			$("html, body").animate({ scrollTop: $(identificacion_clientes).offset().top-120 }, tiempo);			
+		}
+		
+		
+		
+	}).fail(function(xhr,status,error){
+		
+		var err = xhr.responseText
+		console.log(err);
+	}).always(function(){
+		
+		$("#divLoaderPage").removeClass("loader")
+		ConsultaJuicios();
+	})
+	
+	return false;
+	
+}
 
 

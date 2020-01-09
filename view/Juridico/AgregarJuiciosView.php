@@ -253,17 +253,7 @@
                                       </div>
                                    </div>  
                                    
-                                      			               	  <div class="col-xs-12 col-md-3 col-md-3 ">
-            		    <div class="form-group">
-            		    					  
-                      	    <label for="id_usuarios_secretario" class="control-label">Abogado Secretario:</label>
-                      	    <select  class="form-control" id="id_usuarios_secretario" name="id_usuarios_secretario" required>
-                          	<option value="0">--Seleccione--</option>
-                      	    </select>                         
-                       	   <div id="mensaje_id_usuarios_secretario" class="errores"></div>
-                       	 </div>
-            			  </div>       
-                                   
+          
                                   
             		</div>
                            
@@ -323,7 +313,7 @@
     <script src="view/bootstrap/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
-    <script src="view/Juridico/js/AgregarJuicios.js?0.6"></script> 
+    <script src="view/Juridico/js/AgregarJuicios.js?0.9"></script> 
   </body>
 </html>
 
