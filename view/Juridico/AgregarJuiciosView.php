@@ -4,7 +4,19 @@
    <script lang=javascript src="view/Contable/FuncionesJS/xlsx.full.min.js"></script>
    <script lang=javascript src="view/Contable/FuncionesJS/FileSaver.min.js"></script>
     
-    
+    <style type="text/css">
+        .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('view/images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+        opacity: .8;
+        }
+        
+       </style>
   
    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -79,7 +91,7 @@
                                  	<div class="form-group">
                                  	
                                         <label for="identificacion_clientes" class="control-label">Cédula:</label>
-                                        <input type="text" id="identificacion_clientes" name="identificacion_clientes" value="" class="form-control" placeholder="Cédula">
+                                        <input type="text" id="identificacion_clientes" name="identificacion_clientes" value="" class="form-control" placeholder="Cédula" onkeyup="cedulaCorrecta(this)">
                                         <div id="mensaje_identificacion_clientes" class="errores"></div>
                                         
                                       </div>
@@ -154,7 +166,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_titulo_credito_juicios" class="control-label">Fecha Título Crédito:</label>
-                                        <input type="text" class="form-control" id="fecha_titulo_credito_juicios" name="fecha_titulo_credito_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Título Crédito">
+                                        <input type="date" class="form-control" id="fecha_titulo_credito_juicios" name="fecha_titulo_credito_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Título Crédito">
                                         <div id="mensaje_fecha_titulo_credito_juicios" class="errores"></div>
                                         
                                       </div>
@@ -177,7 +189,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_oden_cobro_juicios" class="control-label">Fecha Orden de Cobro:</label>
-                                        <input type="text" class="form-control" id="fecha_oden_cobro_juicios" name="fecha_oden_cobro_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Orden de Cobro">
+                                        <input type="date" class="form-control" id="fecha_oden_cobro_juicios" name="fecha_oden_cobro_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Orden de Cobro">
                                         <div id="mensaje_fecha_oden_cobro_juicios" class="errores"></div>
                                         
                                       </div>
@@ -189,7 +201,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_auto_pago_juicios" class="control-label">Fecha Auto Pago:</label>
-                                        <input type="text" class="form-control" id="fecha_auto_pago_juicios" name="fecha_auto_pago_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>"  placeholder="Fecha Auto Pago"/>
+                                        <input type="date" class="form-control" id="fecha_auto_pago_juicios" name="fecha_auto_pago_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>"  placeholder="Fecha Auto Pago"/>
                                         <div id="mensaje_fecha_auto_pago_juicios" class="errores"></div>
                                         
                                       </div>
@@ -236,22 +248,20 @@
                             		 <div class="col-xs-6 col-md-3 col-lg-3 ">
                              		 <div class="form-group">
                              		 	<label for="fecha_ultima_providencia_juicios" class="control-label">Fecha Última Providencia:</label>
-                                        <input type="text" class="form-control" id="fecha_ultima_providencia_juicios" name="fecha_ultima_providencia_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Última Providencia"/>
+                                        <input type="date" class="form-control" id="fecha_ultima_providencia_juicios" name="fecha_ultima_providencia_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Última Providencia"/>
                                         <div id="mensaje_fecha_ultima_providencia_juicios" class="errores"></div>
                                       </div>
                                    </div>  
                                    
-                                      			               	  <div class="col-xs-12 col-md-3 col-md-3 ">
-            		    <div class="form-group">
-            		    					  
-                      	    <label for="id_usuarios_secretario" class="control-label">Abogado Secretario:</label>
-                      	    <select  class="form-control" id="id_usuarios_secretario" name="id_usuarios_secretario" required>
-                          	<option value="0">--Seleccione--</option>
-                      	    </select>                         
-                       	   <div id="mensaje_id_usuarios_secretario" class="errores"></div>
-                       	 </div>
-            			  </div>       
+                                    <div class="col-xs-6 col-md-3 col-lg-3 ">
+                             		 <div class="form-group">
+                             		 	<label for="fecha_vencimiento_juicios" class="control-label">Fecha de Vencimiento:</label>
+                                        <input type="date" class="form-control" id="fecha_vencimiento_juicios" name="fecha_vencimiento_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha de Vencimiento"/>
+                                        <div id="mensaje_fecha_vencimiento_juicios" class="errores"></div>
+                                      </div>
+                                   </div>  
                                    
+          
                                   
             		</div>
                            
@@ -284,62 +294,21 @@
       			
       			</div>
     		</section>
-      <section class="content">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Listado Usuarios</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fa fa-minus"></i></button>
-                
-              </div>
-            </div>
-            
+         <section class="content">
+      	<div class="box box-primary">
+      		<div class="box-header with-border">
+      			<h3 class="box-title">Listado de Juicios</h3>      			
+            </div> 
             <div class="box-body">
-			<div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#activos" data-toggle="tab">Juicios Activos</a></li>
-              <li><a href="#inactivos" data-toggle="tab">Juicios Inactivos</a></li>
-            </ul>
-            
-            <div class="col-md-12 col-lg-12 col-xs-12">
-            <div class="tab-content">
-             
-            <br>
-              <div class="tab-pane active" id="activos">
-              
-                
-					<div class="pull-right" style="margin-right:15px;">
-					
-						<input type="text" value="" class="form-control" id="search" name="search" onkeyup="load_usuarios(1)" placeholder="search.."/>
-					</div>
-					<div id="load_registrados" ></div>	
-					<div id="users_registrados"></div>	
-                
-              </div>
-              
-              <div class="tab-pane" id="inactivos">
-                
-                    <div class="pull-right" style="margin-right:15px;">
-					<input type="text" value="" class="form-control" id="search_inactivos" name="search_inactivos" onkeyup="load_usuarios_inactivos(1)" placeholder="search.."/>
-					</div>
-					
-					
-					<div id="load_inactivos_registrados" ></div>	
-					<div id="users_inactivos_registrados"></div>
-                
-                
-              </div>
-             
-              <button type="submit" id="btExportar" name="exportar" class="btn btn-info">Exportar</button>
-            </div>
-            </div>
-          </div>
-         
-            
-            </div>
-            </div>
-            </section>
+    			<div class="pull-right" style="margin-right:15px;">
+					<input type="text" value="" class="form-control" id="buscador" name="buscador" onkeyup="consultaJuicios(1)" placeholder="Buscar.."/>
+    			</div>  
+    			<div id="divLoaderPage" ></div>  
+    			          	
+            	<div id="juicios_registrados" ></div>
+            </div> 	
+      	</div>
+      </section> 
   </div>
  	<?php include("view/modulos/footer.php"); ?>	
    <div class="control-sidebar-bg"></div>
@@ -352,8 +321,9 @@
     <script src="view/bootstrap/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
-    <script src="view/Juridico/js/AgregarJuicios.js?0.5"></script> 
-  </body>
+    <script src="view/Juridico/js/validaCedula.js?0.03"></script>     
+    <script src="view/Juridico/js/AgregarJuicios.js?0.10"></script> 
+	  </body>
 </html>
 
  
