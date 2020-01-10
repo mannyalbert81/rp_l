@@ -682,22 +682,17 @@ $controladores=$_SESSION['controladores'];
                 	</span>
               </a>
               <ul class="treeview-menu">
-<<<<<<< HEAD
-		         <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index5"><i class="fa fa-circle-o"></i>Matriz de Juicios</a></li>
-			     <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index6"><i class="fa fa-circle-o"></i>Agregar Juicios</a></li>
-			     <li style="<?php echo getcontrolador("CalculaHonorarios",$controladores) ?>"><a href="index.php?controller=CalculaHonorarios&action=index"><i class="fa fa-circle-o"></i>Calcular Honorarios</a></li>
-				         	
-             </ul>
-            </li>
-=======
                 <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index5"><i class="fa fa-circle-o"></i>Matriz de Juicios</a></li>
     	        <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index6"><i class="fa fa-circle-o"></i>Agregar Juicios</a></li>
+    	         <li style="<?php echo getcontrolador("CalculaHonorarios",$controladores) ?>"><a href="index.php?controller=CalculaHonorarios&action=index"><i class="fa fa-circle-o"></i>Calcular Honorarios</a></li>
     		     <li class="treeview">
-                  <a href="#"><i class="fa fa-circle-o"></i> Generar Providencias
+              </ul>
+              <a href="#">
+              		<i class="fa fa-folder-open-o"></i> Generar Providencias
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
-                  </a>
+              </a>
                   <ul class="treeview-menu">
                     <li style="<?php echo getcontrolador("Avoco",$controladores) ?>"><a href="index.php?controller=Avoco&action=index"><i class="fa fa-circle-o"></i>Avoco</a></li>
     		      </ul>
