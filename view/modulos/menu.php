@@ -699,27 +699,7 @@ $controladores=$_SESSION['controladores'];
                 </li>
 		      </ul>
 		    </li>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
->>>>>>> branch 'master' of https://github.com/mannyalbert81/rp_l.git
-        
+
         <li class="treeview"  style="<?php echo getcontrolador("ReporteJuridico",$controladores) ?>"  >
           <a href="#">
             <i class="fa fa-folder-open-o"></i> <span>Reportes</span>
