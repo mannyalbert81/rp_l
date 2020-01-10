@@ -91,7 +91,7 @@
                                  	<div class="form-group">
                                  	
                                         <label for="identificacion_clientes" class="control-label">Cédula:</label>
-                                        <input type="text" id="identificacion_clientes" name="identificacion_clientes" value="" class="form-control" placeholder="Cédula">
+                                        <input type="text" id="identificacion_clientes" name="identificacion_clientes" value="" class="form-control" placeholder="Cédula" onkeyup="cedulaCorrecta(this)">
                                         <div id="mensaje_identificacion_clientes" class="errores"></div>
                                         
                                       </div>
@@ -166,7 +166,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_titulo_credito_juicios" class="control-label">Fecha Título Crédito:</label>
-                                        <input type="text" class="form-control" id="fecha_titulo_credito_juicios" name="fecha_titulo_credito_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Título Crédito">
+                                        <input type="date" class="form-control" id="fecha_titulo_credito_juicios" name="fecha_titulo_credito_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Título Crédito">
                                         <div id="mensaje_fecha_titulo_credito_juicios" class="errores"></div>
                                         
                                       </div>
@@ -189,7 +189,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_oden_cobro_juicios" class="control-label">Fecha Orden de Cobro:</label>
-                                        <input type="text" class="form-control" id="fecha_oden_cobro_juicios" name="fecha_oden_cobro_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Orden de Cobro">
+                                        <input type="date" class="form-control" id="fecha_oden_cobro_juicios" name="fecha_oden_cobro_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Orden de Cobro">
                                         <div id="mensaje_fecha_oden_cobro_juicios" class="errores"></div>
                                         
                                       </div>
@@ -201,7 +201,7 @@
                              		 <div class="form-group">
                              		 
                              		 	<label for="fecha_auto_pago_juicios" class="control-label">Fecha Auto Pago:</label>
-                                        <input type="text" class="form-control" id="fecha_auto_pago_juicios" name="fecha_auto_pago_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>"  placeholder="Fecha Auto Pago"/>
+                                        <input type="date" class="form-control" id="fecha_auto_pago_juicios" name="fecha_auto_pago_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>"  placeholder="Fecha Auto Pago"/>
                                         <div id="mensaje_fecha_auto_pago_juicios" class="errores"></div>
                                         
                                       </div>
@@ -248,22 +248,20 @@
                             		 <div class="col-xs-6 col-md-3 col-lg-3 ">
                              		 <div class="form-group">
                              		 	<label for="fecha_ultima_providencia_juicios" class="control-label">Fecha Última Providencia:</label>
-                                        <input type="text" class="form-control" id="fecha_ultima_providencia_juicios" name="fecha_ultima_providencia_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Última Providencia"/>
+                                        <input type="date" class="form-control" id="fecha_ultima_providencia_juicios" name="fecha_ultima_providencia_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha Última Providencia"/>
                                         <div id="mensaje_fecha_ultima_providencia_juicios" class="errores"></div>
                                       </div>
                                    </div>  
                                    
-                                      			               	  <div class="col-xs-12 col-md-3 col-md-3 ">
-            		    <div class="form-group">
-            		    					  
-                      	    <label for="id_usuarios_secretario" class="control-label">Abogado Secretario:</label>
-                      	    <select  class="form-control" id="id_usuarios_secretario" name="id_usuarios_secretario" required>
-                          	<option value="0">--Seleccione--</option>
-                      	    </select>                         
-                       	   <div id="mensaje_id_usuarios_secretario" class="errores"></div>
-                       	 </div>
-            			  </div>       
+                                    <div class="col-xs-6 col-md-3 col-lg-3 ">
+                             		 <div class="form-group">
+                             		 	<label for="fecha_vencimiento_juicios" class="control-label">Fecha de Vencimiento:</label>
+                                        <input type="date" class="form-control" id="fecha_vencimiento_juicios" name="fecha_vencimiento_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha de Vencimiento"/>
+                                        <div id="mensaje_fecha_vencimiento_juicios" class="errores"></div>
+                                      </div>
+                                   </div>  
                                    
+          
                                   
             		</div>
                            
@@ -323,8 +321,9 @@
     <script src="view/bootstrap/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
-    <script src="view/Juridico/js/AgregarJuicios.js?0.6"></script> 
-  </body>
+    <script src="view/Juridico/js/validaCedula.js?0.03"></script>     
+    <script src="view/Juridico/js/AgregarJuicios.js?0.10"></script> 
+	  </body>
 </html>
 
  

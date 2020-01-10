@@ -659,8 +659,9 @@
 	        $_id_etapa_procesal = (isset($_POST["id_etapa_procesal"])) ? $_POST["id_etapa_procesal"] : 0;
 	        $_id_estado_procesal = (isset($_POST["id_estado_procesal"])) ? $_POST["id_estado_procesal"] : 0 ;
 	        $_fecha_ultima_providencia_juicios = (isset($_POST["fecha_ultima_providencia_juicios"])) ? $_POST["fecha_ultima_providencia_juicios"] : "";
-	        $_id_usuarios_secretario = (isset($_POST["id_usuarios_secretario"])) ? $_POST["id_usuarios_secretario"] : 0 ;
+	        $_id_usuarios_secretario = $_SESSION["id_usuarios"];
 	        $_observaciones_juicios = (isset($_POST["observaciones_juicios"])) ? $_POST["observaciones_juicios"] : "" ;
+	        $_fecha_vencimiento_juicios = (isset($_POST["fecha_vencimiento_juicios"])) ? $_POST["fecha_vencimiento_juicios"] : "" ;
 	        
 	        /*si es insertado enviar en cero el id_banco a la funcion*/
 	        $funcion = "ins_legal_clientes_juicios";
@@ -685,7 +686,8 @@
                                 '$_fecha_ultima_providencia_juicios',
                                 '$_observaciones_juicios',
                                 '$_id_estado_procesal',
-                                '$_id_usuarios_secretario'";
+                                '$_id_usuarios_secretario',
+                                '$_fecha_vencimiento_juicios'";
 	            $clientes->setFuncion($funcion);
 	            $clientes->setParametros($parametros);
 	            $resultado = $clientes->llamafuncion();
@@ -766,21 +768,7 @@
 	    }
 	}
 	
-	public function CargaUsuariosSecretario(){
-	    
-	    $usuarios_secretario = null;
-	    $usuarios_secretario = new UsuariosModel();
-	    
-	    $query = " SELECT id_usuarios, nombre_usuarios FROM usuarios WHERE id_rol = 65";
-	    
-	    $resulset = $usuarios_secretario->enviaquery($query);
-	    
-	    if(!empty($resulset) && count($resulset)>0){
-	        
-	        echo json_encode(array('data'=>$resulset));
-	        
-	    }
-	}
+
 	
 	public function ConsultaJuicios(){
 	    
@@ -811,6 +799,7 @@
                       legal_etapa_procesal.nombre_etapa_procesal, 
                       legal_juicios.fecha_ultima_providencia_juicios, 
                       legal_juicios.observaciones_juicios, 
+                      legal_juicios.fecha_vencimiento_juicios,
                       legal_estado_procesal.id_estado_procesal, 
                       legal_estado_procesal.nombre_estado_procesal, 
                       usuarios.id_usuarios, 
@@ -827,7 +816,7 @@
 	    $where     = "legal_juicios.id_clientes = legal_clientes.id_clientes AND
                       legal_juicios.id_etapa_procesal = legal_etapa_procesal.id_etapa_procesal AND
                       legal_juicios.id_estado_procesal = legal_estado_procesal.id_estado_procesal AND
-                      legal_juicios.id_usuarios_secretario = usuarios.id_usuarios";
+                      legal_juicios.id_usuarios_abogado = usuarios.id_usuarios";
 	    
 	    $id        = "legal_juicios.id_juicios";
 	    
@@ -880,6 +869,7 @@
 	            $html.= "<thead>";
 	            $html.= "<tr>";
 	            $html.='<th style="text-align: left;  font-size: 12px;">#</th>';
+	            $html.='<th style="text-align: left;  font-size: 12px;"></th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Entidad Origen</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Regional</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">N° Juicio</th>';
@@ -895,6 +885,7 @@
 	            $html.='<th style="text-align: left;  font-size: 12px;">Etapa Procesal</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Estado Procesal</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Fecha Ultima Providencia</th>';
+	            $html.='<th style="text-align: left;  font-size: 12px;">Fecha Vencimiento</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Abogado</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Observaciones</th>';
 	            
@@ -913,6 +904,8 @@
 	                $i++;
 	                $html.='<tr>';
 	                $html.='<td style="font-size: 11px;">'.$i.'</td>';
+	                $html.='<td style="font-size: 15px;">
+                            <a onclick="editJuicios('.$res->id_clientes.')" href="#" class="btn btn-warning" style="font-size:65%;"data-toggle="tooltip" title="Editar"><i class="glyphicon glyphicon-edit"></i></a></td>';
 	                $html.='<td style="font-size: 11px;">'.$res->entidad_origen_juicios.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->regional_juicios.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->numero_juicios.'</td>';
@@ -928,13 +921,11 @@
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_etapa_procesal.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_estado_procesal.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->fecha_ultima_providencia_juicios.'</td>';
+	                $html.='<td style="font-size: 11px;">'.$res->fecha_vencimiento_juicios.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_usuarios.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->observaciones_juicios.'</td>';
 	                
-	                
-	                /*comentario up */
-	                
-	                
+	   
 	                
 	                $html.='</tr>';
 	            }
@@ -1030,8 +1021,72 @@
 	    return $out;
 	}
 	
+	public function editJuicios(){
+	    
+	    session_start();
+	    $clientes = new ClientesModel();
+	    $nombre_controladores = "MatrizJuicios";
+	    $id_rol= $_SESSION['id_rol'];
+	    $resultPer = $clientes->getPermisosEditar("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
+	    
+	    if (!empty($resultPer))
+	    {
+	        
+	        
+	        if(isset($_POST["id_clientes"])){
+	            
+	            $id_clientes = (int)$_POST["id_clientes"];
+	            
+	            $query = "SELECT legal_juicios.id_juicios,
+                      legal_clientes.id_clientes,
+                      legal_clientes.identificacion_clientes,
+                      legal_clientes.nombre_clientes,
+                      legal_juicios.entidad_origen_juicios,
+                      legal_juicios.regional_juicios,
+                      legal_juicios.numero_juicios,
+                      legal_juicios.anio_juicios,
+                      legal_juicios.numero_titulo_credito_juicios,
+                      legal_juicios.fecha_titulo_credito_juicios,
+                      legal_juicios.orden_cobro_juicios,
+                      legal_juicios.fecha_oden_cobro_juicios,
+                      legal_juicios.fecha_auto_pago_juicios,
+                      legal_juicios.cuantia_inicial_juicios,
+                      legal_etapa_procesal.id_etapa_procesal,
+                      legal_etapa_procesal.nombre_etapa_procesal,
+                      legal_juicios.fecha_ultima_providencia_juicios,
+                      legal_juicios.fecha_vencimiento_juicios,
+                      legal_juicios.observaciones_juicios,
+                      legal_estado_procesal.id_estado_procesal,
+                      legal_estado_procesal.nombre_estado_procesal,
+                      usuarios.id_usuarios,
+                      usuarios.cedula_usuarios,
+                      usuarios.nombre_usuarios,
+                      usuarios.apellidos_usuarios FROM public.legal_juicios,
+                      public.legal_clientes,
+                      public.legal_estado_procesal,
+                      public.legal_etapa_procesal,
+                      public.usuarios WHERE legal_juicios.id_clientes = legal_clientes.id_clientes AND
+                      legal_juicios.id_etapa_procesal = legal_etapa_procesal.id_etapa_procesal AND
+                      legal_juicios.id_estado_procesal = legal_estado_procesal.id_estado_procesal AND
+                      legal_juicios.id_usuarios_abogado = usuarios.id_usuarios AND legal_clientes.id_clientes = $id_clientes";
+	        
+	            
+	            
+	            $resultado  = $clientes->enviaquery($query);
+	            
+	            echo json_encode(array('data'=>$resultado));
+	            
+	        }
+	        
+	        
+	    }
+	    else
+	    {
+	        echo "Usuario no tiene permisos-Editar";
+	    }
+	    
+	}
 	
     }
-	//
-	
-	?>
+    
+    ?>
