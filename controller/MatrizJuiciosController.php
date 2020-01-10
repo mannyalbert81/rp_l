@@ -958,7 +958,7 @@
 	}
 
 	public function paginate_juicios($reload, $page, $tpages, $adjacents, $funcion = "") {
-	    
+	 //Steven   
 	    $prevlabel = "&lsaquo; Prev";
 	    $nextlabel = "Next &rsaquo;";
 	    $out = '<ul class="pagination pagination-large">';
