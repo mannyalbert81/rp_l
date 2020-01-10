@@ -1,5 +1,5 @@
    <!DOCTYPE HTML>
-	<html lang="es">
+	<html lang="en">
     <head>
         
     <meta charset="utf-8">
@@ -67,106 +67,88 @@
           
           <div class="row">
 			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="id_juicios" class="control-label">Juicio Coactivo:</label>
-                    <input type="text" id="numero_juicios" name="numero_juicios"  value="" class="form-control">
-	         	</div>
+	         	
+	         	 <div class="input-group input-group-lg">
+			        
+                    <input type="text" id="numero_juicios"  name="numero_juicios"  value="" placeholder="Nuúmero de Juicio a Buscar..." class="form-control">
+			      	<span class="input-group-btn">
+			        	<button class="btn btn-info" id="btnBuscarJuicios"  name="btnBuscarJuicios" type="button">Buscar</button>
+			     	</span>
+			    </div>
+	         	
+	         	
 	         </div>
-	      </div>   	          
-          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="id_juicios" class="control-label">Fecha de Cálculo Coactiva:</label>
-                    <input type="date" id="fecha_calculo_coactiva" name="fecha_calculo_coactiva"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   
-	      
-	      <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="tasa_interes" class="control-label">Tasa de Interés Legal:</label>
-                    <input type="number" id="tasa_interes" name="tasa_interes"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="tasa_mora" class="control-label">Tasa de interés por Mora:</label>
-                    <input type="number" id="tasa_mora" name="tasa_mora"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="tasa_mora" class="control-label">Fecha Vencimiento:</label>
-                    <input type="date" id="fecha_vencimiento" name="fecha_vencimiento"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="meses_mora" class="control-label">Meses Mora:</label>
-                    <input type="number" id="meses_mora" name="meses_mora"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="saldovencido" class="control-label">Saldo vencido:</label>
-                    <input type="number" id="saldo_vencido" name="saldo_vencido"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="honorariossecretariocoactiva" class="control-label">Honorarios Secretario de Coactiva:</label>
-                    <input type="number" id="honorarios_secretario_coactiva" name="honorarios_secretario_coactiva"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="interesmoraliquidacion" class="control-label">Intereses por mora liquidación:</label>
-                    <input type="number" id="interes_mora_liquidacion" name="interes_mora_liquidacion"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="ivafactura" class="control-label">IVA Factura:</label>
-                    <input type="number" id="iva_factura" name="iva_factura"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          <div class="row">
-			<div class="col-md-4 col-lg-4 col-xs-12">
-	         	<div class="form-group">
-	         		<label for="valorretencionfondos" class="control-label">Valor para la Retención de Fondos:</label>
-                    <input type="number" id="valor_retencion_fondos" name="valor_retencion_fondos"  value="" class="form-control">
-	         	</div>
-	         </div>
-	      </div>   	          
-          
-          
-            
-	      <div class="row">
-	      	<div class="col-md-offset-4 col-lg-offset-4 col-md-2 col-lg-2 col-xs-12">
-	      		<div class="form-group">
-	      			<button type="button" id="btnGuardar" name="btnGuardar" class="btn btn-block btn-default" ><i class="fa fa-desktop" aria-hidden="true"></i>Guardar</button>   		
-	      		</div>
-	      	</div>
-	        
-		 </form>
+	  	</div>     
+		<div class="box-body">
+        	<div id="div_detalle_juicio"></div>
+	    </div>  
+	    
+	   	<br>
+	   	<div class="row">
+		<div class="col-md-3 col-lg-3 col-xs-12">
+		<div class="form-group">
+		<label for="meses_mora" class="control-label">INGRESO DE INFORMACIÓN:</label>
+		
+		</div>
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-md-3 col-lg-3 col-xs-12">
+		<div class="form-group">
+		<label for="id_juicios" class="control-label">Fecha de Cálculo Coactiva:</label>
+		<input type="date" id="fecha_calculo_coactiva" name="fecha_calculo_coactiva"  value"" class="form-control">
+		</div>
+		</div>
+		 
+		 
+		 
+		<div class="col-md-3 col-lg-3 col-xs-12">
+		<div class="form-group">
+		<label for="tasa_interes" class="control-label">Tasa de Interés Legal:</label>
+		<div class="input-group input-group-lg">
+		<input type="text" id="tasa_interes" name="tasa_interes"  value="8.02" class="form-control">
+		<span class="input-group-addon">%</span>
+		</div>
+		
+		
+		</div>
+		</div>
+		
+		<div class="col-md-3 col-lg-3 col-xs-12">
+		<div class="form-group">
+		<label for="tasa_mora" class="control-label">Tasa de interés por Mora:</label>
+		<div class="input-group input-group-lg">
+		<input readonly 		type="text" id="tasa_mora" name="tasa_mora"  value="" class="form-control">
+		<span class="input-group-addon">%</span>
+		</div>
+		
+		</div>
+		</div>
+		 
+		<div class="col-md-3 col-lg-3 col-xs-12">
+		<div class="form-group">
+		<label for="tasa_mora" class="control-label">Fecha Vencimiento:</label>
+		<input type="date" id="fecha_vencimiento" name="fecha_vencimiento"  value="" class="form-control">
+		</div>
+		</div>
+		</div>
+		 
+		 
+		<div class="row">
+		<div class="col-md-offset-4 col-lg-offset-4 col-md-2 col-lg-2 col-xs-12">
+		<div class="form-group">
+		<button type="button" id="btnCalcular" name="btnCalcular" class="btn btn-block btn-default" ><i class="fa fa-desktop" aria-hidden="true"></i>Calcular</button>
+		</div>
+		</div>
+		</div>
+	   	
+		<div class="box-body">
+        	<div id="div_detalle_calculo"></div>
+	    </div>  
+		
+		
+	     
+	     		 </form>
 	 </div>
 	      
 	   
@@ -190,13 +172,13 @@
  	<?php include("view/modulos/footer.php"); ?>	
 
    <div class="control-sidebar-bg"></div>
- </div>
+ 
      
    
   <?php include("view/modulos/links_js.php"); ?>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
-  <script src="view/tributario/FuncionesJS/generaAts.js?0.02"></script>
+  <script src="view/Juridico/js/calculaHonorarios.js?0.47"></script>
   
 	
  </body>
