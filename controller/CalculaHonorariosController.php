@@ -322,21 +322,21 @@ class CalculaHonorariosController extends ControladorBase{
 		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
 		$html .= '<div class="form-group">';
 		$html .= '<label for="meses_mora" class="control-label">Meses Mora:</label>';
-		$html .= '<input type="number" id="meses_mora" name="meses_mora"  value="'.$meses_mora.'" class="form-control">';
+		$html .= '<input readonly type="number" id="meses_mora" name="meses_mora"  value="'.$meses_mora.'" class="form-control">';
 		$html .= '</div>';
 		$html .= '</div>';
 		 
 		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
 		$html .= '<div class="form-group">';
 		$html .= '<label for="saldovencido" class="control-label">Saldo vencido:</label>';
-		$html .= '<input type="number" id="saldo_vencido" name="saldo_vencido"  value="'. round($_cuantia_inicial_juicios,2).'" class="form-control">';
+		$html .= '<input readonly type="number" id="saldo_vencido" name="saldo_vencido"  value="'. round($_cuantia_inicial_juicios,2).'" class="form-control">';
 		$html .= '</div>';
 		$html .= '</div>';
 		 
 		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
 		$html .= '<div class="form-group">';
 		$html .= '<label for="honorariossecretariocoactiva" class="control-label">Honorarios Secretario de Coactiva:</label>';
-		$html .= '<input type="number" id="honorarios_secretario_coactiva" name="honorarios_secretario_coactiva"  value="'.$_valor_aplicar.'" class="form-control">';
+		$html .= '<input readonly type="number" id="honorarios_secretario_coactiva" name="honorarios_secretario_coactiva"  value="'.$_valor_aplicar.'" class="form-control">';
 		$html .= '</div>';
 		$html .= '</div>';
 			
@@ -344,7 +344,7 @@ class CalculaHonorariosController extends ControladorBase{
 		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
 		$html .= '<div class="form-group">';
 		$html .= '<label for="interesmoraliquidacion" class="control-label">Intereses por mora liquidación:</label>';
-		$html .= '<input type="number" id="interes_mora_liquidacion" name="interes_mora_liquidacion"  value="'.$_interes_mora.'" class="form-control">';
+		$html .= '<input readonly type="number" id="interes_mora_liquidacion" name="interes_mora_liquidacion"  value="'.$_interes_mora.'" class="form-control">';
 		$html .= '</div>';
 		$html .= '</div>';
 		$html .= '</div>';
@@ -352,14 +352,14 @@ class CalculaHonorariosController extends ControladorBase{
 		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
 		$html .= '<div class="form-group">';
 		$html .= '<label for="ivafactura" class="control-label">IVA Factura:</label>';
-		$html .= '<input type="number" id="iva_factura" name="iva_factura"  value="'.$_iva_factura.'" class="form-control">';
+		$html .= '<input readonly type="number" id="iva_factura" name="iva_factura"  value="'.$_iva_factura.'" class="form-control">';
 		$html .= '</div>';
 		$html .= '</div>';
 		
 		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
 		$html .= '<div class="form-group">';
 		$html .= '<label for="valorretencionfondos" class="control-label">Valor para la Retención de Fondos:</label>';
-		$html .= '<input type="number" id="valor_retencion_fondos" name="valor_retencion_fondos"  value="'.$_valor_retencion_fondos.'" class="form-control">';
+		$html .= '<input readonly type="number" id="valor_retencion_fondos" name="valor_retencion_fondos"  value="'.$_valor_retencion_fondos.'" class="form-control">';
 		$html .= '</div>';
 		$html .= '</div>';
 		$html .= '</div>';
