@@ -2,6 +2,8 @@ $(document).ready(function(){
 	
 	// creo editor de texto
 	CKEDITOR.replace('editor1')
+	CKEDITOR.replace('editor2')
+	CKEDITOR.replace('editor3')
     $('.textarea').wysihtml5()
 	
 		
@@ -17,9 +19,69 @@ $(document).ready(function(){
  */
 
 
- var secretario;
+   
+	var numero_juicios;
+	var identificacion_clientes;
+	var nombre_clientes;
+	var numero_titulo_credito_juicios;
+	var fecha_auto_pago_juicios;
+	var valor_retencion_fondos;
+	var fecha_inicio_proceso_juicios;
+	var secretario;
+    var valorLetras = 0;
 
-
+    var f=new Date();
+	var dia = f.getDate();
+	var hora = f.getHours();
+	var minutos = f.getMinutes();
+    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+    var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+    
+    
+    // fecha para razón aumentando 1 dia 
+    var fecha = new Date();
+    fecha.setDate(fecha.getDate()+1);
+    var dia_razon = fecha.getDate();
+    
+    
+    // relleno a dos digitos el dia
+    if (dia < 10) {
+    	dia = '0' + dia;
+    }
+    
+    // relleno a dos digitos el dia
+    if (dia_razon < 10) {
+    	dia_razon = '0' + dia_razon;
+    }
+    
+    // relleno a dos digitos la hora
+    if (hora < 10) {
+    	hora = '0' + hora;
+    }
+    
+    
+   // relleno a dos digitos los minutos
+    if (minutos < 10) {
+    	minutos = '0' + minutos;
+    }
+    
+    
+    var fecha_actual;
+    var fecha_razon;
+    var fecha_auto_pago_nueva;
+    var fecha_inicio_proceso_juicios_nueva;
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 	$("#numero_juicios" ).autocomplete({
 	 source: 'index.php?controller=Avoco&action=AutocompleteNumeroJuicio',
@@ -42,10 +104,16 @@ $(document).ready(function(){
 	$('#nombre_clientes').val(respuesta.nombre_clientes);
 	$('#numero_titulo_credito_juicios').val(respuesta.numero_titulo_credito_juicios);
 	$('#fecha_auto_pago_juicios').val(respuesta.fecha_auto_pago_juicios);
-	$('#cuantia_inicial_juicios').val(respuesta.cuantia_inicial_juicios);
+	$('#valor_retencion_fondos').val(respuesta.valor_retencion_fondos);
+	$('#fecha_inicio_proceso_juicios').val(respuesta.fecha_inicio_proceso_juicios);
+	
+	
 	secretario =  respuesta.secretarios;                   						
 	
+	
 	formato_avoco();
+	formato_oficio_1();
+	formato_oficio_2();
 	
 	}).fail(function(xhr,status, error) {
 	       
@@ -56,7 +124,10 @@ $(document).ready(function(){
 		$('#nombre_clientes').val("");
 		$('#numero_titulo_credito_juicios').val("");
 		$('#fecha_auto_pago_juicios').val("");
-		$('#cuantia_inicial_juicios').val("");
+		$('#valor_retencion_fondos').val("");
+		$('#fecha_inicio_proceso_juicios').val("");
+		
+		$("#aplicar").attr({disabled:true});
 		secretario =  ""; 
 		
 		console.log(xhr.responseText)
@@ -71,51 +142,31 @@ $(document).ready(function(){
 
 
 	function formato_avoco(){
-		
 	
-	var resultado
-	var formato
-	var numero_juicios=$('#numero_juicios').val()
-	var identificacion_clientes=$('#identificacion_clientes').val()
-	var nombre_clientes=$('#nombre_clientes').val()
-	var numero_titulo_credito_juicios=$('#numero_titulo_credito_juicios').val()
-	var fecha_auto_pago_juicios=$('#fecha_auto_pago_juicios').val()
-	var cuantia_inicial_juicios=$('#cuantia_inicial_juicios').val()
+	var formato="";
+	 numero_juicios=$('#numero_juicios').val();
+	 identificacion_clientes=$('#identificacion_clientes').val();
+	 nombre_clientes=$('#nombre_clientes').val();
+	 numero_titulo_credito_juicios=$('#numero_titulo_credito_juicios').val();
+	 fecha_auto_pago_juicios=$('#fecha_auto_pago_juicios').val();
+	 valor_retencion_fondos=$('#valor_retencion_fondos').val();
+	 fecha_inicio_proceso_juicios=$('#fecha_inicio_proceso_juicios').val();
 	
-	var f=new Date();
-	var dia = f.getDate();
-	var hora = f.getHours();
-	var minutos = f.getMinutes();
-    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-    var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
-    
-    
-    // relleno a dos digitos el dia
-    if (dia < 10) {
-    	dia = '0' + dia;
-    }
-    
-    // relleno a dos digitos la hora
-    if (hora < 10) {
-    	hora = '0' + hora;
-    }
-    
-    
- // relleno a dos digitos los minutos
-    if (minutos < 10) {
-    	minutos = '0' + minutos;
-    }
-    
-    
-   
+	
+	convertir_a_letras(valor_retencion_fondos);
+	var monto_letras =  valorLetras;
+	
+	
     separadores = ['-','/'],
     textoseparado = fecha_auto_pago_juicios.split (new RegExp (separadores.join('|'),'g'));
+    textoseparado1 = fecha_inicio_proceso_juicios.split (new RegExp (separadores.join('|'),'g'));
     
     
     // capturo la fecha actual en letras
-    var fecha_actual = diasSemana[f.getDay()] + ", " + dia + " de " + meses[f.getMonth()] + " del " + f.getFullYear() + ", las " + hora + "H" + minutos;
-    var fecha_auto_pago_nueva = textoseparado[2] + " de " + meses[textoseparado[1]-1] + " del " + textoseparado[0];
-    
+     fecha_actual = diasSemana[f.getDay()] + ", " + dia + " de " + meses[f.getMonth()] + " del " + f.getFullYear() + ", las " + hora + "H" + minutos;
+     fecha_razon = diasSemana[fecha.getDay()] + ", " + dia_razon + " de " + meses[fecha.getMonth()] + " del " + fecha.getFullYear();
+     fecha_auto_pago_nueva = textoseparado[2] + " de " + meses[textoseparado[1]-1] + " del " + textoseparado[0];
+     fecha_inicio_proceso_juicios_nueva  = textoseparado1[2] + " de " + meses[textoseparado1[1]-1] + " del " + textoseparado1[0];
    
     
 	// vacio el texto
@@ -125,34 +176,28 @@ $(document).ready(function(){
 
 	`<p style="text-align:justify">&nbsp;</p>`+
 
-	`<p style="text-align: justify;">CORPORACIÓN NACIONAL DE TELECOMUNICACIONES – CNT EP. - JEFATURA DE COACTIVA. -`+
-	` Quito, ${fecha_actual} Vistos. - Avoco conocimiento en la calidad en que suscribo en conformidad`+
-	` con la acción de personal No. ${numero_juicios} de ${fecha_auto_pago_nueva}. Designo como Secretaria Abogada Externa a`+
-	` la ${secretario}.,`+
-	` quien encontrándose presente, declara aceptar su cargo y promete cumplir fiel y legalmente sus funciones.`+
-	` El presente proceso coactivo se tramitará de acuerdo a lo previsto en la Segunda Disposición Transitoria del Código Orgánico Administrativo (COA),`+
-	` que textualmente dice: <b>“SEGUNDA.-</b> Los procedimientos que se encuentran en trámite a la fecha de vigencia de este Código,`+
-	` continuarán sustanciándose hasta su conclusión conforme con la normativa vigente al momento de su inicio.- En lo principal se dispone:`+
-	` <b>1.-</b> Cúmplase con todo lo actuado en Auto de Pago de fecha ${fecha_auto_pago_nueva}, ordenado en contra de <b>${nombre_clientes},`+
-	` con cédula de ciudadanía No. ${identificacion_clientes}, además dicto en su contra las siguientes medidas cautelares ampliatorias: a)</b> La retención de fondos,`+
-	` depósitos  o cualquier otro tipo de inversiones que el coactivado mantiene en las entidades  del Sistema Financiero, Cooperativas,`+
-	` hasta por el monto de MIL CUATROCIENTOS TREINTA Y TRES CON 26/100 DÓLARES  DE LOS ESTADOS UNIDOS DE AMERICA (USD $1433,26),`+
-	` para dicho efecto remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria,`+
-	` para su cumplimiento inmediato, entidades que informaran a esta Jefatura sobre las retenciones realizadas;`+
-	` b) Ofíciese al señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
-	` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado ESTRADA CALERO FABRICIO MARCELO,`+
-	` con cédula de ciudadanía No.0703293043 y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos`+
-	` registrados a su nombre.- c).- En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad`+
-	` por mora para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
-	` que el señor ESTRADA CALERO FABRICIO MARCELO, con cédula de ciudadanía No.0703293043, mantiene obligaciones en mora con esta entidad de control,`+
-	` en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo el impedimento para ejercer cargo público;`+
-	` 2.- Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información suficiente respecto del domicilio actual,`+
-	` del coactivado  ESTRADA CALERO FABRICIO MARCELO, con cédula de ciudadanía No.0703293043, y más datos generales; 3.-Remítase atento oficio`+
-	` a la Dirección General del Registro Civil a fin que certifique datos filiales, del coactivado  ESTRADA CALERO FABRICIO MARCELO,`+
-	` con cédula de ciudadanía No.0703293043, y más datos generales; 4.- Remítase atento oficio al Ministerio de Relaciones Exteriores,`+
-	` con el fin de que indique si el coactivado ESTRADA CALERO FABRICIO MARCELO, con cédula de ciudadanía No.0703293043,`+
-	` salió del país o consta en el registro consular, si se verifica que es así.- CÚMPLASE y OFÍCIESE.-</p>`+
-	
+	`<p style="text-align: justify;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES – CNT EP. - JEFATURA DE COACTIVA.-</b> Quito, ${fecha_actual}`+
+	` Vistos. - Avoco conocimiento en la calidad en que suscribo en conformidad con la acción de personal No. ${numero_juicios}`+
+	 ` de ${fecha_inicio_proceso_juicios_nueva}. El presente proceso coactivo se tramitará de acuerdo a lo previsto en la Segunda Disposición Transitoria del`+
+	 ` Código Orgánico Administrativo (COA), que textualmente dice: <em><b>“SEGUNDA.-</b> Los procedimientos que se encuentran en trámite a la fecha de`+
+	 ` vigencia de este Código, continuarán sustanciándose hasta su conclusión conforme con la normativa vigente al momento de su inicio<b>”</b></em>.`+
+     ` Designo como Secretaria Abogada Externa a la ${secretario}, quien encontrándose presente, declara aceptar su cargo y`+
+     ` promete cumplir fiel y legalmente sus funciones.- En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
+     ` fecha ${fecha_auto_pago_nueva}, ordenado en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes},`+
+     ` además dicto en su contra las siguientes medidas cautelares ampliatorias: a).-</b> La retención de fondos, depósitos  o cualquier`+
+     ` otro tipo de inversiones que la coactivada mantiene en las entidades del Sistema Financiero, Cooperativas, hasta por el`+
+     ` monto de <b>${monto_letras}</b>, para dicho efecto`+
+     ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
+     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas; <b>b).-</b> Ofíciese al`+
+     ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
+     ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
+     ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
+     ` <b>c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
+     ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
+     ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
+     ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
+     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b></p>`+
+
 	
 	
 	// espacios en blanco para las firmas
@@ -171,7 +216,7 @@ $(document).ready(function(){
 	`<p style="text-align:justify">&nbsp;</p>`+
 			
 	 
-	`<b>Razón:</b> Quito, 26 de agosto de 2019, no se notifica la providencia que antecede ya que el coactivado,`+
+	`<b>Razón:</b> Quito, ${fecha_razon}, no se notifica la providencia que antecede ya que el coactivado,`+
 	` no ha cumplido con su obligación de señalar correo electrónico.- <b>CERTIFICO.-</b>`+
 
 
@@ -182,1068 +227,249 @@ $(document).ready(function(){
 	
 	
 	
-	`<p style="text-align:left">Dra. Letty Geovanna Lara C.<br>`+
+	`<p style="text-align:left">${secretario}<br>`+
+	`<b>LIVENTSIVAL CIA. LTDA.</b><br>`+
 	`<b>SECRETARIA-ABOGADA EXTERNA</b><br>`+
 	`<b>JEFATURA DE COACTIVA CNT- E.P.</b></p>`;
-	
-	
-	
-	
 	
 	CKEDITOR.instances.editor1.setData(formato); 
 	
 	$('#editor1').val(formato);
 	
     
-	
-	
 	}
 	
 	
-
-/*******************************************************************************
- * funcion para iniciar el formulario
- * 
- * @returns
- */
-function init(){
 	
-	//$(".inputDecimal").val('0.00');
-	
-	/* para ver clase de errores, cambiar stilo cuando son de grupo */	
-	$("div.input-group").children("div.errores").css({"margin-top":"-10px","margin-left":"0px","margin-right":"0px"});
-	$(".field-sm").css({"font-size":"12px"});
-	
-	$(".inputDecimal").inputmask({
-		alias: "numeric",
-		digitsOptional: false,
-		groupSeparator:"",
-		autoGroup: true,
-		digits: 2,
-		integerDigits: 10,
-		placeholder:"0",
-		autoUnmask: true,
-	});
-	
-	$("#numero_documento").inputmask({
-		mask: "999-999-9{1,8}", 
-		placeholder: "_",
-		clearIncomplete: true,
-		rightAlign: true
-	});
-	//mask: "9{1,10}.99",
-	$("#impuestos_cuentas_pagar").hide();
-	
-	var fechaServidor = $("#fechasistema").text();
+	function convertir_a_letras(valor){
 		
-	$("#fecha_cuentas_pagar").inputmask("datetime",{
-	     mask: "y-2-1", 
-	     placeholder: "yyyy-mm-dd", 
-	     leapday: "-02-29", 
-	     separator: "-", 
-	     alias: "dd-mm-yyyy",
-	     clearIncomplete: true,
-		 rightAlign: true,		 
-		 yearrange: {
-				minyear: 1950,
-				maxyear: 2019
-			},
-		oncomplete:function(e){
-			if( (new Date($(this).val()).getTime() > new Date(fechaServidor).getTime()))
-		    {
-				$(this).notify("Fecha no puede ser Mayor",{ position:"buttom left", autoHideDelay: 2000});
-				$(this).val('')
-		    }
-		}
-	});
-	
-	bloqueaControles();
-	
-}
-
-function numeros(e){
-	  var key = window.event ? e.which : e.keyCode;
-	  if (key < 48 || key > 57) {
-	    e.preventDefault();
-	  }
- }
-
-/*******************************************************************************
- * function devuelve sequencial de CxP dc 2019-04-18
- * 
- * @returns
- */
-function devuelveConsecutivoCxP(){
-	
-	let $numeroComprobante = $("#num_comprobante");
-	let $idconsecutivo = $("#id_consecutivo");
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=DevuelveConsecutivoCxP",
-		type:"POST",
-		dataType:"json",
-		data:null
-	}).done(function(datos){		
-		
-		let array = datos.data[0];
-		
-		$numeroComprobante.val(array.numero_consecutivos);
-		$idconsecutivo.val(array.id_consecutivos);
-		
-	}).fail(function(xhr,status,error){
-		var err = xhr.responseText
-		console.log('revisar consecutivos de Cuentas X Pagar');
-		
-	})
-}
-
-/*******************************************************************************
- * function to upload formas pago dc 2019-04-18
- * 
- * @returns
- */
-function cargaFormasPago(){
-	
-	let $formapago = $("#id_forma_pago");
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=cargaFormasPago",
-		type:"POST",
-		dataType:"json",
-		data:null
-	}).done(function(datos){		
-		
-		$formapago.empty();
-		$formapago.append("<option value='0' >--Seleccione--</option>");
-		
-		$.each(datos.data, function(index, value) {
-			$formapago.append("<option value= " +value.id_forma_pago +" >" + value.nombre_forma_pago  + "</option>");	
-  		});
-		
-	}).fail(function(xhr,status,error){
-		var err = xhr.responseText
-		console.log(err)
-		$formapago.empty();
-	})
-}
-
-/*******************************************************************************
- * function to upload formas pago dc 2019-04-18
- * 
- * @returns
- */
-function cargaTipoDocumento(){
-	
-	let $tipoDocumento = $("#id_tipo_documento");
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=cargaTipoDocumento",
-		type:"POST",
-		dataType:"json",
-		data:null
-	}).done(function(datos){		
-		
-		$tipoDocumento.empty();
-		$tipoDocumento.append("<option value='0' >--Seleccione--</option>");
-		
-		$.each(datos.data, function(index, value) {
-			$tipoDocumento.append("<option value= " +value.id_tipo_documento +" >" + value.nombre_tipo_documento  + "</option>");	
-  		});
-		
-	}).fail(function(xhr,status,error){
-		var err = xhr.responseText
-		console.log(err)
-		$tipoDocumento.empty();
-	})
-}
-
-
-/*******************************************************************************
- * function to upload bancos dc 2019-04-18
- * 
- * @returns
- */
-function cargaBancos(){
-	let $bancos = $("#id_bancos");
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=cargaBancos",
-		type:"POST",
-		dataType:"json",
-		data:null
-	}).done(function(datos){		
-		
-		$bancos.empty();
-		$bancos.append("<option value='0' >--Seleccione--</option>");
-		
-		$.each(datos.data, function(index, value) {
-			$bancos.append("<option value= " +value.id_bancos +" >" + value.nombre_bancos  + "</option>");	
-  		});
-		
-	}).fail(function(xhr,status,error){
-		var err = xhr.responseText
-		console.log(err)
-		$bancos.empty();
-	})
-}
-
-/*******************************************************************************
- * function to listar Moneda dc 2019-04-18
- * 
- * @returns
- */
-function cargaMoneda(){
-	let $moneda = $("#id_moneda");
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=cargaMoneda",
-		type:"POST",
-		dataType:"json",
-		data:null
-	}).done(function(datos){		
-		
-		$moneda.empty();
-		
-		$.each(datos.data, function(index, value) {
-			$moneda.append("<option value= " +value.id_moneda +" >" + value.signo_moneda+"-"+value.nombre_moneda  + "</option>");	
-  		});
-		
-	}).fail(function(xhr,status,error){
-		var err = xhr.responseText
-		console.log(err)
-		$moneda.empty();
-	})
-}
-
-/*******************************************************************************
- * function to search proveedores
- * 
- * @returns
- */
-$("#cedula_proveedor" ).autocomplete({
-
-	source: "index.php?controller=Proveedores&action=buscaProveedorByCedula",
-	minLength: 3,
-    select: function (event, ui) {
-       // Set selection
-    	if(ui.item.id == ''){
-    		$("#cedula_proveedor" ).notify("CI / RUC no Válido",{ position:"top right"});
-			 return;
-		}
-		
-	       $('#id_proveedor').val(ui.item.id);
-	       $('#cedula_proveedor').val(ui.item.value);
-	       $("#nombre_proveedor").val(ui.item.nombre);
-	       $("#email_proveedor").val(ui.item.email);
-      
-    },
-    change: function(event,ui){
-    	
-		   if(ui.item == null){			   
-			   $("#cedula_proveedor" ).notify("Digite CI / RUC Válido",{ position:"top right"});    			
-			   $('#id_proveedor').val('');
-		       $('#cedula_proveedor').val('');
-		       $("#nombre_proveedor").val('');
-		       $("#email_proveedor").val('');
-		   }
-	   }
-}).focusout(function() {
-	
-});
-
-
-
-/*
- * fn para poner en mayusculas
- */
- $("input#nombre_lote").on("keyup", function () {
-	 $(this).val($(this).val().toUpperCase());
- })
-
-
- 
-
- /* PARA EVITAR SOBRECARGA DE PAGINA */
- 
- /*
-	 * $(window).on('beforeunload', function(){ return "Good Bye"; });
-	 */
- /*
-	 * function myFunction() { return "Write something clever here..."; }
-	 */
-
- /* PARA VENTANAS MODALES */
- /***************************************************************************
-	 * funcion abre modal para generacion de lote
-	 * 
-	 * @param event
-	 * @returns
-	 */
- $('#mod_lote').on('show.bs.modal', function (event) {
-	 	 
-	 $("#mod_descripcion_lote").val("");
-	 let $id_lote = $("#id_lote").val();
-	 if( $id_lote > 0 ){ $("#nombre_lote").notify("Lote ya Generado",{ className: "warn", position:"buttom left"}); return false; }
-	 let nombreLote = $("#nombre_lote").val();	 
-	 if(nombreLote.length == 0){ $("#nombre_lote").notify("ingrese nombre lote",{ position:"buttom left", autoHideDelay: 2000});  return false;}
-	 		 
-	 var modal = $(this)
-	 modal.find('#mod_nombre_lote').val($("#nombre_lote").val())
-
- }); 
- 
- /***************************************************************************
-	 * funcion abre modal de ingreso de los impuestos a la factura
-	 * 
-	 * @param event
-	 * @returns
-	 */
- $('#mod_impuestos').on('show.bs.modal', function (event) {
-	 
-	 cargaModImpuestos();
-	 
-	 var modal = $(this);
-	 
-	// toma de datos
-	 let $id_lote = $("#id_lote").val();
-	 if( $id_lote == 0 || $id_lote.length == 0 || isNaN($id_lote) ){
-		 $("html, body").animate({ scrollTop: $(nombre_lote).offset().top-120 }, 1000);
-		 $("#nombre_lote").notify("Lote No generado",{ position:"buttom"}); 
-		 return false; 
-	 }
-	 if($("#id_tipo_documento").val() == 0 ){ 
-		 $("html, body").animate({ scrollTop: $(nombre_lote).offset().top-120 }, 1000);
-		 $("#id_tipo_documento").notify("Seleccione Tipo Documento",{ position:"buttom left"});  
-		 return false;
-	 }
-	 let tipoDocumento = $("#id_tipo_documento option:selected").text();	 
-	 $("#mod_tipo_documento").val(tipoDocumento);
-	 
-	 if($("#numero_documento").val() == '' || $("#numero_documento").val().length == 0 ){
-		 $("html, body").animate({ scrollTop: $(nombre_lote).offset().top-120 }, 1000);
-		 $("#numero_documento").notify("Ingrese Num Documento",{ position:"buttom left"});  return false;
-		 }
-	 let numeroDocumento = $("#numero_documento").val();
-	 $("#mod_numero_documento").val(numeroDocumento);
-	 
-	 let _id_bancos = $("#id_bancos").val();
-	 
-	 if( _id_bancos == 0 ){
-		 
-		 $("#id_bancos").notify("Seleccione Banco",{ position:"buttom left"});
-		 return false;
-	 }
-	 
-	 let _monto_cuentas_pagar = $("#monto_cuentas_pagar").val();
-	 
-	 if( isNaN(_monto_cuentas_pagar) || _monto_cuentas_pagar == "" || _monto_cuentas_pagar.length == 0){
-		 
-		 swal("", {
-			 dangerMode: true,
-			 text: "ingrese un monto (base de compra)",
-			  buttons: {cancelar: "Cancelar",aceptar: "Aceptar",},
-			}).then((value) => {
-			  switch (value) {
-			 
-			    case "cancelar":
-			      return;
-			    case "aceptar":	
-			    	$("#monto_cuentas_pagar").focus();
-			    	$("#monto_cuentas_pagar").notify("ingrese un monto");
-			    default:
-			      return;
-			  }
-			});
-		 
-		 return false;
-	 }
-	 
-	 modal.find('#mod_monto_documento').val(_monto_cuentas_pagar);
-	 
-	 $("#monto_cuentas_pagar").attr('readonly',true);
-	 
-	 modListaImpuestosCxP();
-
-	 });
- 
- $('#mod_distribucion').on('show.bs.modal', function (event) {
-	 
-	 let modal = $(this);
-	 
-	// toma de datos
-	 let $id_lote = $("#id_lote").val();
-	 if( $id_lote == 0 || $id_lote.length == 0 || isNaN($id_lote) ){
-		 $("html, body").animate({ scrollTop: $(nombre_lote).offset().top-120 }, 1000);
-		 $("#nombre_lote").notify("Lote No generado",{ position:"buttom"}); 
-		 return false; 
-	 }
-	 if($("#id_tipo_documento").val() == 0 ){ 
-		 $("html, body").animate({ scrollTop: $(nombre_lote).offset().top-120 }, 1000);
-		 $("#id_tipo_documento").notify("Seleccione Tipo Documento",{ position:"buttom left"});  
-		 return false;
-	 }
-	 let tipoDocumento = $("#id_tipo_documento option:selected").text();	 
-	 $("#mod_dis_tipo_documento").val(tipoDocumento);
-	 
-	 if($("#numero_documento").val() == '' || $("#numero_documento").val().length == 0 ){
-		 $("html, body").animate({ scrollTop: $(nombre_lote).offset().top-120 }, 1000);
-		 $("#numero_documento").notify("Ingrese Num Documento",{ position:"buttom left"});  return false;
-		 }
-	 let numeroDocumento = $("#numero_documento").val();
-	 $("#mod_numero_documento").val(numeroDocumento);
-	 
-	 let _monto_cuentas_pagar = $("#monto_cuentas_pagar").val();
-	 
-	 if( isNaN(_monto_cuentas_pagar) || _monto_cuentas_pagar == "" || _monto_cuentas_pagar.length == 0){
-		 swal({text: "ingrese un monto (base de compra)",
-	  		  icon: "info",
-	  		  button: "Aceptar",
-	  		});
-		 return false;
-	 }
-	 
-	 modal.find('#mod_monto_compra').val(_monto_cuentas_pagar);
-	 
-	 let $id_proveedor = $("#id_proveedor").val();
-	 if( $id_proveedor == '' || $id_proveedor.length == 0 || isNaN($id_proveedor) ){
-		 $("html, body").animate({ scrollTop: $(cedula_proveedor).offset().top-120 }, 1000);
-		 $("#cedula_proveedor").notify("Digite Proveedor",{ position:"buttom left"}); 
-		 return false; 
-	 }
-	 
-	 let $nombre_proveedor = $("#nombre_proveedor").val();
-	 let $cedula_proveedor = $("#cedula_proveedor").val();
-	 let $moneda = $("#id_moneda option:selected").text();
-	 let $numComprobante = $("#num_comprobante").val();
-	 modal.find('#mod_nombre_proveedor').val($nombre_proveedor);
-	 modal.find('#mod_codigo_proveedor').val($cedula_proveedor);
-	 modal.find('#mod_nombre_moneda').val($moneda);
-	 modal.find('#mod_num_comprobante').val($numComprobante);
-	 
-	 
-	
- });
-
- /***************************************************************************
-	 * dc 2019-04-29 para carga de frecuencia en lote
-	 * 
-	 * @returns
-	 */
- function cargaFrecuenciaLote(){
-		let $frecuencia = $("#mod_id_frecuencia");
+		var letras="";
 		
 		$.ajax({
-			beforeSend:function(){},
-			url:"index.php?controller=CuentasPagar&action=cargaFrecuenciaLote",
-			type:"POST",
-			dataType:"json",
-			data:null
-		}).done(function(datos){		
+			url:'index.php?controller=Avoco&action=Convierte_a_Letras',
+			type:'POST',
+			async: false,
+			data:{valor:valor}
+			}).done(function(respuesta){			                  		
+				valorLetras = respuesta.trim();			
 			
-			$frecuencia.empty();
-			
-			$.each(datos.data, function(index, value) {
-				$frecuencia.append("<option value= " +value.id_frecuencia_lote +" >" + value.nombre_frecuencia_lote  + "</option>");	
-	  		});
-			
-		}).fail(function(xhr,status,error){
-			var err = xhr.responseText
-			console.log(err)
-			$moneda.empty();
-		})
+			}).fail(function(xhr,status, error) {
+			    
+				console.log(xhr.responseText)
+				   						                    						
+			});
 	}
+	
+	
+	
+	
+	/// para oficios
 
- /* PARA SUBMIT DE MODALES */
+
+	function formato_oficio_1(){
+	
+	var formato_1="";
+	var monto_letras =  valorLetras;
+	
+	
+	// vacio el texto
+	$('#editor2').val("");
+	
+	formato_1 = 
+	`<p style="text-align: left;">Oficio No. ${numero_juicios}</p>`+
+	`<p style="text-align: left;">D.M. de Quito, a ${fecha_razon}</p>`+
+	`<p style="text-align: left;">Señor</p>`+
+	
+	`<p style="text-align:left"><b>SUPERINTENDENTE DE BANCOS<br>`+
+	`SUPERINTENDENCIA DE ECONOMÍA POPULAR Y SOLIDARIA<br>`+
+	`DIRECTOR EJECUTIVO DE LA AGENCIA NACIONAL DE TRANSPORTE TERRESTRE, TRÁNSITO Y SEGURIDAD VIAL<br>`+
+	`MINISTRO DE TRABAJO</b><br>`+
+	`Presente.-</p>`+
+	
+	`<p style="text-align: left;">De mi consideración:</p>`+
+	
+	`<p style="text-align: justify;">Por medio del presente, pongo en su conocimiento que dentro del Juicio Coactivo No. <b>${numero_juicios}</b>`+
+	 ` en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, se ha dictado la siguiente providencia:</p>`+
+	 `<p style="text-align: justify;">“…En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
+     ` fecha ${fecha_auto_pago_nueva},`+
+	 ` ordenado en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes},`+
+     ` además dicto en su contra las siguientes medidas cautelares ampliatorias: a).-</b> La retención de fondos, depósitos  o cualquier`+
+     ` otro tipo de inversiones que la coactivada mantiene en las entidades del Sistema Financiero, Cooperativas, hasta por el`+
+     ` monto de <b>${monto_letras}</b>, para dicho efecto`+
+     ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
+     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas; <b>b).-</b> Ofíciese al`+
+     ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
+     ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
+     ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
+     ` <b>c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
+     ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
+     ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
+     ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
+     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> ” F) Abg. Andrés Albuja.  JEFE DE COACTIVA – CNT E.P.-Certifico.</p>`+
+
+     `<p style="text-align: left;">Lo que comunico para fines de Ley.</p>`+
+ 	 `<p style="text-align: left;">Atentamente,</p>`+
+ 	
+	
+	// espacios en blanco para las firmas
+	`<p style="text-align:justify">&nbsp;</p>`+
+	`<p style="text-align:justify">&nbsp;</p>`+
+	
+	
+	`<p style="text-align:left">${secretario}<br>`+
+	`<b>LIVENTSIVAL CIA. LTDA.</b><br>`+
+	`<b>SECRETARIA-ABOGADA EXTERNA</b><br>`+
+	`<b>JEFATURA DE COACTIVA CNT- E.P.</b></p>`;
+	
+	CKEDITOR.instances.editor2.setData(formato_1); 
+	
+	$('#editor2').val(formato_1);
+	
+    
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	function formato_oficio_2(){
+		
+		var formato_2="";
+		var monto_letras =  valorLetras;
+		
+		
+		// vacio el texto
+		$('#editor3').val("");
+		
+		formato_2 = 
+		`<p style="text-align: left;">Oficio No. ${numero_juicios}</p>`+
+		`<p style="text-align: left;">D.M. de Quito, a ${fecha_razon}</p>`+
+		`<p style="text-align: left;">Señor</p>`+
+		
+		`<p style="text-align:left"><b>MINISTRO DEL TRABAJO<br>`+
+		`DIRECTOR NACIONAL DE REGISTRO CIVIL<br>`+
+		`CONSEJO NACIONAL ELECTORAL<br>`+
+		`MINISTRO DE RELACIONES EXTERIORES</b><br>`+
+		`Presente.-</p>`+
+		
+		`<p style="text-align: left;">De mi consideración:</p>`+
+		
+		`<p style="text-align: justify;">Por medio del presente, pongo en su conocimiento que dentro del Juicio Coactivo No. <b>${numero_juicios}</b>`+
+		 ` en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, se ha dictado la siguiente providencia:</p>`+
+		 `<p style="text-align: justify;">“…En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
+	     ` fecha ${fecha_auto_pago_nueva},`+
+		 ` ordenado en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes},`+
+	     ` además dicto en su contra las siguientes medidas cautelares ampliatorias: a).-</b> La retención de fondos, depósitos  o cualquier`+
+	     ` otro tipo de inversiones que la coactivada mantiene en las entidades del Sistema Financiero, Cooperativas, hasta por el`+
+	     ` monto de <b>${monto_letras}</b>, para dicho efecto`+
+	     ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
+	     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas; <b>b).-</b> Ofíciese al`+
+	     ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
+	     ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
+	     ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
+	     ` <b>c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
+	     ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
+	     ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
+	     ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
+	     ` el impedimento para ejercer cargo público;`+
+	     
+	     ` <b>2.-</b> Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información suficiente respecto del domicilio actual, del coactivado <b>${nombre_clientes},`+
+         ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos generales;`+
+         
+         ` <b>3.-</b> Remítase atento oficio a la Dirección General del Registro Civil a fin que certifique datos filiales, del coactivado <b>${nombre_clientes},`+
+         ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos generales;`+
+        
+         ` <b>4.-</b> Remítase atento oficio al Ministerio de Relaciones Exteriores, con el fin de que indique si el coactivado <b>${nombre_clientes},`+
+         ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, salió del país o consta en el registro consular, si se verifica que es así.-`+
+	      
+	      
+	     ` <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> ” F) Abg. Andrés Albuja.  JEFE DE COACTIVA – CNT E.P.-Certifico.</p>`+
+
+	     `<p style="text-align: left;">Lo que comunico para fines de Ley.</p>`+
+	 	 `<p style="text-align: left;">Atentamente,</p>`+
+	 	
+		
+		// espacios en blanco para las firmas
+		`<p style="text-align:justify">&nbsp;</p>`+
+		`<p style="text-align:justify">&nbsp;</p>`+
+		
+		
+		`<p style="text-align:left">${secretario}<br>`+
+		`<b>LIVENTSIVAL CIA. LTDA.</b><br>`+
+		`<b>SECRETARIA-ABOGADA EXTERNA</b><br>`+
+		`<b>JEFATURA DE COACTIVA CNT- E.P.</b></p>`;
+		
+		CKEDITOR.instances.editor3.setData(formato_2); 
+		
+		$('#editor3').val(formato_2);
+		
+	    
+		}
+	
  
- /***************************************************************************
-	 * dc 2019-04-29 formulario de lote
-	 */
-$("#frm_genera_lote").on("submit",function(event){
+	  $("#frm_avoco").on("submit",function(event){
 	
-	let $id_lote = $("#id_lote").val();
-	let $nombre_lote = $("#mod_nombre_lote").val();
-	let $id_frecuencia = $("#mod_id_frecuencia").val();
-	let $descripcion_lote = $("#mod_descripcion_lote").val();
-	
-	var parametros = {id_lote:$id_lote,nombre_lote:$nombre_lote,decripcion_lote:$descripcion_lote,id_frecuencia:$id_frecuencia}
-	
-	var $div_respuesta = $("#msg_frm_lote"); $div_respuesta.text("").removeClass();
-	
-	if($id_lote > 0){ 		
-		
-		$("#msg_frm_lote").notify("!Cuidado! Lote ya esta Generado",{ className: "warn",position:"button", autoHideDelay: 2000 });
-		 return false;
-		}	
-		
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=generaLote",
-		type:"POST",
-		dataType:"json",
-		data:parametros
-	}).done(function(respuesta){
-		
-		if( respuesta.hasOwnProperty('error') && respuesta.error != '' ){
-			
-			$("#msg_frm_lote").notify(respuesta.error,{ className: "warn",position:"button", autoHideDelay: 2000 });
-			
-		}
-				
-		if(respuesta.valor > 0){
-			
-			
-			$("#msg_frm_lote").notify("Lote Generado",{ className: "success",position:"button", autoHideDelay: 2000 });
-			$("#id_lote").val(respuesta.valor);
-			desbloqueaControles();
-		}
-		
-		
-	}).fail(function(xhr,status,error){
-		
-		var err = xhr.responseText
-		console.log(err);
-		
-		$("#id_lote").val("");
-		//cambio dc 05-06-2019
-		//$div_respuesta.text("Error al generar Lote").addClass("alert alert-warning");
-		//por
-		$("#msg_frm_lote").notify("Error al generar Lote",{ className: "error",position:"button", autoHideDelay: 2000 });
-		
-		
-	}).always(function(){
-				
-	})
-	
-	event.preventDefault();
-})
+	   let id_juicios = $("#id_juicios").val();
+	   let id_clientes = $("#id_clientes").val();
+	   let identificacion_clientes = $("#identificacion_clientes").val();
+	   let nombre_clientes = $("#nombre_clientes").val();
+	   let numero_titulo_credito_juicios = $("#numero_titulo_credito_juicios").val();
+	   let fecha_inicio_proceso_juicios = $("#fecha_inicio_proceso_juicios").val();
+	   let fecha_auto_pago_juicios = $("#fecha_auto_pago_juicios").val();
+	   let valor_retencion_fondos = $("#valor_retencion_fondos").val();
+	   let editor1 = $("#editor1").val();
+	   let editor2 = $("#editor2").val();
+	   let editor3 = $("#editor3").val();
+		  
+	   
+	   
+	   
+	   if(id_juicios == '' || id_juicios == 0){
+		   $("#numero_juicios").notify("Ingrese Nº Juicio",{ position:"buttom left", autoHideDelay: 2000});
+			return false;
+	   }
+	   
+	   if(id_clientes == '' || id_clientes == 0){
+		   $("#numero_juicios").notify("Ingrese Nº Juicio",{ position:"buttom left", autoHideDelay: 2000});
+			return false;
+	   }
 
-/*******************************************************************************
- * dc 2019-05-06 desc: agregar impuestos a la cuenta por pagar
- */
-$("#btn_mod_agrega_impuestos").on("click",function(event){
+	   if(identificacion_clientes == '' || identificacion_clientes.length < 10){
+		   $("#identificacion_clientes").notify("Actualice la cédula en la Matriz Juicios",{ position:"buttom left", autoHideDelay: 2000});
+			return false;
+	   }
+	   
+	   
+	   if(nombre_clientes == '' || nombre_clientes.length < 5){
+		   $("#nombre_clientes").notify("Actualice los nombres en la Matriz Juicios",{ position:"buttom left", autoHideDelay: 2000});
+			return false;
+	   }
+	   
+	   if(fecha_inicio_proceso_juicios == '' || fecha_inicio_proceso_juicios.length == 0){
+		   $("#fecha_inicio_proceso_juicios").notify("Actualice la fecha inicio proceso en la Matriz Juicios",{ position:"buttom left", autoHideDelay: 2000});
+			return false;
+	   }
+	   
+	   
+	   if(fecha_auto_pago_juicios == '' || fecha_auto_pago_juicios.length == 0){
+		   $("#fecha_auto_pago_juicios").notify("Actualice la fecha auto págo en la Matriz Juicios",{ position:"buttom left", autoHideDelay: 2000});
+			return false;
+	   }
+	   
+	   if(valor_retencion_fondos == '' || valor_retencion_fondos == 0){
+		   $("#valor_retencion_fondos").notify("Actualice valor de retención en la Matriz Juicios",{ position:"buttom left", autoHideDelay: 2000});
+			return false;
+	   }
 	
-	let _base_impuestos_cxp = $("#mod_monto_documento").val();
-	let _id_impuestos = $("#mod_id_impuestos").val();
-	let _id_lote = $("#id_lote").val();
-	let _mod_base_impuestos = $("#mod_monto_documento").val();
-	
-	if(_id_lote == 0){
-		$("#msg_frm_impuestos").notify("Lote No generado",{ className: "warn",position:"button" })
-		return null;
-	}
-	
-	if(_id_impuestos == 0){
-		
-		$("#mod_id_impuestos").notify("Seleccione Un impuesto",{className: "warn",position:"button"});
-		return null;
-	}
-	
-	if(_mod_base_impuestos.length == 0 || _mod_base_impuestos == "" || isNaN(_mod_base_impuestos) ){
-		$("#mod_monto_documento").notify("Seleccione Un impuesto",{className: "warn",position:"button"});
-		return null;
-	}
-	
-	var parametros = {base_impuestos:_base_impuestos_cxp, id_impuestos:_id_impuestos, id_lote:_id_lote}
-	
-	$("#msg_frm_impuestos").html("");
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=ModAgregaImpuestos",
-		type:"POST",
-		dataType:"json",
-		data:parametros
-	}).done(function(respuesta){
-		
-		if( respuesta.hasOwnProperty('error') && respuesta.error != '' ){
-						
-			$("#msg_frm_impuestos").notify(respuesta.error,{ className: "warn",position:"button" });
-			
-		}
-		
-		if(respuesta.respuesta == 1){
-			
-			$("#msg_frm_impuestos").notify(respuesta.mensaje,{ className: "success",position:"button" });
-			$("#plan_impuesto").val("Impuesto Agregado");
-		}
-		
-		if( respuesta.hasOwnProperty('resultados') ){
-			
-			let resultados = respuesta.resultados;
-			
-			$("#impuesto_cuentas_pagar").val( resultados.impuestos );
-			$("#total_cuentas_pagar").val( resultados.saldo);
-			$("#saldo_cuentas_pagar").val( resultados.saldo);
-			
-			$("#impuesto_cuentas_pagar").attr("readonly",true);
-			$("#total_cuentas_pagar").attr("readonly",true);
-			$("#saldo_cuentas_pagar").attr("readonly",true)
-			
-		}
-		
-	}).fail(function(xhr,status,error){
-		
-		var err = xhr.responseText
-		console.log(err);
-	}).always(function(){
-			modListaImpuestosCxP()
-	})
-	
-	// console.log('click en guardar impuesto')
-	event.preventDefault();
-	
-})
-
-/* PARA LISTA EN MODALES */
-/* Listar impuestos aplicados */
-
-/*******************************************************************************
- * dc 2019-05-02 funcion listar impuestos aplicados a cuentas por pagar
- * 
- * @returns
- */
-function load_impuestos_cpagar(page=1){
-	
-	let parametros = null;
-	
-	$.ajax({
-		sendBefore: function(){},
-		url:"index.php?controller=CuentasPagar&action=listarImpuestos",
-		data:parametros
-	}).done(function(respuesta){
-		$("#impuestos_cuentas_pagar").html(respuesta);
-	})
-	
-}
-
-/*******************************************************************************
- * dc 2019-05-06
- * 
- * @returns
- */
-function cargaModImpuestos(){
-
-	let $modimpuestos = $("#mod_id_impuestos");
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=cargaModImpuestos",
-		type:"POST",
-		dataType:"json",
-		data:null
-	}).done(function(datos){		
-		
-		$modimpuestos.empty();
-		$modimpuestos.append("<option value = \"0\" >--Seleccione--</option>");
-		
-		$.each(datos.data, function(index, value) {
-			$modimpuestos.append("<option value= " +value.id_impuestos +" >" + value.nombre_impuestos  + "</option>");	
-  		});
-		
-	}).fail(function(xhr,status,error){
-		var err = xhr.responseText
-		console.log(err)
-		$modimpuestos.empty();
-		$modimpuestos.append("<option value = \"0\" >--Seleccione--</option>");
-	})
-}
-
-/*******************************************************************************
- * dc 2019-05-07 desc para cargar impuestos en cuentas por cobrar
- * 
- * @returns
- */
-function modListaImpuestosCxP(_page = 1){
-	
-	let _id_lote = $("#id_lote").val();
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=modListaImpuestosCxP",
-		type:"POST",
-		data:{peticion:'ajax',id_lote:_id_lote,page:_page}
-	}).done(function(respuesta){
-		
-		$("#impuestos_cuentas_pagar").html(respuesta);
-		
-	}).fail(function(xhr,status,error){
-		
-		var err = xhr.responseText
-		console.log(err)		
-		
-	}).always(function(){
-		
-	})
-	
-	
-}
-
-/*******************************************************************************
- * dc 2019-05-07 desc: elimina registro de los impuestos agregados a las ctas.
- * pagar.
- * 
- * @returns
- */
-function delImpuestosCxP(id){
-	
-	$("#msg_frm_impuestos").html("");
-	
-	$.ajax({
-		beforeSend:function(){$("#divLoaderPage").addClass("loader")},
-		url:"index.php?controller=CuentasPagar&action=modDelImpuestosCxP",
-		type:"POST",
-		dataType:"json",
-		data:{id_cuentas_pagar_impuestos:id}
-	}).done(function(datos){
-		
-		if(datos.data > 0){
-			
-			$("#msg_frm_impuestos").notify( "Registro Eliminado" ,{ className: "error",position:"button",autoHideDelay: 1500 });
-			resultadosCompra();
-		}		
-		
-	}).fail(function(xhr,status,error){
-		
-		var err = xhr.responseText
-		console.log(err);
-		
-	}).always(function(){
-		
-		$("#divLoaderPage").removeClass("loader")
-		modListaImpuestosCxP();
-	})
-	
-	return false;
-	
-}
-
-/* PARA ACTIVAR BTN DISTRIBUCION */
-/* cuando se haga click en boton btn_distribucion */
-
-/*******************************************************************************
- * funcion que envia datos para realizar la funcion de distribucion
- * 
- * @returns
- */
-function generaDistribucion(){
-	var $respuesta = false;
-	
-	var $lote_num = $("#id_lote").val();
-	
-	if($lote_num.length == 0 || $lote_num == 0 ){
-		$("#nombre_lote").notify("Lote No generado",{ position:"buttom left"});
-		$("html, body").animate({ scrollTop: $(nombre_lote).offset().top-120 }, 1000);
-		return false;
-	}
-	
-	let _base_compra = $("#monto_cuentas_pagar").val();
-	
-	if( _base_compra.length == 0 || _base_compra == 0 ){
-		
-		$("#monto_cuentas_pagar").focus();
-		
-		swal({text: "Ingrese Monto (base compras)",
-	  		  icon: "warning",
-	  		  button: "Aceptar",
-	  		});
-		
-		$("html, body").animate({ scrollTop: $(monto_cuentas_pagar).offset().top-120 }, 1000);
-		return false;
-	}
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=generaDistribucion",
-		type: "POST",
-		dataType: "json",
-		async: false,
-		data: {id_lote:$lote_num,monto_cuentas_pagar:_base_compra}
-	}).done(function(respuesta){
-		
-		$respuesta = true;
-		
-	}).fail(function(xhr, status, error){
-		var err = xhr.responseText
-		console.log(err);
-		
-	})
-	
-	return $respuesta; 
-} 
-
-/*******************************************************************************
- * funcion que envia datos para realizar consulta de distribucion
- * 
- * @returns
- */
-function ListaDistribucion( _page = 1){
-	var $respuesta = false;
-	
-	var $lote_num = $("#id_lote").val();
-	
-	var $divtabla = $("#distribucion_cuentas_pagar")
-	
-	//tomar datos de referencia de descripcion de cuentas pagar
-	let $referencia_cuentas_pagar = $("#descripcion_cuentas_pagar").val();
-	
-	$.ajax({
-		beforeSend:function(){},
-		url:"index.php?controller=CuentasPagar&action=listaDistribucion",
-		type: "POST",
-		dataType: "html",
-		data: {peticion:"ajax", search:"",id_lote:$lote_num,page:_page}
-	}).done(function(respuesta){
-		
-		$divtabla.html(respuesta);
-		
-		$divtabla.find("input[name='mod_dis_referencia']").val($referencia_cuentas_pagar);
-		
-	}).fail(function(xhr, status, error){
-		var err = xhr.responseText
-		console.log(err);
-		
-	})
-	
-	return $respuesta;
-}
-
-/*******************************************************************************
- * dc 2019-05-12
- * 
- * @returns
- */
-$("#frm_cuentas_pagar").on("click","#btn_distribucion",function(event){
-	
-	console.log("llego");
-	// aqui genera la distribucion de los pagos
-	var $respuesta_distribucion = generaDistribucion();
-	
-	if(!$respuesta_distribucion){		
-		return false;
-	}
-	
-	resultadosCompra();
-	ListaDistribucion();
-		
-})
-
-// PARA EVENTO KEYPRESS
-/* para input con clase distribucion */
-
-$("#distribucion_cuentas_pagar").on("focus","input.distribucion.distribucion_autocomplete[type=text]",function(e) {
-	
-	let _elemento = $(this);
-	
-    if ( !_elemento.data("autocomplete") ) {
-    	    	
-    	_elemento.autocomplete({
-    		minLength: 3,    	    
-    		source:function (request, response) {
-    			$.ajax({
-    				url:"index.php?controller=CuentasPagar&action=autompletePlanCuentas",
-    				dataType:"json",
-    				type:"GET",
-    				data:{term:request.term},
-    			}).done(function(x){
-    				
-    				response(x); 
-    				
-    			}).fail(function(xhr,status,error){
-    				var err = xhr.responseText
-    				console.log(err)
-    			})
-    		},
-    		select: function (event, ui) {
-     	       	// Set selection
-    			let fila = _elemento.closest("tr");
-    			let in_nombre_plan_cuentas = fila.find("input:text[name='mod_dis_nombre']")
-    			let in_id_plan_cuentas = fila.find("input:hidden[name='mod_dis_id_plan_cuentas']")
-    			let in_codigo_plan_cuentas = fila.find("input:text[name='mod_dis_codigo']")
-    			
-    			if(ui.item.id == ''){
-    				 _elemento.closest("table").notify("Digite Cod. Cuenta Valido",{ position:"top center"});
-    				 in_nombre_plan_cuentas.val('');
-    	    		 in_codigo_plan_cuentas.val('');
-    	    		 in_id_plan_cuentas.val('');
-    				 return;
-    			}
-    			
-    			in_nombre_plan_cuentas.val(ui.item.nombre);
-    			in_codigo_plan_cuentas.val(ui.item.value);
-    			in_id_plan_cuentas.val(ui.item.id);
-    			     	     
-     	    },
-     	   appendTo: "#mod_distribucion",
-     	   change: function(event,ui){
-     		   
-     		   if(ui.item == null){
-     			   
-     			 _elemento.closest("tr").find("input:hidden[name='mod_dis_id_plan_cuentas']").val("");
-     			 _elemento.closest("table").notify("Digite Cod. Cuenta Valido",{ position:"top center"});
-     			_elemento.val('');
-     			let fila = _elemento.closest("tr");
-    			fila.find("input:text[name='mod_dis_nombre']").val('');
-    			fila.find("input:hidden[name='mod_dis_id_plan_cuentas']").val('')
-     			 
-     		   }
-     	   }
-    	
-    	}).focusout(function() {
-    		
-    	})
-    }
-});
-
-/* PARA MODAL DE DISTRIBUCION */
-// metodo se submit
-$("#btn_distribucion_aceptar").on("click",function(){
-	
-	let divPadre = $("#distribucion_cuentas_pagar");	
-	let filas = divPadre.find("table tbody > tr ");	
-	let data = [];	
-	let error = true;
-	
-	filas.each(function(){
-		
-		var _id_distribucion	= $(this).attr("id").split('_')[1],
-			_desc_distribucion	= $(this).find("input:text[name='mod_dis_referencia']").val(),
-			_id_plan_cuentas 	= $(this).find("input:hidden[name='mod_dis_id_plan_cuentas']").val();
-
-		item = {};
-	
-		if(!isNaN(_id_distribucion)){
-		
-	        item ["id_distribucion"] 		= _id_distribucion;
-	        item ["referencia_distribucion"]= _desc_distribucion;
-	        item ['id_plan_cuentas'] 		= _id_plan_cuentas;
-	        
-	        data.push(item);
-		}else{			
-			error = false; return false;
-		}
-		
-		if(isNaN(_id_plan_cuentas) || _id_plan_cuentas.length == 0 ){
-			divPadre.find("table").notify("Cuentas Faltantes",{ position:"top center"});
-			error = false; return false;
-		}
-				
-	})
-	
-	// validar datos antes de enviar al controlador
-	
-	if(!error){	return false;}
-	
-	parametros 	= new FormData();
-	arrayDatos 	= JSON.stringify(data); 
-	parametros.append('lista_distribucion', arrayDatos);
- 
-	$.ajax({
-		data: parametros,
-		type: 'POST',
-		url : "index.php?controller=CuentasPagar&action=InsertaDistribucion",
-		processData: false, 
-		contentType: false,
-		dataType: "json"
-	}).done(function(a){
-		
-		if(a.respuesta){
-			
-			 $("#mod_distribucion").modal('hide');
-			//ocultar modal padre
-			 swal({text: "Distribucion Realizada",
-		  		  icon: "success",
-		  		  button: "Aceptar",
-		  		});
-		}
-		
-	}).fail(function(xhr, status, error){
-		
-		var err = xhr.responseText		
-		console.log(err)
-		
-	})
-	
-	//console.log(data);
-	
-})
-
-// PARA INPUT DE REFERENCIA
-/* poner mismo texto a todos */
-$("#distribucion_cuentas_pagar").on("keyup","input:text[name='mod_dis_referencia']",function(){
-		
-	let valorPrincipal = $(this).val();
-	
-	$("input:text[name='mod_dis_referencia']").each(function(index,value){		
-		$(this).val(valorPrincipal);
-	})
-	
-})
-
-
-
-/* PARA DIV CON MENSAJES DE ERROR */
-/* SE ACTIVAN AL ENFOCAR EN INPUT RELACIONADO */
-
-$("#nombre_lote").on("focus",function(){
-	$("#mensaje_id_lote").fadeOut().text("");
-})
-
-$("#mod_monto_documento").on("focus",function(){
-	$("#mensaje_mod_monto_documento").fadeOut().text("");
-})
-
-$("#btn_mostrar_lista_impuestos").on("click",function(){	
-	
-	if($(this).find("i").hasClass("fa fa-search-plus")){
-		
-		$(this).find("span").text("Ocultar lista");
-		$(this).find("i").removeClass().addClass("fa fa-search-minus");	
-	}else{
-		$(this).find("span").text("Ver lista");
-		$(this).find("i").removeClass().addClass("fa fa-search-plus");
-	}
-	
-	$("#impuestos_cuentas_pagar").toggle("slow");
-	
-})
-
-function generaMensaje(mensaje,clase){
-	let $div = $("<div></div>");
-	let $btnClose = '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
-	'<span aria-hidden="true">&times;</span></button>';
-	$div.text(mensaje);
-	$div.addClass(clase);
-	$div.append($btnClose);
-	return $div;
-	
-	
-}
-
-
-// PARA EL SUBMIT DE GUARDADO PRINCIPAL
-/* guardar cuentas por pagar */
-
-/*******************************************************************************
- * dc 2019-05-17
- */
-$("#frm_cuentas_pagar").on("submit",function(event){
-	
-	if($("#id_lote").val().length == 0 && !isNaN($("#id_lote").val())){
-		$("#nombre_lote").notify("Debe ingresar el lote",{position:"button"});
-		$("html, body").animate({ scrollTop: $(nombre_lote).offset().top-120 }, 1000);
-		return false;
-	}
 		
 	var parametros = $(this).serialize();
 	
 	$.ajax({
 		beforeSend:null,
-		url:"index.php?controller=CuentasPagar&action=InsertCuentasPagar",
+		url:"index.php?controller=Avoco&action=InsertAvoco",
 		type:"POST",
 		dataType:"json",
 		data:parametros
@@ -1262,8 +488,10 @@ $("#frm_cuentas_pagar").on("submit",function(event){
 			
 			swal({title:"",text:x.mensaje,icon:"success"})
     		.then((value) => {
-    			let loteUrl = $("#id_lote").val();
-    			let urlReporte = "index.php?controller=CuentasPagar&action=Reporte_Cuentas_Por_Pagar&id_lote="+loteUrl;
+    			
+    			
+    			let loteUrl = x.respuesta;
+    			let urlReporte = "index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados="+loteUrl;
     			window.open(urlReporte,"_blank");    			
     			$('#smartwizard').smartWizard("reset");
     			window.location.reload();
@@ -1285,139 +513,19 @@ $("#frm_cuentas_pagar").on("submit",function(event){
 	event.preventDefault()
 })
 
-/********************************************************************************
- * dc 2019-05-22
- * @returns
- */
-function bloqueaControles(){
-	
-	let arrayInput = ["cedula_proveedor","condiciones_pago_cuentas_pagar", "id_bancos", "id_moneda","numero_documento",
-		"numero_ord_compra", "metodo_envio_cuentas_pagar", "monto_cuentas_pagar", "desc_comercial_cuentas_pagar", "flete_cuentas_pagar",
-		"miscelaneos_cuentas_pagar", "impuesto_cuentas_pagar", "total_cuentas_pagar", "monto1099_cuentas_pagar",
-		"efectivo_cuentas_pagar", "cheque_cuentas_pagar", "tarjeta_credito_cuentas_pagar",
-		"condonaciones_cuentas_pagar","saldo_cuentas_pagar"];
-	
-	$.each(arrayInput, function(i,v){
-		$("#"+v).attr('readonly','readonly');
-	})
-	
-	/*$("input:text, select").each(function(i,value){
-		console.log($(this).attr('name'));
-	})*/
-	
-}
 
-/********************************************************************************
- * dc 2019-05-22
- * @returns
- */
-function desbloqueaControles(){
+	$("#frm_avoco").on("click","#btn_cancelar",function(event){
 	
-	let arrayInput = ["cedula_proveedor","condiciones_pago_cuentas_pagar", "id_bancos", "id_moneda","numero_documento",
-		"numero_ord_compra", "metodo_envio_cuentas_pagar", "monto_cuentas_pagar", "desc_comercial_cuentas_pagar", "flete_cuentas_pagar",
-		"miscelaneos_cuentas_pagar", "impuesto_cuentas_pagar", "total_cuentas_pagar", "monto1099_cuentas_pagar",
-		"efectivo_cuentas_pagar", "cheque_cuentas_pagar", "tarjeta_credito_cuentas_pagar",
-		"condonaciones_cuentas_pagar","saldo_cuentas_pagar"];
-	
-	$.each(arrayInput, function(i,v){
-		$("#"+v).attr('readonly',false);
-	})
-	
-	
-}
-
-/*************
- * dc 2019-05-23
- * @param event
- * @returns
- */
-$("#btn_cambiar_compras").on("click",function(event){
-	
-	let lote = $("#id_lote").val();
-	
-	if(isNaN(lote) || lote.length == 0 ){
+		let botonMain = $(this);
 		
-		swal({text: "Lote No Identificado",
-	  		  icon: "info",
-	  		  button: "Aceptar",
-	  		});
+		botonMain.attr('disabled',true);
 		
-		return false;
-	}
-	
-	swal("¿Esta seguro de cambiar Valor compra?", {
-		 dangerMode: true,
-		 text:" Se retiraran impuestos relacionados a esta compra.\n tiene que realizar nueva distribucion ",
-		  buttons: {
-		    cancelar: "Cancelar",
-		    aceptar: "Aceptar",
-		  },
-		})
-		.then((value) => {
-		  switch (value) {
-		 
-		    case "cancelar":
-		      return;
-		    case "aceptar":		      
-		    	
-		    	$.ajax({
-		    		url:"index.php?controller=CuentasPagar&action=CambiarMontoCompra",
-		    		dataType:"json",
-		    		type:"POST",
-		    		data:{id_lote:lote}		    		
-		    	}).done(function(x){
-		    		console.log(x);
-		    		if(x.respuesta == 1){		    			
-		    			$("#monto_cuentas_pagar").attr("readonly",false);
-		    			$("#monto_cuentas_pagar").val('');
-		    			$("#plan_impuesto").val('');
-	    				$("#impuesto_cuentas_pagar").val('');
-	    				$("#total_cuentas_pagar").val('');
-		    				
-		    			swal({text: "Valor Cambiado, Ingrese Nuevos Datos",
-		  		  		  icon: "info",
-		  		  		  button: "Aceptar",
-		  		  		});
-		    		}
-		    		
-		    		
-		    	}).fail(function(xhr,status,error){
-		    		var err = xhr.responseText
-		    		console.log(err)
-		    		swal({text: "Error al cambiar el monto",
-		  		  		  icon: "info",
-		  		  		  button: "Aceptar",
-		  		  		});
-		    	}) 
-		 
-		    default:
-		      return;
-		  }
-		});
-	
-})
-
-$("#frm_cuentas_pagar").on("click","#btn_cancelar",function(event){
-	
-	let botonMain = $(this);
-	
-	botonMain.attr('disabled',true);
-	
-	let lote = $("#id_lote").val();
-	
-	if(isNaN(lote) || lote.length == 0 ){
-		
-		swal({text: "Lote No Identificado",
-	  		  icon: "info",
-	  		  button: "Aceptar",
-	  		});
-		
-		return false;
-	}
 	
 	swal("¿Esta seguro de Cancelar?", {
+		 title:"Petición",
+		 icon:"info", 
 		 dangerMode: true,
-		 text:" se cancelará todo los datos ingresados  ",
+		 text:"Se cancelará todo los datos ingresados",
 		  buttons: {
 		    cancelar: "Cancelar",
 		    aceptar: "Aceptar",
@@ -1430,60 +538,13 @@ $("#frm_cuentas_pagar").on("click","#btn_cancelar",function(event){
 		      return;
 		    case "aceptar":		      
 		    	
-		    	$.ajax({
-		    		url:"index.php?controller=CuentasPagar&action=CancelarCuentasPagar",
-		    		dataType:"json",
-		    		type:"POST",
-		    		data:{id_lote:lote}		    		
-		    	}).done(function(x){
-		    		botonMain.attr('disabled',false);
-		    		swal({title:"Peticion Cancelada",text:"",icon:"info", dangerMode:true})
-		    		.then((value) => {
-		    		  window.open("index.php?controller=CuentasPagar&action=CuentasPagarIndex","_self")
-		    		});
-		    			
-		    		
-		    	}).fail(function(xhr,status,error){
-		    		var err = xhr.responseText
-		    		console.log(err)
-		    		swal({text: "Error al cambiar el monto",
-		  		  		  icon: "info",
-		  		  		  button: "Aceptar",
-		  		  		});
-		    	})
-		 
-		    default:
-		      return;
-		  }
+		    	botonMain.attr('disabled',false);
+	    		swal({title:"Petición Cancelada",text:"",icon:"info", dangerMode:true})
+	    		.then((value) => {
+	    		  window.open("index.php?controller=Avoco&action=index","_self")
+	    
+		  });
+		}
+		  
 		});
 })
-
-/********************************************************************************************************
- * funcion para traer Resultados*
- * dc 2019-06-05
-********************************************************************************************************/
-function resultadosCompra(){
-	
-	$.ajax({
-		url:"index.php?controller=CuentasPagar&action=devolverResultados",
-		dataType:"json",
-		type:"POST",
-		data:{id_lote:$("#id_lote").val(), base_compra: $("#monto_cuentas_pagar").val()}
-	}).done(function(datos){
-		
-		if( datos.hasOwnProperty('resultados') ){
-			
-			let resultados = datos.resultados;
-			
-			$("#impuesto_cuentas_pagar").val( resultados.impuestos );
-			$("#total_cuentas_pagar").val( resultados.saldo);
-			$("#saldo_cuentas_pagar").val( resultados.saldo);
-			
-			$("#impuesto_cuentas_pagar").attr("readonly",true);
-			$("#total_cuentas_pagar").attr("readonly",true);
-			$("#saldo_cuentas_pagar").attr("readonly",true)
-			
-		}
-		
-	})
-}

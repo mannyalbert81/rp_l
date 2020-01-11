@@ -71,12 +71,14 @@
         
         
         <section class="content">
-    <form id="frm_cuentas_pagar" action="<?php echo $helper->url("CuentasPagar","CuentasPagarIndex"); ?>" method="post" enctype="multipart/form-data"  class="form form-horizontal">
+    <form id="frm_avoco" action="<?php echo $helper->url("Avoco","InsertAvoco"); ?>" method="post" enctype="multipart/form-data"  class="form form-horizontal">
     
     	<div id="smartwizard">
             <ul>
                 <li><a href="#step-1">Datos Cliente<br /><small> </small></a></li>
                 <li><a href="#step-2">Revisión Providencia<br /><small></small></a></li>
+                <li><a href="#step-3">Revisión Primer Oficio<br /><small></small></a></li>
+                <li><a href="#step-4">Revisión Segundo Oficio<br /><small></small></a></li>
             </ul>
          
             <div>
@@ -126,6 +128,8 @@
                       </div>
                             
                             
+                            
+                            
                                 	
                 		<div class="col-lg-6 col-md-6 col-xs-12">
                 		   <div class="form-group "> 
@@ -136,6 +140,16 @@
                                     </div>
                     			 </div>        			 
                 		  </div>
+                         
+                         <div class="form-group "> 
+                    			 <div class="form-group-sm">
+                    				<label for="fecha_inicio_proceso_juicios" class="col-sm-4 control-label" > Fecha Inicio Proceso:</label>
+                    				<div class="col-sm-4">
+                    				  <input type="text" class="form-control" id="fecha_inicio_proceso_juicios" name="fecha_inicio_proceso_juicios" value="" readonly>
+                    				</div>
+                    			 </div>        			 
+                			</div> 
+                         
                          
                 			<div class="form-group "> 
                     			 <div class="form-group-sm">
@@ -149,9 +163,9 @@
                 			
                 			<div class="form-group "> 
                     			 <div class="form-group-sm">
-                    				<label for="cuantia_inicial_juicios" class="col-sm-4 control-label" > Cuantía Inicial:</label>
+                    				<label for="valor_retencion_fondos" class="col-sm-4 control-label" > Valor Retención:</label>
                     				<div class="col-sm-4">
-                    				  <input type="text" class="form-control" id="cuantia_inicial_juicios" name="cuantia_inicial_juicios" value="" readonly>
+                    				  <input type="text" class="form-control" id="valor_retencion_fondos" name="valor_retencion_fondos" value="" readonly>
                     				</div>
                     			 </div>        			 
                 			</div> 
@@ -187,6 +201,48 @@
                		</div>
                 </div>
                 
+                  <div id="step-3" class="">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"></h3>
+                          <div class="box-tools pull-right"> </div>
+                        </div>
+                    
+                    	<div class="box-body">
+                          <div class="row">
+            	
+            	        	<div class="col-lg-12 col-md-12 col-xs-12">
+            	            <div class="box-body pad">
+            	                    <textarea id="editor2" name="editor2" rows="15" cols="80"></textarea>
+            	                    <div id="mensaje_editor2" class="errores"></div>
+            	            </div>
+            	       		</div>
+	        
+               			  </div>
+               			</div>
+               		</div>
+                </div>
+                  <div id="step-4" class="">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"></h3>
+                          <div class="box-tools pull-right"> </div>
+                        </div>
+                    
+                    	<div class="box-body">
+                          <div class="row">
+            	
+            	        	<div class="col-lg-12 col-md-12 col-xs-12">
+            	            <div class="box-body pad">
+            	                    <textarea id="editor3" name="editor3" rows="15" cols="80"></textarea>
+            	                    <div id="mensaje_editor3" class="errores"></div>
+            	            </div>
+            	       		</div>
+	        
+               			  </div>
+               			</div>
+               		</div>
+                </div>
                 
             </div>
         </div>
@@ -209,8 +265,8 @@
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
 	<script type="text/javascript" src="view/bootstrap/smartwizard/dist/js/jquery.smartWizard.min.js"></script>
-	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.31"></script>
-	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.9"></script>
+	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.66"></script>
+	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.67"></script>
   
   
     <script src="view/bootstrap/bower_components/ckeditor/ckeditor.js"></script>
