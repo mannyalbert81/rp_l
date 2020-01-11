@@ -60,6 +60,7 @@ class CalculaHonorariosController extends ControladorBase{
 		$_identificacion_clientes = "";
 		$_nombre_clientes = "";
 		$_numero_titulo_credito_juicios = "";
+		$_cuantia_inicial_juicios = 0;
 		$_id_juicios = 0;
 		//validar los campos recibidos para generar diario
 		$arrayTabla = array();
@@ -154,6 +155,63 @@ class CalculaHonorariosController extends ControladorBase{
 		die();
 		
 	
+	}
+	
+	public function GuardarHonorariosSecretarios()
+	{
+		$CalculoHonorarios = new CalculoHonorariosModel();
+		
+		
+		$_id_juicios							=  (isset($_REQUEST['id_juicios'])&& $_REQUEST['id_juicios'] !=NULL)?$_REQUEST['id_juicios']:'';			
+		$_fecha_calculo_honorarios				=  (isset($_REQUEST['fecha_calculo_honorarios'])&& $_REQUEST['fecha_calculo_honorarios'] !=NULL)?$_REQUEST['fecha_calculo_honorarios']:'';
+		$_tasa_interes_calculo_honorarios		=  (isset($_REQUEST['tasa_interes_calculo_honorarios'])&& $_REQUEST['tasa_interes_calculo_honorarios'] !=NULL)?$_REQUEST['tasa_interes_calculo_honorarios']:'';
+		$_tasa_intres_mora_calculo_honorarios	=  (isset($_REQUEST['tasa_intres_mora_calculo_honorarios'])&& $_REQUEST['tasa_intres_mora_calculo_honorarios'] !=NULL)?$_REQUEST['tasa_intres_mora_calculo_honorarios']:'';
+		$_fecha_vencimiento						=  (isset($_REQUEST['fecha_vencimiento'])&& $_REQUEST['fecha_vencimiento'] !=NULL)?$_REQUEST['fecha_vencimiento']:'';
+		$_meses_mora_calculo_honorarios			=  (isset($_REQUEST['meses_mora_calculo_honorarios'])&& $_REQUEST['meses_mora_calculo_honorarios'] !=NULL)?$_REQUEST['meses_mora_calculo_honorarios']:'';
+		$_saldo_vencido_calculo_honorarios		=  (isset($_REQUEST['saldo_vencido_calculo_honorarios'])&& $_REQUEST['saldo_vencido_calculo_honorarios'] !=NULL)?$_REQUEST['saldo_vencido_calculo_honorarios']:'';
+		$_honorario_secretario_coactiva_calculo_honorarios	=  (isset($_REQUEST['honorario_secretario_coactiva_calculo_honorarios'])&& $_REQUEST['honorario_secretario_coactiva_calculo_honorarios'] !=NULL)?$_REQUEST['honorario_secretario_coactiva_calculo_honorarios']:'';
+		$_interes_mora_liquidacion_calculo_honorarios		=  (isset($_REQUEST['interes_mora_liquidacion_calculo_honorarios'])&& $_REQUEST['interes_mora_liquidacion_calculo_honorarios'] !=NULL)?$_REQUEST['interes_mora_liquidacion_calculo_honorarios']:'';
+		$_iva_factura_calculo_honorarios					=  (isset($_REQUEST['iva_factura_calculo_honorarios'])&& $_REQUEST['iva_factura_calculo_honorarios'] !=NULL)?$_REQUEST['iva_factura_calculo_honorarios']:'';
+		$_valor_retencion_fondo_calculo_honorarios			=  (isset($_REQUEST['valor_retencion_fondo_calculo_honorarios'])&& $_REQUEST['valor_retencion_fondo_calculo_honorarios'] !=NULL)?$_REQUEST['valor_retencion_fondo_calculo_honorarios']:'';
+		
+		$funcion = "ins_calculo_honorarios";
+		$parametros = "'$_id_juicios',
+		'$_fecha_calculo_honorarios',
+		'$_tasa_interes_calculo_honorarios',
+		'$_tasa_intres_mora_calculo_honorarios',
+		'$_fecha_vencimiento',
+		'$_meses_mora_calculo_honorarios',
+		'$_saldo_vencido_calculo_honorarios',
+		'$_honorario_secretario_coactiva_calculo_honorarios',
+		'$_interes_mora_liquidacion_calculo_honorarios',
+		'$_iva_factura_calculo_honorarios',
+		'$_valor_retencion_fondo_calculo_honorarios'";
+		$CalculoHonorarios->setFuncion($funcion);
+		$CalculoHonorarios->setParametros($parametros);
+		
+		
+		$resultado=$CalculoHonorarios->llamafuncion();
+		$res = $this->ActualizaValor($_id_juicios, $_valor_retencion_fondo_calculo_honorarios, $_fecha_vencimiento);
+		
+		
+		$respuesta = '';
+		
+		if(!empty($resultado) && count($resultado)){
+		
+			foreach ($resultado[0] as $k => $v)
+			{
+				$respuesta=$v;
+			}
+		
+			if (strpos($respuesta, 'OK') !== false) {
+				 
+				echo json_encode(array('success'=>1,'mensaje'=>$respuesta));
+			}else{
+				echo json_encode(array('success'=>0,'mensaje'=>$respuesta));
+			}
+		
+		}
+		
 	}
 	
 	
@@ -306,14 +364,7 @@ class CalculaHonorariosController extends ControladorBase{
 		$html .= '</div>';
 		$html .= '</div>';
 			
-		$html .= '<div class="row">';
-		$html .= '<div class="col-md-offset-4 col-lg-offset-4 col-md-2 col-lg-2 col-xs-12">';
-		$html .= '<div class="form-group">';
-		$html .= '<button type="button" id="btnGuardar" name="btnGuardar" class="btn btn-block btn-default" ><i class="fa fa-desktop" aria-hidden="true"></i>Guardar</button>';
-		$html .= '</div>';
-		$html .= '</div>';
-		$html .= '</div>';
-		
+
 		$respuesta = array();
 		$respuesta['tabladatos'] =  $html;
 		//$respuesta['tabladatos'] = "PRUEBA";
@@ -322,7 +373,20 @@ class CalculaHonorariosController extends ControladorBase{
 
 	}
 	
-		 
+	
+	public function  ActualizaValor($_id_juicios, $_valor_retencion_fondos, $_fecha_vencimiento)
+	{
+		$juicios = new JuiciosModel();
+		
+		$colval = "fecha_vencimiento_juicios = '$_fecha_vencimiento'  , valor_retencion_fondos=  '$_valor_retencion_fondos'";
+		$tabla = "legal_juicios";
+		$where = "id_juicios = '$_id_juicios'";
+		$resultado=$juicios->UpdateBy($colval, $tabla, $where);
+
+		
+	}
+	
+	
 	function graficaVista( $paramArrayDatos){
 		 
 		$_base_imponible = 0;
@@ -463,6 +527,237 @@ class CalculaHonorariosController extends ControladorBase{
 		return $html;
 	
 		 
+	}
+	
+	
+	
+	
+	public function consulta_honorarios(){
+	
+	
+		session_start();
+		$id_rol=$_SESSION["id_rol"];
+		$usuarios = new UsuariosModel();
+		$honorarios = new CalculoHonorariosModel();
+	
+		$where_to="";
+		$columnas = "legal_juicios.numero_juicios, 
+					  legal_calculo_honorarios.fecha_calculo_honorarios, 
+					  legal_calculo_honorarios.tasa_interes_calculo_honorarios, 
+					  legal_calculo_honorarios.tasa_intres_mora_calculo_honorarios, 
+					  legal_calculo_honorarios.fecha_vencimiento, 
+					  legal_calculo_honorarios.meses_mora_calculo_honorarios, 
+					  legal_calculo_honorarios.saldo_vencido_calculo_honorarios, 
+					  legal_calculo_honorarios.honorario_secretario_coactiva_calculo_honorarios, 
+					  legal_calculo_honorarios.interes_mora_liquidacion_calculo_honorarios, 
+					  legal_calculo_honorarios.iva_factura_calculo_honorarios, 
+					  legal_calculo_honorarios.valor_retencion_fondo_calculo_honorarios, 
+					  legal_calculo_honorarios.creado";
+		$tablas   = " public.legal_juicios, 
+  					public.legal_calculo_honorarios ";
+		$where    = "legal_calculo_honorarios.id_juicios = legal_juicios.id_juicios";
+	
+		$id       = "creado";
+	
+	
+		 
+	
+		$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
+		$search =  (isset($_REQUEST['search'])&& $_REQUEST['search'] !=NULL)?$_REQUEST['search']:'';
+	
+	
+		if($action == 'ajax')
+		{
+	
+			if(!empty($search)){
+	
+	
+				$where1=" AND legal_juicios.numero_juicios LIKE '%".$search."%'   ";
+	
+				$where_to=$where.$where1;
+			}else{
+	
+				$where_to=$where;
+	
+			}
+	
+			$html="";
+			$resultSet=$honorarios->getCantidad("*", $tablas, $where_to);
+			$cantidadResult=(int)$resultSet[0]->total;
+	
+			$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
+	
+			$per_page = 10; //la cantidad de registros que desea mostrar
+			$adjacents  = 9; //brecha entre páginas después de varios adyacentes
+			$offset = ($page - 1) * $per_page;
+	
+			$limit = " LIMIT   '$per_page' OFFSET '$offset'";
+	
+			$resultSet=$honorarios->getCondicionesPagDesc($columnas, $tablas, $where_to, $id, $limit);
+			$count_query   = $cantidadResult;
+			$total_pages = ceil($cantidadResult/$per_page);
+	
+	
+	
+	
+	
+			if($cantidadResult>0)
+			{
+	
+				$html.='<div class="pull-left" style="margin-left:15px;">';
+				$html.='<span class="form-control"><strong>Registros: </strong>'.$cantidadResult.'</span>';
+				$html.='<input type="hidden" value="'.$cantidadResult.'" id="total_query" name="total_query"/>' ;
+				$html.='</div>';
+				$html.='<div class="col-lg-12 col-md-12 col-xs-12">';
+				$html.='<section style="height:425px; overflow-y:scroll;">';
+				$html.= "<table id='tabla_retencion' class='tablesorter table table-striped table-bordered dt-responsive nowrap dataTables-example'>";
+				$html.= "<thead>";
+				$html.= "<tr>";
+				$html.='<th style="text-align: left;  font-size: 12px;"></th>';
+				$html.='<th style="text-align: center;  font-size: 12px;">Número de Juicio</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Fecha Cálculo</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Tasa Interés</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Tasa Mora</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Fecha Vencimiento</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Meses Mora</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Saldo Vencido</th>';
+				$html.='<th style="text-align: center;  font-size: 12px;">Honorario Secret.</th>';
+				$html.='<th style="text-align: center; font-size: 12px;">Interés Mora</th>';
+				$html.='<th style="text-align: center; font-size: 12px;">IVA</th>';
+				$html.='<th style="text-align: center; font-size: 12px;">Valor Ret. Fondos</th>';
+				$html.='<th style="text-align: center; font-size: 12px;">Creado</th>';
+				
+				 
+	
+	
+	
+	
+				$html.='</tr>';
+				$html.='</thead>';
+				$html.='<tbody>';
+	
+	
+				$i=0;
+				$importe=0;
+				$coreo_envidado="";
+				foreach ($resultSet as $res)
+				{
+	
+					$i++;
+					$html.='<tr>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$i.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->numero_juicios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->fecha_calculo_honorarios.'</td>';
+					$html.='<td style="font-size: 11px;">'.$res->tasa_interes_calculo_honorarios.'</td>';
+					$html.='<td style="font-size: 11px;">'.$res->tasa_intres_mora_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->fecha_vencimiento.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->meses_mora_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->saldo_vencido_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->honorario_secretario_coactiva_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->interes_mora_liquidacion_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->iva_factura_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->valor_retencion_fondo_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->creado.'</td>';
+	
+	
+	
+	
+	
+					$html.='</tr>';
+				}
+	
+	
+	
+				$html.='</tbody>';
+				$html.='</table>';
+				$html.='</section></div>';
+				$html.='<div class="table-pagination pull-right">';
+				$html.=''. $this->paginate_honorarios("index.php", $page, $total_pages, $adjacents).'';
+				$html.='</div>';
+	
+	
+	
+			}else{
+				$html.='<div class="col-lg-6 col-md-6 col-xs-12">';
+				$html.='<div class="alert alert-warning alert-dismissable" style="margin-top:40px;">';
+				$html.='<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+				$html.='<h4>Aviso!!!</h4> <b>Actualmente no hay Retenciones registradas...</b>';
+				$html.='</div>';
+				$html.='</div>';
+			}
+	
+	
+			echo $html;
+			die();
+	
+		}
+	
+	
+	}
+	
+	
+	public function paginate_honorarios($reload, $page, $tpages, $adjacents) {
+	
+		$prevlabel = "&lsaquo; Prev";
+		$nextlabel = "Next &rsaquo;";
+		$out = '<ul class="pagination pagination-large">';
+	
+		// previous label
+	
+		if($page==1) {
+			$out.= "<li class='disabled'><span><a>$prevlabel</a></span></li>";
+		} else if($page==2) {
+			$out.= "<li><span><a href='javascript:void(0);' onclick='load_retencion(1)'>$prevlabel</a></span></li>";
+		}else {
+			$out.= "<li><span><a href='javascript:void(0);' onclick='load_retencion(".($page-1).")'>$prevlabel</a></span></li>";
+	
+		}
+	
+		// first label
+		if($page>($adjacents+1)) {
+			$out.= "<li><a href='javascript:void(0);' onclick='load_retencion(1)'>1</a></li>";
+		}
+		// interval
+		if($page>($adjacents+2)) {
+			$out.= "<li><a>...</a></li>";
+		}
+	
+		// pages
+	
+		$pmin = ($page>$adjacents) ? ($page-$adjacents) : 1;
+		$pmax = ($page<($tpages-$adjacents)) ? ($page+$adjacents) : $tpages;
+		for($i=$pmin; $i<=$pmax; $i++) {
+			if($i==$page) {
+				$out.= "<li class='active'><a>$i</a></li>";
+			}else if($i==1) {
+				$out.= "<li><a href='javascript:void(0);' onclick='load_retencion(1)'>$i</a></li>";
+			}else {
+				$out.= "<li><a href='javascript:void(0);' onclick='load_retencion(".$i.")'>$i</a></li>";
+			}
+		}
+	
+		// interval
+	
+		if($page<($tpages-$adjacents-1)) {
+			$out.= "<li><a>...</a></li>";
+		}
+	
+		// last
+	
+		if($page<($tpages-$adjacents)) {
+			$out.= "<li><a href='javascript:void(0);' onclick='load_retencion($tpages)'>$tpages</a></li>";
+		}
+	
+		// next
+	
+		if($page<$tpages) {
+			$out.= "<li><span><a href='javascript:void(0);' onclick='load_retencion(".($page+1).")'>$nextlabel</a></span></li>";
+		}else {
+			$out.= "<li class='disabled'><span><a>$nextlabel</a></span></li>";
+		}
+	
+		$out.= "</ul>";
+		return $out;
 	}
 	
 	
