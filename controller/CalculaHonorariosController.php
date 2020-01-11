@@ -18,42 +18,13 @@ class CalculaHonorariosController extends ControladorBase{
 		if (isset(  $_SESSION['nombre_usuarios']) )
 		{
 
-			$nombre_controladores = "ProcesosMayorizacion";
-			$id_rol= $_SESSION['id_rol'];
-			$resultPer = $estados->getPermisosVer("   controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 			
-			if (!empty($resultPer))
-			{
-			    $colModulos = " modulos.id_modulos, modulos.nombre_modulos";
-			    $tabModulos = " public.modulos
-        			    INNER JOIN public.core_tipo_procesos
-        			    ON core_tipo_procesos.id_modulos = modulos.id_modulos ";
-			    $wheModulos = " 1 = 1 AND modulos.id_modulos = 9 ";
-			    $gruModulos = " modulos.id_modulos, modulos.nombre_modulos ";
-			    $idModulos = " modulos.nombre_modulos ";
-			    
-			    
-			    $rsModulos = $estados->getCondiciones_grupo($colModulos,$tabModulos,$wheModulos,$gruModulos,$idModulos);
-			    
-				
-				
-				$this->view_tributario("GeneraAts",array(
-				    "resultEdit" =>$resultEdit,"rsModulos"=>$rsModulos
 			
-				));
-		
-				
-				
-			}
-			else
-			{
-			    $this->view_Contable("Error",array(
-						"resultado"=>"No tiene Permisos de Acceso a Grupos"
-				
-				));
-				
-				exit();	
-			}
+			$this->view_Juridico("CalculaHonorariosSecretarios",array(
+					"resultEdit" =>"","rsModulos"=>""
+						
+			));
+			
 				
 		}
 	else{
@@ -79,399 +50,344 @@ class CalculaHonorariosController extends ControladorBase{
 	}
 	
 	
+	public function BuscarJuicios(){
 	
-	public function totalesAts(){
-		session_start();
-		$id_usuarios = $_SESSION['id_usuarios'];
-		$usuario_usuarios = $_SESSION['usuario_usuarios'];
-		$Participes = new ParticipesModel();
-		$idTipoProcesos = (isset($_POST['id_tipo_procesos'])) ? $_POST['id_tipo_procesos'] : "";
-		$anioDiario = (isset($_POST['anio_procesos'])) ? $_POST['anio_procesos'] : "";
-		$mesDiario = (isset($_POST['mes_procesos'])) ? $_POST['mes_procesos'] : "";
-		$tipoPeticion = (isset($_POST['peticion'])) ? $_POST['peticion'] : "";
-		$idModulos = (isset($_POST['id_modulos'])) ? $_POST['id_modulos'] : null;
-		$mesperiodofiscal = $mesDiario;
-		if (strlen($mesDiario) == 1 )
-		{
 			
-			$mesperiodofiscal = '0' .$mesDiario;
-		}
-		else {
-			$mesperiodofiscal = $mesDiario;
-		}
-		//$mes_letras = date('n')
 		
-		if(empty($idTipoProcesos)){
-			echo '<message>Datos no recibidos<message>';
-			return;
-		}
+		$juicios = new JuiciosModel();
+			
+		$_numero_juicios =  (isset($_REQUEST['numero_juicios'])&& $_REQUEST['numero_juicios'] !=NULL)?$_REQUEST['numero_juicios']:'';
+		$_identificacion_clientes = "";
+		$_nombre_clientes = "";
+		$_numero_titulo_credito_juicios = "";
+		$_cuantia_inicial_juicios = 0;
+		$_id_juicios = 0;
 		//validar los campos recibidos para generar diario
 		$arrayTabla = array();
 		$cantidad = 0;
-		$columnas = 'tri_retenciones_detalle.impuesto_codigo, 
-						  tri_retenciones_detalle.impuesto_codigoretencion,
-						  SUM(tri_retenciones_detalle.impuestos_baseimponible) AS impuestos_baseimponible, 
-						ROUND(  SUM(tri_retenciones_detalle.impuestos_porcentajeretener)/COUNT(tri_retenciones_detalle.impuestos_porcentajeretener)) AS impuesto_porcentaje , 
-						  SUM(tri_retenciones_detalle.impuestos_valorretenido) AS impuestos_valorretenido';
-		$tablas = " public.tri_retenciones, 
-  						public.tri_retenciones_detalle";
-		$where = "tri_retenciones_detalle.id_tri_retenciones = tri_retenciones.id_tri_retenciones
-					  AND SUBSTRING ( tri_retenciones.infocompretencion_periodofiscal,1,2) = '$mesperiodofiscal'
-					  AND SUBSTRING ( tri_retenciones.infocompretencion_periodofiscal,4,4) = '$anioDiario'  
-					  GROUP BY tri_retenciones_detalle.impuesto_codigo, tri_retenciones_detalle.impuesto_codigoretencion
-					  ";
-			
-		$id = "tri_retenciones_detalle.impuesto_codigo,tri_retenciones_detalle.impuesto_codigoretencion";
-		$rsHistorial = $Participes->getCondiciones($columnas, $tablas, $where, $id);
-		$respuesta = array();
-		$respuesta['tabladatos'] =  $this->graficaXML($rsHistorial);
-		//$respuesta['tabladatos'] = "PRUEBA";
-		echo json_encode($respuesta);
-	//	echo json_encode($where);
-		die();
-			
+		$columnas = ' legal_clientes.id_clientes, 
+					  legal_juicios.id_juicios, 
+					  legal_clientes.identificacion_clientes, 
+					  legal_clientes.nombre_clientes, 
+					  legal_juicios.entidad_origen_juicios, 
+					  legal_juicios.regional_juicios, 
+					  legal_juicios.numero_juicios, 
+					  legal_juicios.anio_juicios, 
+					  legal_juicios.numero_titulo_credito_juicios, 
+					  legal_juicios.fecha_titulo_credito_juicios, 
+					  legal_juicios.orden_cobro_juicios, 
+					  legal_juicios.fecha_oden_cobro_juicios, 
+					  legal_juicios.fecha_auto_pago_juicios, 
+					  legal_juicios.cuantia_inicial_juicios, 
+					  legal_etapa_procesal.nombre_etapa_procesal, 
+					  legal_juicios.fecha_ultima_providencia_juicios, 
+					  legal_juicios.observaciones_juicios, 
+					  legal_estado_procesal.nombre_estado_procesal, 
+					  usuarios.nombre_usuarios, 
+					  usuarios.usuario_usuarios';
+		$tablas = "public.legal_juicios, 
+					  public.legal_clientes, 
+					  public.legal_etapa_procesal, 
+					  public.legal_estado_procesal, 
+					  public.usuarios		";
+		$where = " legal_clientes.id_clientes = legal_juicios.id_clientes AND
+  legal_etapa_procesal.id_etapa_procesal = legal_juicios.id_etapa_procesal AND
+  legal_estado_procesal.id_estado_procesal = legal_juicios.id_estado_procesal AND
+  usuarios.id_usuarios = legal_juicios.id_usuarios_abogado
+				AND  legal_juicios.numero_juicios = '$_numero_juicios' "; 
 		
+		$id = "legal_juicios.id_juicios";
+		$html='';
+		$resJuicios = $juicios->getCondiciones($columnas, $tablas, $where, $id);
 		
-	}
-	
-
-	public function generaAts(){
-		
-	
-		session_start();
-		$id_usuarios = $_SESSION['id_usuarios'];
-		$usuario_usuarios = $_SESSION['usuario_usuarios'];
-		$Participes = new ParticipesModel();
-		$idTipoProcesos = (isset($_POST['id_tipo_procesos'])) ? $_POST['id_tipo_procesos'] : "";
-		$anioDiario = (isset($_POST['anio_procesos'])) ? $_POST['anio_procesos'] : "";
-		$mesDiario = (isset($_POST['mes_procesos'])) ? $_POST['mes_procesos'] : "";
-		$tipoPeticion = (isset($_POST['peticion'])) ? $_POST['peticion'] : "";
-		$idModulos = (isset($_POST['id_modulos'])) ? $_POST['id_modulos'] : null;
-		$mesperiodofiscal = $mesDiario;
-		if (strlen($mesDiario) == 1 )
+		if ($resJuicios !="")
 		{
-				
-			$mesperiodofiscal = '0' .$mesDiario;
-		}
-		else {
-			$mesperiodofiscal = $mesDiario;
-		}
-		//$mes_letras = date('n')
-	
-		if(empty($idTipoProcesos)){
-			echo '<message>Datos no recibidos<message>';
-			return;
-		}
-		//validar los campos recibidos para generar diario
-		$arrayTabla = array();
-		$cantidad = 0;
-		$columnas = "  id_tri_retenciones, 
-				infotributaria_ambiente, 
-				infotributaria_tipoemision, 
-				infotributaria_razonsocial,
-				infotributaria_nombrecomercial, 
-				infotributaria_ruc, 
-				infotributaria_claveacceso,
-				infotributaria_coddoc, 
-				infotributaria_ptoemi, 
-				infotributaria_estab, 
-				infotributaria_secuencial,
-				infotributaria_dirmatriz,
-				infocompretencion_fechaemision, 
-				infocompretencion_direstablecimiento,
-				infocompretencion_contribuyenteespecial,
-				infocompretencion_obligadocontabilidad,
-				infocompretencion_tipoidentificacionsujetoretenido, 
-				infocompretencion_razonsocialsujetoretenido,
-				infocompretencion_identificacionsujetoretenido,
-				infocompretencion_periodofiscal, 
-				infoadicional_campoadicional,
-				infoadicional_campoadicional_dos, 
-				infoadicional_campoadicional_tres,
-				creado, 
-				modificado, 
-				enviado_correo_electronico, 
-				fecha_autorizacion";
-		$tablas = " public.tri_retenciones";
-		$where = "SUBSTRING ( tri_retenciones.infocompretencion_periodofiscal,1,2) = '$mesperiodofiscal'
-		AND SUBSTRING ( tri_retenciones.infocompretencion_periodofiscal,4,4) = '$anioDiario' ";
-			
-		$id = "creado";
-		
-		
-		$columnas_detalle = "  id_tri_retenciones_detalle, 
-				id_tri_retenciones, 
-				impuesto_codigo, 
-				impuesto_codigoretencion, 
-				impuestos_baseimponible, 
-				impuestos_porcentajeretener, 
-				impuestos_valorretenido, 
-				impuestos_coddocsustento, 
-				impuestos_numdocsustento, 
-				impuesto_fechaemisiondocsustento, 
-				impuesto_codigo_dos, 
-				creado, 
-				modificado";
-		$tablas_detalle = " public.tri_retenciones_detalle";
-		
-		$id_detalle = "creado";
-		
-		
-		
-		$rsHistorial = $Participes->getCondiciones($columnas, $tablas, $where, $id);
-		//$respuesta = array();
-		//$respuesta['tabladatos'] =  $this->graficaXML($rsHistorial);
-		//$respuesta['tabladatos'] = "PRUEBA";
-		//echo json_encode($respuesta);
-		//	echo json_encode($where);
-		///die();
-			
-	
-		///VARIABLES DEL DETALLE
-		
-		$_baseImpGrav = "";
-		$_montoIva = "";
-		
-		$_valRetBien10 ="0.00";
-		$_valRetServ20="0.00";
-		$_valorRetBienes="0.00";
-		$_valRetServ50="0.00";
-		$_valorRetServicios="0.00";
-		$_valRetServ100="0.00";
-		
-		$_codRetAir ="0.00";
-		$_baseImpAir = "0.00";
-		$_porcentajeAir ="0.00";
-		$_valRetAir = "0.00";
-		
-		
-		////genera el xml
-		
-		$texto="";
-		 
-		
-			 
-		if(!empty($rsHistorial)){
-			 
-			 
-			$texto .='<?xml version="1.0" encoding="UTF-8"?>';
-			$texto .= '<iva>';
-			$texto .= '<TipoIDInformante>R</TipoIDInformante>';
-			$texto .= '<IdInformante>'.'1791700376001'.'</IdInformante>';
-			$texto .= '<razonSocial>'.'FONDO COMPLEMENTARIO PREVISIONAL CERRADO DE CESANTIA DE SERVIDORES Y TRABAJADORES PUBLICOS DE FUERZAS ARMADAS-CAPREMCI'.'</razonSocial>';
-			$texto .= '<Anio>'.$anioDiario.'</Anio>';
-			$texto .= '<Mes>'.$mesperiodofiscal.'</Mes>';
-			$texto .= '<totalVentas>'.'0.00'.'</totalVentas>';
-			$texto .= '<codigoOperativo>'.'IVA'.'</codigoOperativo>';
-			 
-			$texto .= '<compras>';
-			 
-			echo json_encode("Cabeza");
-				
-			
-			
-			foreach ($rsHistorial as $res){
-				 
-				$texto .= '<detalleCompras>';
-				 
-				$texto .= '<codSustento>'.'01'.'</codSustento>';
-				$texto .= '<tpIdProv>'.$res->infocompretencion_tipoidentificacionsujetoretenido.'</tpIdProv>';
-				$texto .= '<idProv>'.$res->infocompretencion_identificacionsujetoretenido.'</idProv>';
-				$texto .= '<tipoComprobante>'.'19'.'</tipoComprobante>';
-				if ( $res->infocompretencion_tipoidentificacionsujetoretenido == "01" || $res->infocompretencion_tipoidentificacionsujetoretenido == "02" || $res->infocompretencion_tipoidentificacionsujetoretenido == "03")
-				{
-					$texto .= '<parteRel>'.'NO'.'</parteRel>';
-					
-				}	
-				else
-				{
-					$texto .= '<parteRel>'.'SI'.'</parteRel>';
-				}
-				//$_establecimiento = ;
-				$originalDate_fechaemision = $res->infocompretencion_fechaemision;
-				$newDate_fechaemision = date("d/m/Y", strtotime($originalDate_fechaemision));
-				$texto .= '<fechaRegistro>'.$newDate_fechaemision.'</fechaRegistro>';
-				$texto .= '<establecimiento>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),1,3).'</establecimiento>';
-				$texto .= '<puntoEmision>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),4,3).'</puntoEmision>';
-				$texto .= '<secuencial>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),6,9).'</secuencial>';
-				$originalDate_fechaemision = $res->infocompretencion_fechaemision;
-				$newDate_fechaemision = date("d/m/Y", strtotime($originalDate_fechaemision));
-				$texto .= '<fechaEmision>'.$newDate_fechaemision.'</fechaEmision>';
-				$texto .= '<autorizacion>'.$res->infotributaria_claveacceso.'</autorizacion>';
-				
-				$where_detalle = "id_tri_retenciones = '$res->id_tri_retenciones' ";
-				$rsDetalle = $Participes->getCondiciones($columnas_detalle, $tablas_detalle, $where_detalle, $id_detalle);
-				foreach ($rsDetalle as $resDetalle){
-					if ($resDetalle->impuesto_codigo == "1") //es renta
-					{
-						 $_baseImpGrav =  $resDetalle->impuestos_baseimponible;
-						
-						 $_codRetAir = $resDetalle->impuesto_codigoretencion;
-						 $_baseImpAir = $resDetalle->impuestos_baseimponible;
-						 $_porcentajeAir = $resDetalle->impuestos_porcentajeretener;
-						 $_valRetAir = $resDetalle->impuestos_valorretenido;
-						 	
-					}
-					else // IVA
-					{
-						$_montoIva  = $resDetalle->impuestos_baseimponible;
-						//$_valRetBien10 = 20;//$resDetalle->impuestos_valorretenido;
-						switch ($resDetalle->impuestos_porcentajeretener) {
-							case "10.00":
-								$_valRetBien10 = $resDetalle->impuestos_valorretenido;
-								break;
-							case "20.00":
-								$_valRetServ20 = $resDetalle->impuestos_valorretenido;
-								break;
-							case "30.00":
-								$_valorRetBienes= $resDetalle->impuestos_valorretenido;
-								break;
-							case "50.00":
-								$_valRetServ50= $resDetalle->impuestos_valorretenido;
-								break;
-							case "70.00":
-								$_valorRetServicios= $resDetalle->impuestos_valorretenido;
-								break;
-							case "100.00":
-								$_valRetServ100= $resDetalle->impuestos_valorretenido;
-								break;
-						}
-					}
-				}
-				
-				$texto .= '<baseNoGraIva>'.'0.00'.'</baseNoGraIva>';
-				$texto .= '<baseImponible>'.'0.00'.'</baseImponible>';
-				$texto .= '<baseImpGrav>'.$_baseImpGrav.'</baseImpGrav>';
-				$texto .= '<baseImpExe>'.'0.00'.'</baseImpExe>';
-				$texto .= '<montoIce>'.'0.00'.'</montoIce>';
-				$texto .= '<montoIva>'.$_montoIva.'</montoIva>';
-					
-				$texto .= '<valRetBien10>'.$_valRetBien10.'</valRetBien10>';
-				$texto .= '<valRetServ20>'.$_valRetServ20.'</valRetServ20>';
-				$texto .= '<valorRetBienes>'.$_valorRetBienes.'</valorRetBienes>';
-				$texto .= '<valRetServ50>'.$_valRetServ50.'</valRetServ50>';
-				$texto .= '<valorRetServicios>'.$_valorRetServicios.'</valorRetServicios>';
-				$texto .= '<valRetServ100>'.$_valRetServ100.'</valRetServ100>';
-				$texto .= '<totbasesImpReemb>'.'0'.'</totbasesImpReemb>';
-				
-				$texto .= '<pagoExterior>';
-				$texto .= '<pagoLocExt>'.'01'.'</pagoLocExt>';
-				$texto .= '<paisEfecPago>'.'NA'.'</paisEfecPago>';
-				$texto .= '<aplicConvDobTrib>'.'NA'.'</aplicConvDobTrib>';
-				$texto .= '<pagExtSujRetNorLeg>'.'NA'.'</pagExtSujRetNorLeg>';
-				
-				$texto .= '</pagoExterior>';
-				
-				$texto .= '<formasDepago>';
-				$texto .= '<formaPago>'.'20'.'</formaPago>';
-				$texto .= '</formasDepago>';
-				
-				$texto .= '<air>';
-				$texto .= '<detalleAir>';
-				$texto .= '<codRetAir>'.$_codRetAir.'</codRetAir>';
-				$texto .= '<baseImpAir>'.$_baseImpAir.'</baseImpAir>';
-				$texto .= '<porcentajeAir>'.$_porcentajeAir.'</porcentajeAir>';
-				$texto .= '<valRetAir>'.$_valRetAir.'</valRetAir>';
-					
-				$texto .= '</detalleAir>';
-				$texto .= '</air>';
-		/*
-				<estabRetencion1>003</estabRetencion1>
-				
-				<ptoEmiRetencion1>002</ptoEmiRetencion1>
-				
-				<secRetencion1>0002948</secRetencion1>
-				
-				<autRetencion1>3008201907171170737000120030020000029480000000110</autRetencion1>
-				
-				<fechaEmiRet1>30/08/2019</fechaEmiRet1>
-			*/	
-				
-				$texto .= '</detalleCompras>';
-				
-				 
+			foreach ($resJuicios as $res)
+			{
+				$_identificacion_clientes =  $res->identificacion_clientes;
+				$_nombre_clientes = $res->nombre_clientes;
+				$_numero_titulo_credito_juicios = $res->numero_titulo_credito_juicios;
+				$_cuantia_inicial_juicios = $res->cuantia_inicial_juicios;
+				$_id_juicios = $res->id_juicios;
 			}
-			 
-			 
-			$texto .= '</compras>';
-			 
-			 
-			 
-			$texto .= '</iva>';
-			 
-			 
-			$nombre_archivo = "ATS-".$mesperiodofiscal.$anioDiario.".xml";
 			
-			$ubicacionServer = $_SERVER['DOCUMENT_ROOT']."\\rp_c\\DOCUMENTOS_GENERADOS\\ATS\\";
-			$ubicacion = $ubicacionServer.$nombre_archivo;
-				
-			 
-			$textoXML = mb_convert_encoding($texto, "UTF-8");
-			 
-			// Grabamos el XML en el servidor como un fichero plano, para
-			// poder ser leido por otra aplicación.
-			$gestor = fopen($ubicacionServer.$nombre_archivo, 'w');
-			fwrite($gestor, $textoXML);
-			fclose($gestor);
+			$html.='<div class="row">';
+			
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="form-group">';
+			$html.='<label for="meses_mora" class="control-label">Identificación:</label>';
+			$html.='<input type="text" id="identificacion_clientes" name="identificacion_clientes"  value="'.$_identificacion_clientes .'" class="form-control">';
+			$html.='<input type="hidden" id="id_juicios" name="id_juicios"  value="'.$_id_juicios .'" class="form-control">';
+			$html.='</div>';
+			$html.='</div>';
 			
 			
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="form-group">';
+			$html.='<label for="meses_mora" class="control-label">Nombres:</label>';
+			$html.='<input type="text" id="nombres_clientes" name="nombres_clientes"  value="'.$_nombre_clientes .'" class="form-control">';
+			$html.='</div>';
+			$html.='</div>';
 			
-			header("Content-disposition: attachment; filename=$nombre_archivo");
-			header("Content-type: MIME");
-			ob_clean();
-			flush();
-			// Read the file
-			//echo $ubicacion;
-			//print_r($_POST);
-			//echo  "******llego--",$_tipo_archivo_recaudaciones,"***" ;
-			//echo "parametro id ---",$_id_archivo_recaudaciones,"**";
-			readfile($ubicacion);
-			exit;
-				
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="form-group">';
+			$html.='<label for="meses_mora" class="control-label">Título Crédito :</label>';
+			$html.='<input type="text" id="numero_titulo_credito_juicios" name="numero_titulo_credito_juicios"  value="'.$_numero_titulo_credito_juicios .'" class="form-control">';
+			$html.='</div>';
+			$html.='</div>';
 			
-			 
+			
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="form-group">';
+			$html.='<label for="meses_mora" class="control-label">Cuantía Inicial:</label>';
+			$html.='<input type="text" id="cuantia_inicial_juicios" name="cuantia_inicial_juicios"  value="'.$_cuantia_inicial_juicios .'" class="form-control">';
+			$html.='</div>';
+			$html.='</div>';
+			
+			$html.='</div>';
+			
+			
+			
 		}
-		 
+		$respuesta = array();
+		$respuesta['tabladatos'] =  $html;
+		echo json_encode($respuesta);
+		die();
+		
 	
 	}
 	
-	function devuelveDocumentoFactura($_id_tri_retenciones)
+	public function GuardarHonorariosSecretarios()
 	{
-		$Participes = new ParticipesModel();
+		$CalculoHonorarios = new CalculoHonorariosModel();
 		
-		$_impuestos_numdocsustento = "";
-		$columnas_detalle = "  id_tri_retenciones_detalle,
-				id_tri_retenciones,
-				impuesto_codigo,
-				impuesto_codigoretencion,
-				impuestos_baseimponible,
-				impuestos_porcentajeretener,
-				impuestos_valorretenido,
-				impuestos_coddocsustento,
-				impuestos_numdocsustento,
-				impuesto_fechaemisiondocsustento,
-				impuesto_codigo_dos,
-				creado,
-				modificado";
-		$tablas_detalle = " public.tri_retenciones_detalle";
 		
-		$id_detalle = "creado";
-		$where_detalle = "id_tri_retenciones = '$_id_tri_retenciones' ";
-		$rsDetalle = $Participes->getCondiciones($columnas_detalle, $tablas_detalle, $where_detalle, $id_detalle);
-		foreach ($rsDetalle as $resDetalle){
-			if ($resDetalle->impuesto_codigo == "1") //es renta
+		$_id_juicios							=  (isset($_REQUEST['id_juicios'])&& $_REQUEST['id_juicios'] !=NULL)?$_REQUEST['id_juicios']:'';			
+		$_fecha_calculo_honorarios				=  (isset($_REQUEST['fecha_calculo_honorarios'])&& $_REQUEST['fecha_calculo_honorarios'] !=NULL)?$_REQUEST['fecha_calculo_honorarios']:'';
+		$_tasa_interes_calculo_honorarios		=  (isset($_REQUEST['tasa_interes_calculo_honorarios'])&& $_REQUEST['tasa_interes_calculo_honorarios'] !=NULL)?$_REQUEST['tasa_interes_calculo_honorarios']:'';
+		$_tasa_intres_mora_calculo_honorarios	=  (isset($_REQUEST['tasa_intres_mora_calculo_honorarios'])&& $_REQUEST['tasa_intres_mora_calculo_honorarios'] !=NULL)?$_REQUEST['tasa_intres_mora_calculo_honorarios']:'';
+		$_fecha_vencimiento						=  (isset($_REQUEST['fecha_vencimiento'])&& $_REQUEST['fecha_vencimiento'] !=NULL)?$_REQUEST['fecha_vencimiento']:'';
+		$_meses_mora_calculo_honorarios			=  (isset($_REQUEST['meses_mora_calculo_honorarios'])&& $_REQUEST['meses_mora_calculo_honorarios'] !=NULL)?$_REQUEST['meses_mora_calculo_honorarios']:'';
+		$_saldo_vencido_calculo_honorarios		=  (isset($_REQUEST['saldo_vencido_calculo_honorarios'])&& $_REQUEST['saldo_vencido_calculo_honorarios'] !=NULL)?$_REQUEST['saldo_vencido_calculo_honorarios']:'';
+		$_honorario_secretario_coactiva_calculo_honorarios	=  (isset($_REQUEST['honorario_secretario_coactiva_calculo_honorarios'])&& $_REQUEST['honorario_secretario_coactiva_calculo_honorarios'] !=NULL)?$_REQUEST['honorario_secretario_coactiva_calculo_honorarios']:'';
+		$_interes_mora_liquidacion_calculo_honorarios		=  (isset($_REQUEST['interes_mora_liquidacion_calculo_honorarios'])&& $_REQUEST['interes_mora_liquidacion_calculo_honorarios'] !=NULL)?$_REQUEST['interes_mora_liquidacion_calculo_honorarios']:'';
+		$_iva_factura_calculo_honorarios					=  (isset($_REQUEST['iva_factura_calculo_honorarios'])&& $_REQUEST['iva_factura_calculo_honorarios'] !=NULL)?$_REQUEST['iva_factura_calculo_honorarios']:'';
+		$_valor_retencion_fondo_calculo_honorarios			=  (isset($_REQUEST['valor_retencion_fondo_calculo_honorarios'])&& $_REQUEST['valor_retencion_fondo_calculo_honorarios'] !=NULL)?$_REQUEST['valor_retencion_fondo_calculo_honorarios']:'';
+		
+		$funcion = "ins_calculo_honorarios";
+		$parametros = "'$_id_juicios',
+		'$_fecha_calculo_honorarios',
+		'$_tasa_interes_calculo_honorarios',
+		'$_tasa_intres_mora_calculo_honorarios',
+		'$_fecha_vencimiento',
+		'$_meses_mora_calculo_honorarios',
+		'$_saldo_vencido_calculo_honorarios',
+		'$_honorario_secretario_coactiva_calculo_honorarios',
+		'$_interes_mora_liquidacion_calculo_honorarios',
+		'$_iva_factura_calculo_honorarios',
+		'$_valor_retencion_fondo_calculo_honorarios'";
+		$CalculoHonorarios->setFuncion($funcion);
+		$CalculoHonorarios->setParametros($parametros);
+		
+		
+		$resultado=$CalculoHonorarios->llamafuncion();
+		$res = $this->ActualizaValor($_id_juicios, $_valor_retencion_fondo_calculo_honorarios, $_fecha_vencimiento);
+		
+		
+		$respuesta = '';
+		
+		if(!empty($resultado) && count($resultado)){
+		
+			foreach ($resultado[0] as $k => $v)
+			{
+				$respuesta=$v;
+			}
+		
+			if (strpos($respuesta, 'OK') !== false) {
+				 
+				echo json_encode(array('success'=>1,'mensaje'=>$respuesta));
+			}else{
+				echo json_encode(array('success'=>0,'mensaje'=>$respuesta));
+			}
+		
+		}
+		
+	}
+	
+	
+	public function CalcularHonorariosSecretarios(){
+		session_start();
+		$tablaHonorarios = new TablaHonorariosSecretarioModel();
+		
+		$meses_mora = 0;
+		$_minimo_tabla_honorarios = 0;
+		$_interes_porcentaje_tabla_honorarios = 0;
+		$_exedente_tabla_honorarios = 0;
+		$_calculo_porcentaje_exedente = 0;
+		$_valor_aplicar = 0;
+		$_interes_mora = 0;
+		$_variable_honorarios_secretario = 0;
+		$_valor_min_recuperado = 0;
+		$_iva_factura = 0;
+		$_valor_retencion_fondos = 0;
+		$id_usuarios = $_SESSION['id_usuarios'];
+		$usuario_usuarios = $_SESSION['usuario_usuarios'];
+		
+		
+		
+		$honorarios = new TablaHonorariosSecretarioModel();
+		$_fecha_calculo_coactiva =  (isset($_REQUEST['fecha_calculo_coactiva'])&& $_REQUEST['fecha_calculo_coactiva'] !=NULL)?$_REQUEST['fecha_calculo_coactiva']:'';
+		$_tasa_interes =  (isset($_REQUEST['tasa_interes'])&& $_REQUEST['tasa_interes'] !=NULL)?$_REQUEST['tasa_interes']:'';
+		$_tasa_mora =  (isset($_REQUEST['tasa_mora'])&& $_REQUEST['tasa_mora'] !=NULL)?$_REQUEST['tasa_mora']:'';
+		$_fecha_vencimiento =  (isset($_REQUEST['fecha_vencimiento'])&& $_REQUEST['fecha_vencimiento'] !=NULL)?$_REQUEST['fecha_vencimiento']:'';
+		$_id_juicios =  (isset($_REQUEST['$id_juicios'])&& $_REQUEST['$id_juicios'] !=NULL)?$_REQUEST['$id_juicios']:'';
+		$_cuantia_inicial_j =  (isset($_REQUEST['cuantia_inicial_juicios'])&& $_REQUEST['cuantia_inicial_juicios'] !=NULL)?$_REQUEST['cuantia_inicial_juicios']:'';
+		$_cuantia_inicial_juicios = round($_cuantia_inicial_j,2);
+		
+		
+		//1. hallar meses en mora
+		//strtotime
+		$_fecha1 = new DateTime($_fecha_vencimiento);
+		 
+		$_fecha2 = new DateTime($_fecha_calculo_coactiva); 
+		
+		
+		$interval=$_fecha2->diff($_fecha1);
+		$intervalMeses=$interval->format('%a');
+		$meses_mora = round($intervalMeses/30 , 2); 
+		
+		
+		//2. calculamos interes por mora
+		//=ROUND((D8*D7*($D$5/12)),2)
+		$_coeficiente_mora = $_tasa_mora / 100;
+		$_interes_mora = round($_cuantia_inicial_juicios * $meses_mora * ($_coeficiente_mora / 12)  ,2);
+	
+		//3. calculo la variable de honorarios secretario coactiva
+		$_variable_honorarios_secretario = $_cuantia_inicial_juicios + $_interes_mora;
+		
+		//4. comenzamos calculo de honorarios
+		
+		//a)  revisamos monto 
+		
+		$columnas = 'id_tabla_honorarios_secretario, valor_min_recuperado, valor_max_recuperado,
+						porcentaje, minimo';
+		$tablas = " public.legal_tabla_honorarios_secretario";
+		$where = "  $_cuantia_inicial_juicios   BETWEEN valor_min_recuperado AND valor_max_recuperado";
+		$id = "id_tabla_honorarios_secretario";
+		$resTabla = $tablaHonorarios->getCondiciones($columnas, $tablas, $where, $id);
+
+		if ($resTabla !="")
+		{
+			foreach ($resTabla as $res)
 			{
 				
-				$_impuestos_numdocsustento = $resDetalle->impuestos_numdocsustento;
-		
+				if ($_cuantia_inicial_juicios <= 500.00)
+				{
+					
+					$_interes_porcentaje_tabla_honorarios = $res->porcentaje;
+					$_minimo_tabla_honorarios = $res->minimo;
+					$_calculo_porcentaje_exedente = round($_variable_honorarios_secretario * ($_interes_porcentaje_tabla_honorarios/100),2);
+					$_valor_aplicar = $_minimo_tabla_honorarios + $_calculo_porcentaje_exedente; 
+					
+				}
+				else 
+				{
+					
+					$_valor_min_recuperado = $res->valor_min_recuperado;
+					$_interes_porcentaje_tabla_honorarios = $res->porcentaje;
+					$_exedente_tabla_honorarios = $_variable_honorarios_secretario - $_valor_min_recuperado;
+					$_minimo_tabla_honorarios = $res->minimo;
+					$_calculo_porcentaje_exedente = round($_exedente_tabla_honorarios * ($_interes_porcentaje_tabla_honorarios/100),2);
+					$_valor_aplicar = $_minimo_tabla_honorarios + $_calculo_porcentaje_exedente;
+							
+				}
+				
+				
+				$_iva_factura = round($_valor_aplicar * 12 / 100 , 2);
+				$_valor_retencion_fondos =round( $_cuantia_inicial_juicios + $_valor_aplicar + $_interes_mora + $_iva_factura , 2);
 			}
 		
 		}
+		$html = '';
 		
-		return $_impuestos_numdocsustento;
-	}
+		$html .= '<div class="row">';
+		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
+		$html .= '<div class="form-group">';
+		$html .= '<label for="meses_mora" class="control-label">VALORES CALCULADOS:</label>';
+		
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= '<div class="row">';
+		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
+		$html .= '<div class="form-group">';
+		$html .= '<label for="meses_mora" class="control-label">Meses Mora:</label>';
+		$html .= '<input readonly type="number" id="meses_mora" name="meses_mora"  value="'.$meses_mora.'" class="form-control">';
+		$html .= '</div>';
+		$html .= '</div>';
 		 
-	function graficaXML( $paramArrayDatos){
+		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
+		$html .= '<div class="form-group">';
+		$html .= '<label for="saldovencido" class="control-label">Saldo vencido:</label>';
+		$html .= '<input readonly type="number" id="saldo_vencido" name="saldo_vencido"  value="'. round($_cuantia_inicial_juicios,2).'" class="form-control">';
+		$html .= '</div>';
+		$html .= '</div>';
+		 
+		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
+		$html .= '<div class="form-group">';
+		$html .= '<label for="honorariossecretariocoactiva" class="control-label">Honorarios Secretario de Coactiva:</label>';
+		$html .= '<input readonly type="number" id="honorarios_secretario_coactiva" name="honorarios_secretario_coactiva"  value="'.$_valor_aplicar.'" class="form-control">';
+		$html .= '</div>';
+		$html .= '</div>';
+			
+		
+		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
+		$html .= '<div class="form-group">';
+		$html .= '<label for="interesmoraliquidacion" class="control-label">Intereses por mora liquidación:</label>';
+		$html .= '<input readonly type="number" id="interes_mora_liquidacion" name="interes_mora_liquidacion"  value="'.$_interes_mora.'" class="form-control">';
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= '<div class="row">';
+		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
+		$html .= '<div class="form-group">';
+		$html .= '<label for="ivafactura" class="control-label">IVA Factura:</label>';
+		$html .= '<input readonly type="number" id="iva_factura" name="iva_factura"  value="'.$_iva_factura.'" class="form-control">';
+		$html .= '</div>';
+		$html .= '</div>';
+		
+		$html .= '<div class="col-md-3 col-lg-3 col-xs-12">';
+		$html .= '<div class="form-group">';
+		$html .= '<label for="valorretencionfondos" class="control-label">Valor para la Retención de Fondos:</label>';
+		$html .= '<input readonly type="number" id="valor_retencion_fondos" name="valor_retencion_fondos"  value="'.$_valor_retencion_fondos.'" class="form-control">';
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= '</div>';
+			
+
+		$respuesta = array();
+		$respuesta['tabladatos'] =  $html;
+		//$respuesta['tabladatos'] = "PRUEBA";
+		echo json_encode($respuesta);
+		die();
+
+	}
+	
+	
+	public function  ActualizaValor($_id_juicios, $_valor_retencion_fondos, $_fecha_vencimiento)
+	{
+		$juicios = new JuiciosModel();
+		
+		$colval = "fecha_vencimiento_juicios = '$_fecha_vencimiento'  , valor_retencion_fondos=  '$_valor_retencion_fondos'";
+		$tabla = "legal_juicios";
+		$where = "id_juicios = '$_id_juicios'";
+		$resultado=$juicios->UpdateBy($colval, $tabla, $where);
+
+		
+	}
+	
+	
+	function graficaVista( $paramArrayDatos){
 		 
 		$_base_imponible = 0;
 		$_valor_retenido = 0;
@@ -611,6 +527,237 @@ class CalculaHonorariosController extends ControladorBase{
 		return $html;
 	
 		 
+	}
+	
+	
+	
+	
+	public function consulta_honorarios(){
+	
+	
+		session_start();
+		$id_rol=$_SESSION["id_rol"];
+		$usuarios = new UsuariosModel();
+		$honorarios = new CalculoHonorariosModel();
+	
+		$where_to="";
+		$columnas = "legal_juicios.numero_juicios, 
+					  legal_calculo_honorarios.fecha_calculo_honorarios, 
+					  legal_calculo_honorarios.tasa_interes_calculo_honorarios, 
+					  legal_calculo_honorarios.tasa_intres_mora_calculo_honorarios, 
+					  legal_calculo_honorarios.fecha_vencimiento, 
+					  legal_calculo_honorarios.meses_mora_calculo_honorarios, 
+					  legal_calculo_honorarios.saldo_vencido_calculo_honorarios, 
+					  legal_calculo_honorarios.honorario_secretario_coactiva_calculo_honorarios, 
+					  legal_calculo_honorarios.interes_mora_liquidacion_calculo_honorarios, 
+					  legal_calculo_honorarios.iva_factura_calculo_honorarios, 
+					  legal_calculo_honorarios.valor_retencion_fondo_calculo_honorarios, 
+					  legal_calculo_honorarios.creado";
+		$tablas   = " public.legal_juicios, 
+  					public.legal_calculo_honorarios ";
+		$where    = "legal_calculo_honorarios.id_juicios = legal_juicios.id_juicios";
+	
+		$id       = "creado";
+	
+	
+		 
+	
+		$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
+		$search =  (isset($_REQUEST['search'])&& $_REQUEST['search'] !=NULL)?$_REQUEST['search']:'';
+	
+	
+		if($action == 'ajax')
+		{
+	
+			if(!empty($search)){
+	
+	
+				$where1=" AND legal_juicios.numero_juicios LIKE '%".$search."%'   ";
+	
+				$where_to=$where.$where1;
+			}else{
+	
+				$where_to=$where;
+	
+			}
+	
+			$html="";
+			$resultSet=$honorarios->getCantidad("*", $tablas, $where_to);
+			$cantidadResult=(int)$resultSet[0]->total;
+	
+			$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
+	
+			$per_page = 10; //la cantidad de registros que desea mostrar
+			$adjacents  = 9; //brecha entre páginas después de varios adyacentes
+			$offset = ($page - 1) * $per_page;
+	
+			$limit = " LIMIT   '$per_page' OFFSET '$offset'";
+	
+			$resultSet=$honorarios->getCondicionesPagDesc($columnas, $tablas, $where_to, $id, $limit);
+			$count_query   = $cantidadResult;
+			$total_pages = ceil($cantidadResult/$per_page);
+	
+	
+	
+	
+	
+			if($cantidadResult>0)
+			{
+	
+				$html.='<div class="pull-left" style="margin-left:15px;">';
+				$html.='<span class="form-control"><strong>Registros: </strong>'.$cantidadResult.'</span>';
+				$html.='<input type="hidden" value="'.$cantidadResult.'" id="total_query" name="total_query"/>' ;
+				$html.='</div>';
+				$html.='<div class="col-lg-12 col-md-12 col-xs-12">';
+				$html.='<section style="height:425px; overflow-y:scroll;">';
+				$html.= "<table id='tabla_retencion' class='tablesorter table table-striped table-bordered dt-responsive nowrap dataTables-example'>";
+				$html.= "<thead>";
+				$html.= "<tr>";
+				$html.='<th style="text-align: left;  font-size: 12px;"></th>';
+				$html.='<th style="text-align: center;  font-size: 12px;">Número de Juicio</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Fecha Cálculo</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Tasa Interés</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Tasa Mora</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Fecha Vencimiento</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Meses Mora</th>';
+				$html.='<th style="text-align: left;  font-size: 12px;">Saldo Vencido</th>';
+				$html.='<th style="text-align: center;  font-size: 12px;">Honorario Secret.</th>';
+				$html.='<th style="text-align: center; font-size: 12px;">Interés Mora</th>';
+				$html.='<th style="text-align: center; font-size: 12px;">IVA</th>';
+				$html.='<th style="text-align: center; font-size: 12px;">Valor Ret. Fondos</th>';
+				$html.='<th style="text-align: center; font-size: 12px;">Creado</th>';
+				
+				 
+	
+	
+	
+	
+				$html.='</tr>';
+				$html.='</thead>';
+				$html.='<tbody>';
+	
+	
+				$i=0;
+				$importe=0;
+				$coreo_envidado="";
+				foreach ($resultSet as $res)
+				{
+	
+					$i++;
+					$html.='<tr>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$i.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->numero_juicios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->fecha_calculo_honorarios.'</td>';
+					$html.='<td style="font-size: 11px;">'.$res->tasa_interes_calculo_honorarios.'</td>';
+					$html.='<td style="font-size: 11px;">'.$res->tasa_intres_mora_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->fecha_vencimiento.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->meses_mora_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->saldo_vencido_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->honorario_secretario_coactiva_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->interes_mora_liquidacion_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->iva_factura_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->valor_retencion_fondo_calculo_honorarios.'</td>';
+					$html.='<td style="text-align: center; font-size: 11px;">'.$res->creado.'</td>';
+	
+	
+	
+	
+	
+					$html.='</tr>';
+				}
+	
+	
+	
+				$html.='</tbody>';
+				$html.='</table>';
+				$html.='</section></div>';
+				$html.='<div class="table-pagination pull-right">';
+				$html.=''. $this->paginate_honorarios("index.php", $page, $total_pages, $adjacents).'';
+				$html.='</div>';
+	
+	
+	
+			}else{
+				$html.='<div class="col-lg-6 col-md-6 col-xs-12">';
+				$html.='<div class="alert alert-warning alert-dismissable" style="margin-top:40px;">';
+				$html.='<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+				$html.='<h4>Aviso!!!</h4> <b>Actualmente no hay Retenciones registradas...</b>';
+				$html.='</div>';
+				$html.='</div>';
+			}
+	
+	
+			echo $html;
+			die();
+	
+		}
+	
+	
+	}
+	
+	
+	public function paginate_honorarios($reload, $page, $tpages, $adjacents) {
+	
+		$prevlabel = "&lsaquo; Prev";
+		$nextlabel = "Next &rsaquo;";
+		$out = '<ul class="pagination pagination-large">';
+	
+		// previous label
+	
+		if($page==1) {
+			$out.= "<li class='disabled'><span><a>$prevlabel</a></span></li>";
+		} else if($page==2) {
+			$out.= "<li><span><a href='javascript:void(0);' onclick='load_retencion(1)'>$prevlabel</a></span></li>";
+		}else {
+			$out.= "<li><span><a href='javascript:void(0);' onclick='load_retencion(".($page-1).")'>$prevlabel</a></span></li>";
+	
+		}
+	
+		// first label
+		if($page>($adjacents+1)) {
+			$out.= "<li><a href='javascript:void(0);' onclick='load_retencion(1)'>1</a></li>";
+		}
+		// interval
+		if($page>($adjacents+2)) {
+			$out.= "<li><a>...</a></li>";
+		}
+	
+		// pages
+	
+		$pmin = ($page>$adjacents) ? ($page-$adjacents) : 1;
+		$pmax = ($page<($tpages-$adjacents)) ? ($page+$adjacents) : $tpages;
+		for($i=$pmin; $i<=$pmax; $i++) {
+			if($i==$page) {
+				$out.= "<li class='active'><a>$i</a></li>";
+			}else if($i==1) {
+				$out.= "<li><a href='javascript:void(0);' onclick='load_retencion(1)'>$i</a></li>";
+			}else {
+				$out.= "<li><a href='javascript:void(0);' onclick='load_retencion(".$i.")'>$i</a></li>";
+			}
+		}
+	
+		// interval
+	
+		if($page<($tpages-$adjacents-1)) {
+			$out.= "<li><a>...</a></li>";
+		}
+	
+		// last
+	
+		if($page<($tpages-$adjacents)) {
+			$out.= "<li><a href='javascript:void(0);' onclick='load_retencion($tpages)'>$tpages</a></li>";
+		}
+	
+		// next
+	
+		if($page<$tpages) {
+			$out.= "<li><span><a href='javascript:void(0);' onclick='load_retencion(".($page+1).")'>$nextlabel</a></span></li>";
+		}else {
+			$out.= "<li class='disabled'><span><a>$nextlabel</a></span></li>";
+		}
+	
+		$out.= "</ul>";
+		return $out;
 	}
 	
 	

@@ -113,6 +113,7 @@ $("#frm_agregar_juicio").on("submit",function(event){
 	let _fecha_ultima_providencia_juicios = document.getElementById('fecha_ultima_providencia_juicios').value;
 	let _observaciones_juicios = document.getElementById('observaciones_juicios').value;
 	let _fecha_vencimiento_juicios = document.getElementById('fecha_vencimiento_juicios').value;
+	let _fecha_inicio_proceso_juicios = document.getElementById('fecha_inicio_proceso_juicios').value;
 	
 	
 	var parametros = {identificacion_clientes:_identificacion_clientes,
@@ -131,7 +132,8 @@ $("#frm_agregar_juicio").on("submit",function(event){
 			id_estado_procesal:_id_estado_procesal,
 			fecha_ultima_providencia_juicios:_fecha_ultima_providencia_juicios,
 			observaciones_juicios:_observaciones_juicios,
-			fecha_vencimiento_juicios:_fecha_vencimiento_juicios}
+			fecha_vencimiento_juicios:_fecha_vencimiento_juicios,
+			fecha_inicio_proceso_juicios:_fecha_inicio_proceso_juicios}
 	
 	
 	$.ajax({
@@ -308,6 +310,7 @@ function editJuicios(id = 0){
 			$("#fecha_ultima_providencia_juicios").val(array.fecha_ultima_providencia_juicios);			
 			$("#observaciones_juicios").val(array.observaciones_juicios);
 			$("#fecha_vencimiento_juicios").val(array.fecha_vencimiento_juicios);
+			$("#fecha_inicio_proceso_juicios").val(array.fecha_inicio_proceso_juicios);
 			
 			
 			$("html, body").animate({ scrollTop: $(identificacion_clientes).offset().top-120 }, tiempo);			

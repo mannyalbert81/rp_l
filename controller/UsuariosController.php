@@ -391,7 +391,7 @@ class UsuariosController extends ControladorBase{
     		    		    
     		    if ($_FILES['fotografia_usuarios']['tmp_name']!="")
     		    {
-    		        $directorio = $_SERVER['DOCUMENT_ROOT'].'/rp_l/fotografias_usuarios/';
+    		        $directorio = $_SERVER['DOCUMENT_ROOT'].'/rp_liventy/fotografias_usuarios/';
     		        
     		        $nombre = $_FILES['fotografia_usuarios']['name'];
     		        $tipo = $_FILES['fotografia_usuarios']['type'];

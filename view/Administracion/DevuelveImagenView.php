@@ -25,7 +25,7 @@ if (isset ($_GET["id_valor"]))
 
 }
 $image = "";
-$conn  = pg_connect("user=postgres port=5432 password=Programadores2018 dbname=rp_capremci host=192.168.1.231");
+$conn  = pg_connect("user=postgres port=5432 password=.romina.2012 dbname=rp_liventy host=35.175.215.2");
 if(!$conn)
 {
 	echo  "No se pudo conectar";
@@ -59,7 +59,7 @@ else
 			
 		}else 
 		{
-			$archivo=$_SERVER['DOCUMENT_ROOT'].'/rp_c/view/images/'.'nodisponible.jpg';
+			$archivo=$_SERVER['DOCUMENT_ROOT'].'/rp_liventy/view/images/'.'nodisponible.jpg';
 			
 			header("Content-type: image/jpeg");
 			header("Content-length: ".filesize($archivo));

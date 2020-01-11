@@ -252,6 +252,17 @@
                                         <div id="mensaje_fecha_ultima_providencia_juicios" class="errores"></div>
                                       </div>
                                    </div>  
+                             
+                                    <div class="col-xs-6 col-md-3 col-lg-3 ">
+                             		 <div class="form-group">
+                             		 	<label for="fecha_inicio_proceso_juicios" class="control-label">Fecha de Inicio de Proceso:</label>
+                                        <input type="date" class="form-control" id="fecha_inicio_proceso_juicios" name="fecha_inicio_proceso_juicios" value="" data-fechaactual="<?php echo date('Y/m/d');?>" placeholder="Fecha de Inicio"/>
+                                        <div id="mensaje_fecha_inicio_proceso_juicios" class="errores"></div>
+                                      </div>
+                                   </div>  
+                                   </div>  
+                                   
+                                       <div class="row">     
                                    
                                     <div class="col-xs-6 col-md-3 col-lg-3 ">
                              		 <div class="form-group">
@@ -263,10 +274,7 @@
                                    
           
                                   
-            		</div>
-                           
-                            	  <div class="row">		
-                            	    	             	          <div class="col-xs-12 col-md-12 col-lg-12">
+            	           	    	             	          <div class="col-xs-9 col-md-9 col-lg-9">
                             		<div class="form-group">
                                       <label for="observaciones_juicios" class="control-label">Observaciones:</label>
                                       <input type="text" class="form-control" id="observaciones_juicios" name="observaciones_juicios" value="" placeholder="Observaciones"/>

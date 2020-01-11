@@ -18,9 +18,7 @@ class Conectar{
        //holas 
         if($this->driver=="pgsql" || $this->driver==null){
             $con = pg_connect("host=35.175.215.2 port=5432 dbname=rp_liventy user=postgres password=.romina.2012");
-            //$con = pg_connect("host=192.168.1.128 port=5432 dbname=rp_capremci user=postgres password=Capremci2018");
-        	//$con = pg_connect("host=192.168.1.231 port=5432 dbname=rp_capremci user=postgres password=Programadores2018");
-        	if(!$con){
+         	if(!$con){
         		echo "No se puedo Conectar a la Base";
         		exit();
         	} else {
