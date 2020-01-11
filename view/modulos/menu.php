@@ -685,6 +685,8 @@ $controladores=$_SESSION['controladores'];
             <!--     <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index5"><i class="fa fa-circle-o"></i>Matriz de Juicios</a></li> -->
     	        <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index6"><i class="fa fa-circle-o"></i>Agregar Juicios</a></li>
     	         <li style="<?php echo getcontrolador("CalculaHonorarios",$controladores) ?>"><a href="index.php?controller=CalculaHonorarios&action=index"><i class="fa fa-circle-o"></i>Calcular Honorarios</a></li>
+    		     <li style="<?php echo getcontrolador("DocumentosGenerados",$controladores) ?>"><a href="index.php?controller=DocumentosGenerados&action=index5"><i class="fa fa-circle-o"></i>Documentos Generados</a></li>
+    		 
     		     <li class="treeview">
               </ul>
               <a href="#">

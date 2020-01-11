@@ -34,7 +34,7 @@ $(document).ready(function(){
 
            		   }
 
-function load_matriz_doc(pagina){
+function load_documentos_generados(pagina){
 
 
 	   var search=$("#search_solicitud_doc").val();
