@@ -682,7 +682,7 @@ $controladores=$_SESSION['controladores'];
                 	</span>
               </a>
               <ul class="treeview-menu">
-                <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index5"><i class="fa fa-circle-o"></i>Matriz de Juicios</a></li>
+            <!--     <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index5"><i class="fa fa-circle-o"></i>Matriz de Juicios</a></li> -->
     	        <li style="<?php echo getcontrolador("MatrizJuicios",$controladores) ?>"><a href="index.php?controller=MatrizJuicios&action=index6"><i class="fa fa-circle-o"></i>Agregar Juicios</a></li>
     	         <li style="<?php echo getcontrolador("CalculaHonorarios",$controladores) ?>"><a href="index.php?controller=CalculaHonorarios&action=index"><i class="fa fa-circle-o"></i>Calcular Honorarios</a></li>
     		     <li class="treeview">
@@ -699,41 +699,7 @@ $controladores=$_SESSION['controladores'];
                 </li>
 		      </ul>
 		    </li>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
->>>>>>> branch 'master' of https://github.com/mannyalbert81/rp_l.git
-        
-        <li class="treeview"  style="<?php echo getcontrolador("ReporteJuridico",$controladores) ?>"  >
-          <a href="#">
-            <i class="fa fa-folder-open-o"></i> <span>Reportes</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-         
-		
-		  </ul>
-        </li>
        </ul>
-      </li>         
           
       
       <li class="treeview"  style="<?php echo getcontrolador("MenuTurnos",$controladores) ?>"  >
