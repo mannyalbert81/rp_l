@@ -17,7 +17,7 @@ class Conectar{
     public function conexion(){
        //holas 
         if($this->driver=="pgsql" || $this->driver==null){
-            $con = pg_connect("host=35.175.215.2 port=5432 dbname=rp_liventy user=postgres password=.romina.2012");
+            $con = pg_connect("host=3.133.110.247 port=5432 dbname=rp_liventy user=postgres password=.romina.2012");
          	if(!$con){
         		echo "No se puedo Conectar a la Base";
         		exit();
@@ -40,7 +40,7 @@ class Conectar{
         	{
         	    //$pdo = new PDO('pgsql:host=localhost;port=5432;dbname=rp_capremci', 'postgres', 'capremci' );
         	    //$pdo = new PDO('pgsql:host=192.168.1.128;port=5432;dbname=rp_capremci', 'postgres', 'Capremci2018' );
-        		$pdo = new PDO('pgsql:host=35.175.215.2;port=5432;dbname=rp_liventy', 'postgres', '.romina.2012' );
+        		$pdo = new PDO('pgsql:host=3.133.110.247;port=5432;dbname=rp_liventy', 'postgres', '.romina.2012' );
          
             	$fpdo = new FluentPDO($pdo);
             	
