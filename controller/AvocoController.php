@@ -289,7 +289,7 @@
 	       
 	       
 	       
-	       $html.='<div style="position: fixed; top: -55px; left: 0px; right: 0px; background-color: lightblue; height: 50px;">'.$logo.'</div>';
+	       $html.='<div style="position: fixed; top: -50px; left: 0px; right: 0px; background-color: lightblue; height: 50px;">'.$logo.'</div>';
 	       $html.='<div style="font-family: Arial; font-size:11pt; color:#000000; text-align: justify; margin-top:57px">'.$cuerpo.'</div>';
 	       $html.='<div style="page-break-after:always;"></div>';
 	       $html.='<div style="font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify;">'.$oficio1.'</div>';

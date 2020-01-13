@@ -52,32 +52,6 @@
 	    }
 	    
 	}
-	public function verDoc()
-	{
-	    session_start();
-	    if (isset($_SESSION['usuario_usuarios']) )
-	    {
-	        $id_juicios = $_GET['id_juicios'];
-	        $documento = $_GET['documento'];
-	        $arraydoc = explode('-', $documento);
-	        
-	        //para produccion
-	        $mi_pdf = 'C:/coactiva/Documentos/'.$arraydoc[1].'/'.$arraydoc[2].'.pdf';
-	        
-	     
-	        if(file_exists($mi_pdf))
-	        {
-	            header('Content-type: application/pdf');
-	            header('Content-Disposition: inline; filename="'.$mi_pdf.'"');
-	            readfile($mi_pdf);
-	        }else
-	        {
-	            echo 'ESTIMADO USUARIO SE PRESENTAN INCONVENIENTES PARA ABRIR SU PDF, INTENTELO MAS TARDE.';
-	        }
-	        
-	        
-	    }
-	}
 	
 	
 	
@@ -180,8 +154,8 @@
 	            $html.= "<table id='tabla_bancos' class='tablesorter table table-striped table-bordered dt-responsive nowrap dataTables-example'>";
 	            $html.= "<thead>";
 	            $html.= "<tr>";
-	            $html.='<th style="text-align: left;  font-size: 12px;">#</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;"></th>';
+	            $html.='<th style="text-align: left;  font-size: 12px;">#</th>';
 	      
 	            $html.='<th style="text-align: left;  font-size: 12px;">Identificación</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Nombre</th>';
@@ -205,9 +179,10 @@
 	                
 	                $i++;
 	                $html.='<tr>';
+	               
+	                $html.='<td style="font-size: 18px;"><span class="pull-right"><a href="index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados='.$res->id_documentos_generados.'" target="_blank" class="btn btn-info" style="font-size:65%;"><i class="glyphicon glyphicon-print"></i></a></span></td>';
+	                
 	                $html.='<td style="font-size: 11px;">'.$i.'</td>';
-	                 $html.='<td style="font-size: 15px;">
-                           <a onclick="Documento('.$res->id_documentos_generados.')" href="#" class="btn btn-warning" style="font-size:65%;"data-toggle="tooltip" title="Editar"><i class="glyphicon glyphicon-file"></i></a></td>';
 	                $html.='<td style="font-size: 11px;">'.$res->identificacion_clientes.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_clientes.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->numero_juicios.'</td>';
