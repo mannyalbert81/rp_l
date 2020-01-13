@@ -8,7 +8,7 @@ function ConsultaDocumentosGenerados(_page = 1){
 	
 	var buscador = $("#buscador").val();
 	$.ajax({
-		beforeSend:function(){/*$("#divLoaderPage").addClass("loader")*/},
+		beforeSend:function(){$("#divLoaderPage").addClass("loader")},
 		url:"index.php?controller=DocumentosGenerados&action=ConsultaDocumentosGenerados",
 		type:"POST",
 		data:{page:_page,search:buscador,peticion:'ajax'}
@@ -23,7 +23,7 @@ function ConsultaDocumentosGenerados(_page = 1){
 		
 	}).always(function(){
 		
-		//$("#divLoaderPage").removeClass("loader")
+		$("#divLoaderPage").removeClass("loader")
 		
 	})
 	

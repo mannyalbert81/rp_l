@@ -19,6 +19,19 @@
     }
     
     </style>
+       <style type="text/css">
+        .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('view/images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+        opacity: .8;
+        }
+        
+       </style>
     <title>Calculo Honorarios</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="icon" type="image/png" href="view/bootstrap/otros/login/images/icons/favicon.ico"/>
@@ -73,13 +86,13 @@
             <div class="box-body">
            		
            		 <div class="row">
-					<div class="col-md-4 col-lg-4 col-xs-12">
+					<div class="col-md-4 col-lg-4 col-xs-12" >
 			         	
-			         	 <div class="input-group input-group-lg">
+			         	 <div class="input-group input-group-lg" >
 					        
-		                    <input type="text" id="numero_juicios"  name="numero_juicios"  value="" placeholder="Nuúmero de Juicio a Buscar..." class="form-control">
+		                    <input type="text" id="numero_juicios"  name="numero_juicios"  value="" placeholder="Número de Juicio a Buscar..." class="form-control">
 					      	<span class="input-group-btn">
-					        	<button class="btn btn-info" id="btnBuscarJuicios"  name="btnBuscarJuicios" type="button">Buscar</button>
+					        	<button style="text-align: center;" class="btn btn-info" id="btnBuscarJuicios"  name="btnBuscarJuicios" type="button">Buscar</button>
 					     	</span>
 					    </div>
 			         	
@@ -88,7 +101,6 @@
 			  	</div>     
 				<br>
 		        <div id="div_detalle_juicio"></div>
-			    
 			   	<br>
 			   	<div  id="div_ingreso_informacion" >
 			   	
@@ -103,7 +115,7 @@
 				</div>
 				<div class="row">
 				<div class="col-md-3 col-lg-3 col-xs-12">
-				<div class="form-group">
+				<div class="input-group input-group-lg">
 				<label for="id_juicios" class="control-label">Fecha de Cálculo Coactiva:</label>
 				<input type="date" id="fecha_calculo_coactiva" name="fecha_calculo_coactiva"  value"" class="form-control">
 				</div>
@@ -135,7 +147,7 @@
 				</div>
 				 
 				<div class="col-md-3 col-lg-3 col-xs-12">
-				<div class="form-group">
+				<div class="input-group input-group-lg">
 				<label for="tasa_mora" class="control-label">Fecha Vencimiento:</label>
 				<input type="date" id="fecha_vencimiento" name="fecha_vencimiento"  value="" class="form-control">
 				</div>
@@ -194,6 +206,7 @@
 					</div>
 					<div id="load_honorarios" ></div>	
 					<div id="honorarios_registrados_detalle"></div>	
+					<div id="divLoaderPage"></div>	
                 
               </div>
    
