@@ -176,11 +176,11 @@ $(document).ready(function(){
 
 	`<p style="text-align:justify">&nbsp;</p>`+
 
-	`<p style="text-align: justify;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES – CNT EP. - JEFATURA DE COACTIVA.-</b> Quito, ${fecha_actual}`+
+	`<p style="text-align: justify;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES - CNT EP. - JEFATURA DE COACTIVA.-</b> Quito, ${fecha_actual}`+
 	` Vistos. - Avoco conocimiento en la calidad en que suscribo en conformidad con la acción de personal No. ${numero_juicios}`+
 	 ` de ${fecha_inicio_proceso_juicios_nueva}. El presente proceso coactivo se tramitará de acuerdo a lo previsto en la Segunda Disposición Transitoria del`+
-	 ` Código Orgánico Administrativo (COA), que textualmente dice: <em><b>“SEGUNDA.-</b> Los procedimientos que se encuentran en trámite a la fecha de`+
-	 ` vigencia de este Código, continuarán sustanciándose hasta su conclusión conforme con la normativa vigente al momento de su inicio<b>”</b></em>.`+
+	 ` Código Orgánico Administrativo (COA), que textualmente dice: <em><b>"SEGUNDA.-</b> Los procedimientos que se encuentran en trámite a la fecha de`+
+	 ` vigencia de este Código, continuarán sustanciándose hasta su conclusión conforme con la normativa vigente al momento de su inicio<b>"</b></em>.`+
      ` Designo como Secretaria Abogada Externa a la ${secretario}, quien encontrándose presente, declara aceptar su cargo y`+
      ` promete cumplir fiel y legalmente sus funciones.- En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
      ` fecha ${fecha_auto_pago_nueva}, ordenado en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes},`+
@@ -290,7 +290,7 @@ $(document).ready(function(){
 	
 	`<p style="text-align: justify;">Por medio del presente, pongo en su conocimiento que dentro del Juicio Coactivo No. <b>${numero_juicios}</b>`+
 	 ` en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, se ha dictado la siguiente providencia:</p>`+
-	 `<p style="text-align: justify;">“…En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
+	 `<p style="text-align: justify;">"…En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
      ` fecha ${fecha_auto_pago_nueva},`+
 	 ` ordenado en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes},`+
      ` además dicto en su contra las siguientes medidas cautelares ampliatorias: a).-</b> La retención de fondos, depósitos  o cualquier`+
@@ -305,7 +305,7 @@ $(document).ready(function(){
      ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
      ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
-     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> ” F) Abg. Andrés Albuja.  JEFE DE COACTIVA – CNT E.P.-Certifico.</p>`+
+     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> " F) Abg. Andrés Albuja.  JEFE DE COACTIVA – CNT E.P.-Certifico.</p>`+
 
      `<p style="text-align: left;">Lo que comunico para fines de Ley.</p>`+
  	 `<p style="text-align: left;">Atentamente,</p>`+
@@ -359,7 +359,7 @@ $(document).ready(function(){
 		
 		`<p style="text-align: justify;">Por medio del presente, pongo en su conocimiento que dentro del Juicio Coactivo No. <b>${numero_juicios}</b>`+
 		 ` en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, se ha dictado la siguiente providencia:</p>`+
-		 `<p style="text-align: justify;">“…En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
+		 `<p style="text-align: justify;">"…En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
 	     ` fecha ${fecha_auto_pago_nueva},`+
 		 ` ordenado en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes},`+
 	     ` además dicto en su contra las siguientes medidas cautelares ampliatorias: a).-</b> La retención de fondos, depósitos  o cualquier`+
@@ -386,7 +386,7 @@ $(document).ready(function(){
          ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, salió del país o consta en el registro consular, si se verifica que es así.-`+
 	      
 	      
-	     ` <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> ” F) Abg. Andrés Albuja.  JEFE DE COACTIVA – CNT E.P.-Certifico.</p>`+
+	     ` <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> " F) Abg. Andrés Albuja.  JEFE DE COACTIVA – CNT E.P.-Certifico.</p>`+
 
 	     `<p style="text-align: left;">Lo que comunico para fines de Ley.</p>`+
 	 	 `<p style="text-align: left;">Atentamente,</p>`+

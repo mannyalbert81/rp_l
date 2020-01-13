@@ -267,23 +267,43 @@
 	    //PARA OBTENER DATOS DE LA EMPRESA
 	    $datos = array();
 	    $rsdatos = $juicios->getBy("id_documentos_generados = '$_id_documentos_generados'");
+	    $cuerpo="";
+	    $oficio1="";
+	    $oficio2="";
+	    $html="";
 	    
-	   
+	    $directorio = $_SERVER ['DOCUMENT_ROOT'];
+	    $dom=$directorio.'/rp_l/view/dompdf/dompdf_config.inc.php';
+	    
+	    $domLogo=$directorio.'/rp_l/view/images/cnt_encabezado_coactiva.jpg';
+	    $logo = '<img src="'.$domLogo.'" width="100%">';
+	    
 	    
 	    
 	    if(!empty($rsdatos) && count($rsdatos)>0){
 	     
-	        $datos['fecha_documentos_generados']=$rsdatos[0]->fecha_documentos_generados;
-	        $datos['cuerpo_documentos_generados']=$rsdatos[0]->cuerpo_documentos_generados;
-	        $datos['oficio_uno_documentos_generados']=$rsdatos[0]->oficio_uno_documentos_generados;
-	        $datos['oficio_dos_documentos_generados']=$rsdatos[0]->oficio_dos_documentos_generados;
+	       $cuerpo=$rsdatos[0]->cuerpo_documentos_generados;
+	       $oficio1=$rsdatos[0]->oficio_uno_documentos_generados;
+	       $oficio2=$rsdatos[0]->oficio_dos_documentos_generados;
+	       
+	       
+	       
+	       
+	       $html.='<div style="position: fixed; top: -55px; left: 0px; right: 0px; background-color: lightblue; height: 50px;">'.$logo.'</div>';
+	       $html.='<div style="font-family: Arial; font-size:11pt; color:#000000; text-align: justify; margin-top:57px">'.$cuerpo.'</div>';
+	       $html.='<div style="page-break-after:always;"></div>';
+	       $html.='<div style="font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify;">'.$oficio1.'</div>';
+	       $html.='<div style="page-break-after:always;"></div>';
+	       $html.='<div style="font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify;">'.$oficio2.'</div>';
+	       
 	        
 	    }
 	    
+	    $this->report("Avoco",array("resultSet"=>$html));
+	    die();
 	    
 	    
-	    
-	    $this->verReporte("Avoco", array('datos'=>$datos));
+	  
 	    
 	}
 	
