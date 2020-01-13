@@ -250,7 +250,7 @@
 	
 	Public function Reporte_Documentos_Generados(){
 	    
-	    $juicios = new JuiciosModel();
+	    $juicios = new LegalDocumentosGeneradosModel();
 	   
 	    session_start();
 	    
@@ -267,6 +267,9 @@
 	    //PARA OBTENER DATOS DE LA EMPRESA
 	    $datos = array();
 	    $rsdatos = $juicios->getBy("id_documentos_generados = '$_id_documentos_generados'");
+	    
+	   
+	    
 	    
 	    if(!empty($rsdatos) && count($rsdatos)>0){
 	     
