@@ -59,7 +59,7 @@ else
 			
 		}else 
 		{
-			$archivo=$_SERVER['DOCUMENT_ROOT'].'/rp_liventy/view/images/'.'nodisponible.jpg';
+			$archivo=$_SERVER['DOCUMENT_ROOT'].'/rp_l/view/images/'.'nodisponible.jpg';
 			
 			header("Content-type: image/jpeg");
 			header("Content-length: ".filesize($archivo));
