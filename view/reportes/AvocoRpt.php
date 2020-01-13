@@ -34,8 +34,20 @@ $mpdf->SetHTMLFooter($footer);
 //$stylesheet = file_get_contents('view/reportes/template/cuentasPagar.css'); // la ruta a tu css
 //$mpdf->WriteHTML($stylesheet,1);
 //$mpdf->WriteHTML($template,2);
+// Cargamos el contenido HTML.
+//$mpdf->loadHtml(utf8_decode($template));
 
-$mpdf->WriteHTML($template);
+// Renderizamos el documento PDF.
+//$pdf->render();
+
+// Enviamos el fichero PDF al navegador.
+//*$pdf->stream('FicheroEjemplo.pdf');
+
+//echo $template; exit();
+$mpdf->text_input_as_HTML = true; 
+$mpdf->WriteText(12, 12, $template);
+
+//$mpdf->WriteHTML($template);
 $mpdf->debug = true;
 $mpdf->Output();
 /*$content = $mpdf->Output('', 'S'); // Saving pdf to attach to email
