@@ -312,8 +312,7 @@
 					<input type="text" value="" class="form-control" id="buscador" name="buscador" onkeyup="consultaJuicios(1)" placeholder="Buscar.."/>
     			</div>  
     			<div id="divLoaderPage" ></div>  
-    			          	
-            	<div id="juicios_registrados" ></div>
+    	    	<div id="juicios_registrados" ></div>
             </div> 	
       	</div>
       </section> 

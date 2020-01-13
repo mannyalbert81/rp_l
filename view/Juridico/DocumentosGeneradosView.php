@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="icon" type="image/png" href="view/bootstrap/otros/login/images/icons/favicon.ico"/>
    <style type="text/css">
- 	  .loader {
+        .loader {
         position: fixed;
         left: 0px;
         top: 0px;
@@ -18,7 +18,8 @@
         background: url('view/images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
         opacity: .8;
         }
- 	</style> 	
+        
+       </style>
    <?php include("view/modulos/links_css.php"); ?>
    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">   	
 	<link href="view/bootstrap/smartwizard/dist/css/smart_wizard.css" rel="stylesheet" type="text/css" /> 
@@ -70,6 +71,8 @@
     			</div>  
     			<div id="ConsultaDocumentosGenerados" ></div>  
     	    	<div id="documentos_generados_registrados_tbl" ></div>
+    	    	<div id="divLoaderPage" ></div>
+    	    	
             </div> 	
       	</div>
       </section> 
@@ -81,7 +84,7 @@
  </div>
    <?php include("view/modulos/links_js.php"); ?>
  <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
- <script src="view/Juridico/js/DocumentosGenerados.js?0.10" ></script>
+ <script src="view/Juridico/js/DocumentosGenerados.js?0.12" ></script>
  
  </body>
 </html>
