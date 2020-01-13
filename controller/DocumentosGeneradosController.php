@@ -206,8 +206,8 @@
 	                $i++;
 	                $html.='<tr>';
 	                $html.='<td style="font-size: 11px;">'.$i.'</td>';
-	               // $html.='<td style="font-size: 15px;">
-                     //       <a onclick="editJuicios('.$res->id_clientes.')" href="#" class="btn btn-warning" style="font-size:65%;"data-toggle="tooltip" title="Editar"><i class="glyphicon glyphicon-edit"></i></a></td>';
+	                 $html.='<td style="font-size: 15px;">
+                           <a onclick="Documento('.$res->id_documentos_generados.')" href="#" class="btn btn-warning" style="font-size:65%;"data-toggle="tooltip" title="Editar"><i class="glyphicon glyphicon-file"></i></a></td>';
 	                $html.='<td style="font-size: 11px;">'.$res->identificacion_clientes.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_clientes.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->numero_juicios.'</td>';

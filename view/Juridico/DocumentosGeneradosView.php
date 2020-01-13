@@ -55,51 +55,24 @@
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo $helper->url("Usuarios","Bienvenida"); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Participes</li>
+            <li class="active">Documentos</li>
           </ol>
         </section>
         
-       <section class="content">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Listado de Documentos</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fa fa-minus"></i></button>
-                
-              </div>
-            </div>
-            
+         <section class="content">
+      	<div class="box box-primary">
+      		<div class="box-header with-border">
+      			<h3 class="box-title">Listado de Documentos Generados</h3>      			
+            </div> 
             <div class="box-body">
-
-           <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#activos" data-toggle="tab">Documentos Generados</a></li>
-            
-            </ul>
-            
-            <div class="col-md-12 col-lg-12 col-xs-12">
-            <div class="tab-content">
-            <br>
- 		
-              
-              <div class="tab-pane" id="activos">
-                
-                   <div class="pull-right" style="margin-right:11px;">
-					<input type="text" value="" class="form-control" id="" name="" onkeyup="ConsultaDocumentosGenerados(1)" placeholder="search.."/>
-					</div>
-                    	
-					<div id="ConsultaDocumentosGenerados" ></div>	
-					<div id="documentos_generados_registrados"></div>	
-					
-              </div>
-             </div>
-            </div>
-           </div>
-         
-            </div>
-            </div>
-            </section>
+    			<div class="pull-right" style="margin-right:15px;">
+					<input type="text" value="" class="form-control" id="buscador" name="buscador" onkeyup="ConsultaDocumentosGenerados(1)" placeholder="Buscar.."/>
+    			</div>  
+    			<div id="ConsultaDocumentosGenerados" ></div>  
+    	    	<div id="documentos_generados_registrados_tbl" ></div>
+            </div> 	
+      	</div>
+      </section> 
    
   		</div>
  	<?php include("view/modulos/footer.php"); ?>	
@@ -108,7 +81,7 @@
  </div>
    <?php include("view/modulos/links_js.php"); ?>
  <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
- <script src="view/Juridico/js/DocumentosGenerados.js?0.8" ></script>
+ <script src="view/Juridico/js/DocumentosGenerados.js?0.10" ></script>
  
  </body>
 </html>
