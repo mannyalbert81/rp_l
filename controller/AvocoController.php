@@ -290,11 +290,11 @@
 	       
 	       
 	       $html.='<div style="position: fixed; top: -50px; left: 0px; right: 0px; background-color: lightblue; height: 50px;">'.$logo.'</div>';
-	       $html.='<div style="margin-left: 40px; font-family: Arial; font-size:11pt; color:#000000; text-align: justify; margin-top:57px">'.$cuerpo.'</div>';
+	       $html.='<div style="margin-left: 60px; font-family: Arial; font-size:11pt; color:#000000; text-align: justify; margin-top:57px">'.$cuerpo.'</div>';
 	       $html.='<div style="page-break-after:always;"></div>';
-	       $html.='<div style="margin-left: 40px; font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify; margin-top:57px">'.$oficio1.'</div>';
+	       $html.='<div style="margin-left: 60px; font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify; margin-top:57px">'.$oficio1.'</div>';
 	       $html.='<div style="page-break-after:always;"></div>';
-	       $html.='<div style="margin-left: 40px; font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify; margin-top:57px">'.$oficio2.'</div>';
+	       $html.='<div style="margin-left: 60px; font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify; margin-top:57px">'.$oficio2.'</div>';
 	       
 	        
 	    }
