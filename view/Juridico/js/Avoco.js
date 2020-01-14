@@ -174,7 +174,7 @@ $(document).ready(function(){
 	
 	formato = `<p style="text-align: center;"><b>JUICIO COACTIVO No. ${numero_juicios}</b></p>`+
 
-	`<p style="text-align:justify">&nbsp;</p>`+
+//	`<p style="text-align:justify">&nbsp;</p>`+
 
 	`<p style="text-align: justify;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES - CNT EP. - JEFATURA DE COACTIVA.-</b> Quito, ${fecha_actual}`+
 	` Vistos. - Avoco conocimiento en la calidad en que suscribo en conformidad con la acción de personal No. ${numero_juicios}`+
@@ -213,7 +213,7 @@ $(document).ready(function(){
 	
 	// espacios en blanco para la razòn
 	`<p style="text-align:justify">&nbsp;</p>`+
-	`<p style="text-align:justify">&nbsp;</p>`+
+
 			
 	 
 	`<b>Razón:</b> Quito, ${fecha_razon}, no se notifica la providencia que antecede ya que el coactivado,`+
