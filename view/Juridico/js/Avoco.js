@@ -283,7 +283,6 @@ $(document).ready(function(){
 	`<p style="text-align:left"><b>SUPERINTENDENTE DE BANCOS<br>`+
 	`SUPERINTENDENCIA DE ECONOMÍA POPULAR Y SOLIDARIA<br>`+
 	`DIRECTOR EJECUTIVO DE LA AGENCIA NACIONAL DE TRANSPORTE TERRESTRE, TRÁNSITO Y SEGURIDAD VIAL<br>`+
-	`MINISTRO DE TRABAJO</b><br>`+
 	`Presente.-</p>`+
 	
 	`<p style="text-align: left;">De mi consideración:</p>`+
@@ -302,7 +301,7 @@ $(document).ready(function(){
      ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
      ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
      ` <b>c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
-     ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
+     ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General,`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
      ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
      ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> " F) Abg. Andrés Albuja.  JEFE DE COACTIVA - CNT E.P.- Certifico.</p>`+
@@ -352,7 +351,6 @@ $(document).ready(function(){
 		`<p style="text-align:left"><b>MINISTRO DEL TRABAJO<br>`+
 		`DIRECTOR NACIONAL DE REGISTRO CIVIL<br>`+
 		`CONSEJO NACIONAL ELECTORAL<br>`+
-		`MINISTRO DE RELACIONES EXTERIORES</b><br>`+
 		`Presente.-</p>`+
 		
 		`<p style="text-align: left;">De mi consideración:</p>`+
@@ -382,7 +380,7 @@ $(document).ready(function(){
          ` <b>3.-</b> Remítase atento oficio a la Dirección General del Registro Civil a fin que certifique datos filiales, del coactivado <b>${nombre_clientes},`+
          ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos generales;`+
         
-         ` <b>4.-</b> Remítase atento oficio al Ministerio de Relaciones Exteriores, con el fin de que indique si el coactivado <b>${nombre_clientes},`+
+         ` <b>4.-</b> Remítase atento oficio con el fin de que indique si el coactivado <b>${nombre_clientes},`+
          ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, salió del país o consta en el registro consular, si se verifica que es así.-`+
 	      
 	      

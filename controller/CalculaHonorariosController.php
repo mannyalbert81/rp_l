@@ -287,7 +287,7 @@ class CalculaHonorariosController extends ControladorBase{
 					$_interes_porcentaje_tabla_honorarios = $res->porcentaje;
 					$_minimo_tabla_honorarios = $res->minimo;
 					$_calculo_porcentaje_exedente = round($_variable_honorarios_secretario * ($_interes_porcentaje_tabla_honorarios/100),2);
-					$_valor_aplicar = $_minimo_tabla_honorarios + $_calculo_porcentaje_exedente; 
+					$_valor_aplicar = $_minimo_tabla_honorarios + $_calculo_porcentaje_exedente + 30; 
 					
 				}
 				else 
@@ -298,7 +298,7 @@ class CalculaHonorariosController extends ControladorBase{
 					$_exedente_tabla_honorarios = $_variable_honorarios_secretario - $_valor_min_recuperado;
 					$_minimo_tabla_honorarios = $res->minimo;
 					$_calculo_porcentaje_exedente = round($_exedente_tabla_honorarios * ($_interes_porcentaje_tabla_honorarios/100),2);
-					$_valor_aplicar = $_minimo_tabla_honorarios + $_calculo_porcentaje_exedente;
+					$_valor_aplicar = $_minimo_tabla_honorarios + $_calculo_porcentaje_exedente + 30;
 							
 				}
 				
