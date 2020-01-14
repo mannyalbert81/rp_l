@@ -196,7 +196,7 @@ $(document).ready(function(){
      ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
      ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
-     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b></p>`+
+     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE Y OFÍCIESE.-</b></p>`+
 
 	
 	
@@ -304,7 +304,7 @@ $(document).ready(function(){
      ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General,`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
      ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
-     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> " F) Abg. Andrés Albuja.  JEFE DE COACTIVA - CNT E.P.- Certifico.</p>`+
+     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE Y OFÍCIESE.-</b> " F) Abg. Andrés Albuja.  JEFE DE COACTIVA - CNT E.P.- Certifico.</p>`+
 
      `<p style="text-align: left;">Lo que comunico para fines de Ley.</p>`+
  	 `<p style="text-align: left;">Atentamente,</p>`+
@@ -384,7 +384,7 @@ $(document).ready(function(){
          ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, salió del país o consta en el registro consular, si se verifica que es así.-`+
 	      
 	      
-	     ` <b>CÚMPLASE, OFÍCIESE Y NOTÍFIQUESE.-</b> " F) Abg. Andrés Albuja.  JEFE DE COACTIVA - CNT E.P.- Certifico.</p>`+
+	     ` <b>CÚMPLASE Y OFÍCIESE.-</b> " F) Abg. Andrés Albuja.  JEFE DE COACTIVA - CNT E.P.- Certifico.</p>`+
 
 	     `<p style="text-align: left;">Lo que comunico para fines de Ley.</p>`+
 	 	 `<p style="text-align: left;">Atentamente,</p>`+
