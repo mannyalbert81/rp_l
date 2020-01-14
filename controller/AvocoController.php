@@ -275,8 +275,8 @@
 	    $directorio = $_SERVER ['DOCUMENT_ROOT'];
 	    $dom=$directorio.'/rp_l/view/dompdf/dompdf_config.inc.php';
 	    
-	    $domLogo=$directorio.'/rp_l/view/images/cnt_encabezado_coactiva.jpg';
-	    $logo = '<img src="'.$domLogo.'" width="100%">';
+	    $domLogo=$directorio.'/rp_l/view/images/LOGOcnt.jpg';
+	    $logo = '<img src="'.$domLogo.'">';
 	    
 	    
 	    
@@ -289,12 +289,12 @@
 	       
 	       
 	       
-	       $html.='<div style="position: fixed; top: -50px; left: 0px; right: 0px; background-color: lightblue; height: 50px;">'.$logo.'</div>';
-	       $html.='<div style="margin-left: 60px; font-family: Arial; font-size:11pt; color:#000000; text-align: justify; margin-top:57px">'.$cuerpo.'</div>';
+	       $html.='<div style="position: fixed; top: -40px; left: 45px; right: 0px;">'.$logo.'</div>';
+	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:11.5pt; color:#000000; text-align: justify;">'.$cuerpo.'</div>';
 	       $html.='<div style="page-break-after:always;"></div>';
-	       $html.='<div style="margin-left: 60px; font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify; margin-top:57px">'.$oficio1.'</div>';
+	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:30px;">'.$oficio1.'</div>';
 	       $html.='<div style="page-break-after:always;"></div>';
-	       $html.='<div style="margin-left: 60px; font-family: Arial; font-size:11pt; color:#000000; width: 100%; text-align: justify; margin-top:57px">'.$oficio2.'</div>';
+	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:30px;">'.$oficio2.'</div>';
 	       
 	        
 	    }

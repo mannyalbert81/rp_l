@@ -172,9 +172,16 @@ $(document).ready(function(){
 	// vacio el texto
 	$('#editor1').val("");
 	
-	formato = `<p style="text-align: center;"><b>JUICIO COACTIVO No. ${numero_juicios}</b></p>`+
+	formato = 
+		
+		`<p style="text-align: center;"><b>REPÚBLICA DEL ECUADOR</b></p>`+
+		`<p style="text-align: center;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES CNT EP.</b></p>`+
+		`<p style="text-align: center;"><b>JEFATURA DE COACTIVA</b></p>`+
+		`<p style="text-align: center;"><b>JUICIO COACTIVO No. ${numero_juicios}</b></p>`+
 
-//	`<p style="text-align:justify">&nbsp;</p>`+
+	
+	
+	`<p style="text-align:justify">&nbsp;</p>`+
 
 	`<p style="text-align: justify;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES - CNT EP. - JEFATURA DE COACTIVA.-</b> Quito, ${fecha_actual}`+
 	` Vistos. - Avoco conocimiento en la calidad en que suscribo en conformidad con la acción de personal No. ${numero_juicios}`+
@@ -196,15 +203,14 @@ $(document).ready(function(){
      ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
      ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
-     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE Y OFÍCIESE.-</b></p>`+
+     ` el impedimento para ejercer cargo público.- <b>CÚMPLASE Y OFÍCIESE.-</b></p>`+
 
 	
 	
 	// espacios en blanco para las firmas
 	`<p style="text-align:justify">&nbsp;</p>`+
 	`<p style="text-align:justify">&nbsp;</p>`+
-	
-	
+	`<p style="text-align:justify">&nbsp;</p>`+
 	
 	`<p style="text-align:left">Abogado<br>`+
 	`Andrés Abuja Tintín<br>`+
@@ -213,8 +219,9 @@ $(document).ready(function(){
 	
 	// espacios en blanco para la razòn
 	`<p style="text-align:justify">&nbsp;</p>`+
-
-			
+	`<p style="text-align:justify">&nbsp;</p>`+
+	`<p style="text-align:justify">&nbsp;</p>`+	
+	`<p style="text-align:justify">&nbsp;</p>`+	
 	 
 	`<b>Razón:</b> Quito, ${fecha_razon}, no se notifica la providencia que antecede ya que el coactivado,`+
 	` no ha cumplido con su obligación de señalar correo electrónico.- <b>CERTIFICO.-</b>`+
@@ -224,7 +231,7 @@ $(document).ready(function(){
 	// espacios en blanco para las firmas
 	`<p style="text-align:justify">&nbsp;</p>`+
 	`<p style="text-align:justify">&nbsp;</p>`+
-	
+	`<p style="text-align:justify">&nbsp;</p>`+
 	
 	
 	`<p style="text-align:left">${secretario}<br>`+
@@ -276,13 +283,13 @@ $(document).ready(function(){
 	$('#editor2').val("");
 	
 	formato_1 = 
-	`<p style="text-align: left;">Oficio No. ${numero_juicios}</p>`+
-	`<p style="text-align: left;">D.M. de Quito, a ${fecha_razon}</p>`+
+	`<p style="text-align: left;">Oficio No. ${numero_juicios}<br>`+
+	`D.M. de Quito, a ${fecha_razon}</p>`+
 	`<p style="text-align: left;">Señor</p>`+
 	
 	`<p style="text-align:left"><b>SUPERINTENDENTE DE BANCOS<br>`+
 	`SUPERINTENDENCIA DE ECONOMÍA POPULAR Y SOLIDARIA<br>`+
-	`DIRECTOR EJECUTIVO DE LA AGENCIA NACIONAL DE TRANSPORTE TERRESTRE, TRÁNSITO Y SEGURIDAD VIAL<br>`+
+	`DIRECTOR EJECUTIVO DE LA AGENCIA NACIONAL DE TRANSPORTE TERRESTRE, TRÁNSITO Y SEGURIDAD VIAL</b><br>`+
 	`Presente.-</p>`+
 	
 	`<p style="text-align: left;">De mi consideración:</p>`+
@@ -296,11 +303,11 @@ $(document).ready(function(){
      ` otro tipo de inversiones que la coactivada mantiene en las entidades del Sistema Financiero, Cooperativas, hasta por el`+
      ` monto de <b>${monto_letras}</b>, para dicho efecto`+
      ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
-     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas; <b>b).-</b> Ofíciese al`+
+     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas;<b> b).-</b> Ofíciese al`+
      ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
      ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
      ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
-     ` <b>c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
+     ` <b> c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
      ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General,`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
      ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
@@ -344,13 +351,14 @@ $(document).ready(function(){
 		$('#editor3').val("");
 		
 		formato_2 = 
-		`<p style="text-align: left;">Oficio No. ${numero_juicios}</p>`+
-		`<p style="text-align: left;">D.M. de Quito, a ${fecha_razon}</p>`+
+		`<p style="text-align: left;">Oficio No. ${numero_juicios}<br>`+
+		`D.M. de Quito, a ${fecha_razon}</p>`+
 		`<p style="text-align: left;">Señor</p>`+
 		
 		`<p style="text-align:left"><b>MINISTRO DEL TRABAJO<br>`+
 		`DIRECTOR NACIONAL DE REGISTRO CIVIL<br>`+
-		`CONSEJO NACIONAL ELECTORAL<br>`+
+		`CONSEJO NACIONAL ELECTORAL</b><br>`+
+		
 		`Presente.-</p>`+
 		
 		`<p style="text-align: left;">De mi consideración:</p>`+
@@ -364,11 +372,11 @@ $(document).ready(function(){
 	     ` otro tipo de inversiones que la coactivada mantiene en las entidades del Sistema Financiero, Cooperativas, hasta por el`+
 	     ` monto de <b>${monto_letras}</b>, para dicho efecto`+
 	     ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
-	     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas; <b>b).-</b> Ofíciese al`+
+	     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas;<b> b).-</b> Ofíciese al`+
 	     ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
 	     ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
 	     ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
-	     ` <b>c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
+	     ` <b> c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
 	     ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
 	     ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
 	     ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
@@ -418,10 +426,17 @@ $(document).ready(function(){
 	   let fecha_inicio_proceso_juicios = $("#fecha_inicio_proceso_juicios").val();
 	   let fecha_auto_pago_juicios = $("#fecha_auto_pago_juicios").val();
 	   let valor_retencion_fondos = $("#valor_retencion_fondos").val();
+	   
+	   
+	   CKEDITOR.instances.editor1.updateElement();
+	   CKEDITOR.instances.editor2.updateElement();
+	   CKEDITOR.instances.editor3.updateElement();
+	   
 	   let editor1 = $("#editor1").val();
 	   let editor2 = $("#editor2").val();
 	   let editor3 = $("#editor3").val();
 		  
+	   
 	   
 	   
 	   
