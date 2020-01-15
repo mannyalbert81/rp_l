@@ -3,7 +3,7 @@ $(document).ready(function(){
 	// creo editor de texto
 	CKEDITOR.replace('editor1')
 	CKEDITOR.replace('editor2')
-	CKEDITOR.replace('editor3')
+	//CKEDITOR.replace('editor3')
     $('.textarea').wysihtml5()
 	
 		
@@ -113,7 +113,7 @@ $(document).ready(function(){
 	
 	formato_avoco();
 	formato_oficio_1();
-	formato_oficio_2();
+	//formato_oficio_2();
 	
 	}).fail(function(xhr,status, error) {
 	       
@@ -293,30 +293,52 @@ $(document).ready(function(){
 	
 	`<p style="text-align:left"><b>SUPERINTENDENTE DE BANCOS<br>`+
 	`SUPERINTENDENCIA DE ECONOMÍA POPULAR Y SOLIDARIA<br>`+
-	`DIRECTOR EJECUTIVO DE LA AGENCIA NACIONAL DE TRANSPORTE TERRESTRE, TRÁNSITO Y SEGURIDAD VIAL</b><br>`+
-	`Presente.-</p>`+
+	`DIRECTOR EJECUTIVO DE LA AGENCIA NACIONAL DE TRANSPORTE TERRESTRE, TRÁNSITO Y SEGURIDAD VIAL<br>`+
+	`MINISTERIO DE TRABAJO<br>`+
+	`DIRECTOR DE SERVICIOS DE RENTAS INTERNAS (SRI)<br>`+
+	`DIRECTOR DEL INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL<br>`+
+	`CONSEJO NACIONAL ELECTORAL</b></p>`+
+	
+	
+	`<p>Presente.-</p>`+
 	
 	`<p style="text-align: left;">De mi consideración:</p>`+
 	
 	`<p style="text-align: justify;">Por medio del presente, pongo en su conocimiento que dentro del Juicio Coactivo No. <b>${numero_juicios}</b>`+
 	 ` en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, se ha dictado la siguiente providencia:</p>`+
 	 `<p style="text-align: justify;">&quot;..En lo principal se dispone: <b>1.-</b>  Cúmplase con todo lo actuado en Auto de Pago de`+
-     ` fecha ${fecha_auto_pago_nueva},`+
+    ` fecha ${fecha_auto_pago_nueva},`+
 	 ` ordenado en contra de <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes},`+
-     ` además dicto en su contra las siguientes medidas cautelares ampliatorias: a).-</b> La retención de fondos, depósitos  o cualquier`+
-     ` otro tipo de inversiones que la coactivada mantiene en las entidades del Sistema Financiero, Cooperativas, hasta por el`+
-     ` monto de <b>${monto_letras}</b>, para dicho efecto`+
-     ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
-     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas;<b> b).-</b> Ofíciese al`+
-     ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
-     ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
-     ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
-     ` <b> c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
-     ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General,`+
-     ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
-     ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
-     ` el impedimento para ejercer cargo público; y más datos generales.- <b>CÚMPLASE Y OFÍCIESE.-</b> " F) Abg. Andrés Albuja.  JEFE DE COACTIVA - CNT E.P.- Certifico.</p>`+
+    ` además dicto en su contra las siguientes medidas cautelares ampliatorias: a).-</b> La retención de fondos, depósitos  o cualquier`+
+    ` otro tipo de inversiones que la coactivada mantiene en las entidades del Sistema Financiero, Cooperativas, hasta por el`+
+    ` monto de <b>${monto_letras}</b>, para dicho efecto`+
+    ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
+    ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas;<b> b).-</b> Ofíciese al`+
+    ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
+    ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
+    ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
+    ` <b> c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
+    ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
+    ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
+    ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
+    ` el impedimento para ejercer cargo público; y más datos generales.-`+
+    
+    ` <b>2.-</b> Remítase atento oficio al Servicio de Rentas Internas (SRI), a fin que se retenga la devolución de valores concernientes al I.V.A., así como del impuesto a la renta, que hayan sido generados a favor del coactivado <b>${nombre_clientes},`+
+    ` con cédula de ciudadanía No. ${identificacion_clientes}</b>.-`+
+    
+    ` <b>3.-</b> Remítase atento oficio al Instituto De Seguridad Social a fin de emitir la historia laboral del coactivado <b>${nombre_clientes},`+
+    ` con cédula de ciudadanía No. ${identificacion_clientes}</b>.-`+
+   
+    ` <b>4.-</b> Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información suficiente respecto del domicilio actual, del coactivado <b>${nombre_clientes},`+
+    ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos generales.-`+
+     
+     
+    ` &quot; F) Abg. Andrés Albuja. JEFE DE COACTIVA - CNT E.P.- Certifico.</p>`+
 
+    
+    
+    
+    
      `<p style="text-align: left;">Lo que comunico para fines de Ley.</p>`+
  	 `<p style="text-align: left;">Atentamente,</p>`+
  	
@@ -434,11 +456,11 @@ $(document).ready(function(){
 	   
 	   CKEDITOR.instances.editor1.updateElement();
 	   CKEDITOR.instances.editor2.updateElement();
-	   CKEDITOR.instances.editor3.updateElement();
+	   //CKEDITOR.instances.editor3.updateElement();
 	   
 	   let editor1 = $("#editor1").val();
 	   let editor2 = $("#editor2").val();
-	   let editor3 = $("#editor3").val();
+	   //let editor3 = $("#editor3").val();
 		  
 	   
 	   

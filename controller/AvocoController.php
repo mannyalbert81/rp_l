@@ -154,7 +154,10 @@
 	    $_id_juicios = (isset($_POST['id_juicios'])) ? $_POST['id_juicios'] : null;
 	    $_editor1 = (isset($_POST['editor1'])) ? $_POST['editor1'] : null;
 	    $_editor2 = (isset($_POST['editor2'])) ? $_POST['editor2'] : null;
-	    $_editor3 = (isset($_POST['editor3'])) ? $_POST['editor3'] : null;
+	    //$_editor3 = (isset($_POST['editor3'])) ? $_POST['editor3'] : null;
+	    $_editor3 = "";
+	    
+	    
 	    
 	    
 	    $id_usuarios = $_SESSION["id_usuarios"];
@@ -188,14 +191,14 @@
 	        exit();
 	    }
 	    
-	    
+	    /*
 	    if(!empty($_editor3)){
 	        
 	    }else{
 	        
 	        echo  json_encode(array('error'=>'Ingrese Texto Para el Segundo Oficio'));
 	        exit();
-	    }
+	    }*/
 	    
 	   
 	    $funcion = "ins_legal_documentos_generados";
@@ -284,14 +287,14 @@
 	     
 	       $cuerpo=$rsdatos[0]->cuerpo_documentos_generados;
 	       $oficio1=$rsdatos[0]->oficio_uno_documentos_generados;
-	       $oficio2=$rsdatos[0]->oficio_dos_documentos_generados;
+	       //$oficio2=$rsdatos[0]->oficio_dos_documentos_generados;
 	       
 	       $html.='<div style="position: fixed; top: -40px; left: 45px; right: 0px;">'.$logo.'</div>';
 	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:11.5pt; color:#000000; text-align: justify;">'.$cuerpo.'</div>';
 	       $html.='<div style="page-break-after:always;"></div>';
-	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:40px;">'.$oficio1.'</div>';
-	       $html.='<div style="page-break-after:always;"></div>';
-	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:40px;">'.$oficio2.'</div>';
+	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:30px;">'.$oficio1.'</div>';
+	      // $html.='<div style="page-break-after:always;"></div>';
+	      // $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:30px;">'.$oficio2.'</div>';
 	        
 	    }
 	    

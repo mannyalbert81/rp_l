@@ -81,8 +81,8 @@
             <ul>
                 <li><a href="#step-1">Datos Cliente<br /><small> </small></a></li>
                 <li><a href="#step-2">Revisión Providencia<br /><small></small></a></li>
-                <li><a href="#step-3">Revisión Primer Oficio<br /><small></small></a></li>
-                <li><a href="#step-4">Revisión Segundo Oficio<br /><small></small></a></li>
+                <li><a href="#step-3">Revisión Oficio<br /><small></small></a></li>
+                <!-- <li><a href="#step-4">Revisión Segundo Oficio<br /><small></small></a></li> -->
             </ul>
          
             <div>
@@ -226,6 +226,9 @@
                			</div>
                		</div>
                 </div>
+                
+                
+                <!-- 
                   <div id="step-4" class="">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -248,6 +251,9 @@
                		</div>
                 </div>
                 
+                 -->
+                
+                
             </div>
         </div>
     		
@@ -269,8 +275,8 @@
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
 	<script type="text/javascript" src="view/bootstrap/smartwizard/dist/js/jquery.smartWizard.min.js"></script>
-	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.79"></script>
-	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.67"></script>
+	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.82"></script>
+	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.70"></script>
   
   
     <script src="view/bootstrap/bower_components/ckeditor/ckeditor.js"></script>
