@@ -206,7 +206,7 @@ $(document).ready(function(){
      ` <b>c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
      ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
-     ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
+     ` entidad, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
      ` el impedimento para ejercer cargo público.- <b>2.-</b> Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información`+
      ` suficiente respecto del domicilio actual, del coactivado <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos`+
      ` generales.- <b>CÚMPLASE Y OFÍCIESE.-</b></p>`+
@@ -321,7 +321,7 @@ $(document).ready(function(){
     ` <b> c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
     ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
     ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
-    ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
+    ` entidad, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
     ` el impedimento para ejercer cargo público; y más datos generales.-`+
     
     ` <b>2.-</b> Remítase atento oficio al Servicio de Rentas Internas (SRI), a fin que se retenga la devolución de valores concernientes al I.V.A., así como del impuesto a la renta, que hayan sido generados a favor del coactivado <b>${nombre_clientes},`+
