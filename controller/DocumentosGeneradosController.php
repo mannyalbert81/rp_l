@@ -154,7 +154,7 @@
 	            $html.= "<table id='tabla_bancos' class='tablesorter table table-striped table-bordered dt-responsive nowrap dataTables-example'>";
 	            $html.= "<thead>";
 	            $html.= "<tr>";
-	            $html.='<th style="text-align: left;  font-size: 12px;"></th>';
+	            $html.='<th style="text-align: left;  font-size: 12px;">Acciones</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">#</th>';
 	      
 	            $html.='<th style="text-align: left;  font-size: 12px;">Identificación</th>';
@@ -180,7 +180,8 @@
 	                $i++;
 	                $html.='<tr>';
 	               
-	                $html.='<td style="font-size: 18px;"><span class="pull-right"><a href="index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados='.$res->id_documentos_generados.'" target="_blank" class="btn btn-info" style="font-size:65%;"><i class="glyphicon glyphicon-print"></i></a></span></td>';
+	                $html.='<td style="font-size: 14px;"><span class="pull-left"><a href="index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados='.$res->id_documentos_generados.'" target="_blank" class="btn btn-info" style="font-size:65%;" title="Imprimir"><i class="glyphicon glyphicon-print"></i></a></span>
+                                                         <span class="pull-right"><a href="index.php?controller=Avoco&action=index&id_documentos_generados='.$res->id_documentos_generados.'" class="btn btn-warning" style="font-size:65%;" title="Editar"><i class="glyphicon glyphicon-edit"></i></a></span></td>';
 	                
 	                $html.='<td style="font-size: 11px;">'.$i.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->identificacion_clientes.'</td>';

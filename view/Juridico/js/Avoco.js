@@ -81,8 +81,15 @@ $(document).ready(function(){
     
     
     
-    
+    var id_documentos_generados=$('#id_documentos_generados').val();
 
+    
+    if(id_documentos_generados>0){
+    	
+    	
+    	
+    }else{
+    
 	$("#numero_juicios" ).autocomplete({
 	 source: 'index.php?controller=Avoco&action=AutocompleteNumeroJuicio',
 	  	minLength: 1
@@ -136,6 +143,8 @@ $(document).ready(function(){
 	                    					
 	});
 
+
+   }
 
 
 
@@ -445,6 +454,7 @@ $(document).ready(function(){
  
 	  $("#frm_avoco").on("submit",function(event){
 	
+	   let id_documentos_generados = $("#id_documentos_generados").val();	  
 	   let id_juicios = $("#id_juicios").val();
 	   let id_clientes = $("#id_clientes").val();
 	   let identificacion_clientes = $("#identificacion_clientes").val();
@@ -534,7 +544,7 @@ $(document).ready(function(){
     			let urlReporte = "index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados="+loteUrl;
     			window.open(urlReporte,"_blank");    			
     			$('#smartwizard').smartWizard("reset");
-    			window.location.reload();
+    			window.location.href= 'index.php?controller=Avoco&action=index';
     		});
 			
 		}

@@ -81,6 +81,8 @@ $(document).ready(function(){
     
    function validaPaso1(){
 	   
+	   
+	   let id_documentos_generados = $("#id_documentos_generados").val();
 	   let id_juicios = $("#id_juicios").val();
 	   let identificacion_clientes = $("#identificacion_clientes").val();
 	   let nombre_clientes = $("#nombre_clientes").val();

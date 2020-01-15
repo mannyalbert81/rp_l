@@ -14,6 +14,9 @@
 	    session_start();
 	    if (isset(  $_SESSION['nombre_usuarios']) )
 	    {
+	        
+	        
+	        $juicios = new LegalDocumentosGeneradosModel();
 	        $controladores = new ControladoresModel();
 	        $nombre_controladores = "Avoco";
 	        $id_rol= $_SESSION['id_rol'];
@@ -22,8 +25,38 @@
 	        if (!empty($resultPer))
 	        {
 	            
+	            $resultEdit="";
+	            
+	            if(isset($_GET["id_documentos_generados"])){
+	                
+	                
+	                $_id_documentos_generados = $_GET["id_documentos_generados"];
+	                
+	                
+	                $columnas="d.id_documentos_generados, d.id_juicios, j.id_clientes, c.identificacion_clientes, 
+                                c.nombre_clientes, j.numero_juicios, j.numero_titulo_credito_juicios,
+                                j.fecha_inicio_proceso_juicios, j.fecha_auto_pago_juicios, j.valor_retencion_fondos,
+                                d.cuerpo_documentos_generados, d.oficio_uno_documentos_generados";
+	                $tablas="legal_documentos_generados d 
+                            inner join legal_juicios j on d.id_juicios=j.id_juicios
+                            inner join legal_clientes c on j.id_clientes=c.id_clientes";
+	                $where="d.id_documentos_generados='$_id_documentos_generados'";
+	                $id="d.id_documentos_generados";
+	                
+	                
+	                
+	                $resultEdit = $juicios->getCondiciones($columnas, $tablas, $where, $id);
+	                
+	               
+	                
+	                
+	            }
+	            
+	            
+	            
+	            
 	            $this->view_Juridico("Avoco",array(
-	                ""=>""
+	                "resultEdit"=>$resultEdit
 	            ));
 	            
 	        }
@@ -151,6 +184,8 @@
 	    session_start();
 	    $juicios = new JuiciosModel();
 	    
+	    
+	    $_id_documentos_generados  = (isset($_POST['id_documentos_generados'])) ? $_POST['id_documentos_generados'] : null;
 	    $_id_juicios = (isset($_POST['id_juicios'])) ? $_POST['id_juicios'] : null;
 	    $_editor1 = (isset($_POST['editor1'])) ? $_POST['editor1'] : null;
 	    $_editor2 = (isset($_POST['editor2'])) ? $_POST['editor2'] : null;
@@ -160,9 +195,14 @@
 	    
 	    
 	    
+	    
+	    
 	    $id_usuarios = $_SESSION["id_usuarios"];
 	    date_default_timezone_set('America/Guayaquil');
 	    $fechaActual = date('Y-m-d');
+	    
+	    
+	    
 	    
 	    
 	    
@@ -201,6 +241,39 @@
 	    }*/
 	    
 	   
+	    if($_id_documentos_generados > 0){
+	        
+	        
+	        
+	        
+	        $colval_afi = "cuerpo_documentos_generados='$_editor1', oficio_uno_documentos_generados='$_editor2'";
+	        $tabla_afi = "legal_documentos_generados";
+	        $where_afi = "id_documentos_generados = '$_id_documentos_generados'";
+	        $resultado=$juicios->editBy($colval_afi, $tabla_afi, $where_afi);
+	        
+	        
+	        
+	        // actualizacion
+        if((int)$resultado > 0){
+            
+            $id = $_id_documentos_generados;
+            
+            echo json_encode(array('respuesta'=>$id,'mensaje'=>"Documento Actualizado Correctamente"));
+            exit();
+            
+           
+        }
+        else{
+            
+            echo json_encode(array('error'=>"Error Actualizando Documento"));
+            exit();
+        }
+        
+	        
+	        
+	    }else{
+	        
+	    
 	    $funcion = "ins_legal_documentos_generados";
 	    $parametros = "
                     '$_id_juicios',
@@ -228,6 +301,10 @@
 	        echo json_encode(array('respuesta'=>$id,'mensaje'=>"Documento Generado Correctamente"));
 	        exit();
 	    }
+	    
+	    
+	  }
+	    
 	    
 	    echo json_encode(array('error'=>"Revisar Datos Enviados"));
 	    
