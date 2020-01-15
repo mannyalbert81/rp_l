@@ -542,7 +542,7 @@ $(document).ready(function(){
 				
 
 				
-				swal({title:"",text:x.mensaje,icon:"info"})
+				swal({title:"",text:x.mensaje,icon:"success"})
 	    		.then((value) => {
 	    			
 	    			
