@@ -536,16 +536,47 @@ $(document).ready(function(){
 		
 		if(x.hasOwnProperty('respuesta')){
 			
-			swal({title:"",text:x.mensaje,icon:"success"})
-    		.then((value) => {
-    			
-    			
-    			let loteUrl = x.respuesta;
-    			let urlReporte = "index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados="+loteUrl;
-    			window.open(urlReporte,"_blank");    			
-    			$('#smartwizard').smartWizard("reset");
-    			window.location.href= 'index.php?controller=Avoco&action=index';
-    		});
+			
+			if(x.mensaje=='Documento Actualizado Correctamente'){
+				
+				
+
+				
+				swal({title:"",text:x.mensaje,icon:"info"})
+	    		.then((value) => {
+	    			
+	    			
+	    			let loteUrl = x.respuesta;
+	    			let urlReporte = "index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados="+loteUrl;
+	    			window.open(urlReporte,"_blank");    			
+	    			$('#smartwizard').smartWizard("reset");
+	    			window.location.href= 'index.php?controller=DocumentosGenerados&action=index5';
+	    		});
+				
+			}else{
+				
+
+				
+				swal({title:"",text:x.mensaje,icon:"success"})
+	    		.then((value) => {
+	    			
+	    			
+	    			let loteUrl = x.respuesta;
+	    			let urlReporte = "index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados="+loteUrl;
+	    			window.open(urlReporte,"_blank");    			
+	    			$('#smartwizard').smartWizard("reset");
+	    			window.location.reload();
+	    		});
+				
+				
+			}
+			
+			
+			
+			
+			
+			
+			
 			
 		}
 		

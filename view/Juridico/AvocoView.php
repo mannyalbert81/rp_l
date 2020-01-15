@@ -481,8 +481,8 @@
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
 	<script type="text/javascript" src="view/bootstrap/smartwizard/dist/js/jquery.smartWizard.min.js"></script>
-	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.89"></script>
-	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.73"></script>
+	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.90"></script>
+	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.74"></script>
   
   
     <script src="view/bootstrap/bower_components/ckeditor/ckeditor.js?0.1"></script>
