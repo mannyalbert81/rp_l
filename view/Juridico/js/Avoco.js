@@ -207,12 +207,13 @@ $(document).ready(function(){
      ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
      ` entidad de control, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
-     ` el impedimento para ejercer cargo público.- <b>CÚMPLASE Y OFÍCIESE.-</b></p>`+
+     ` el impedimento para ejercer cargo público.- <b>2.-</b> Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información`+
+     ` suficiente respecto del domicilio actual, del coactivado <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos`+
+     ` generales.- <b>CÚMPLASE Y OFÍCIESE.-</b></p>`+
 
 	
 	
 	// espacios en blanco para las firmas
-	`<p style="text-align:justify">&nbsp;</p>`+
 	`<p style="text-align:justify">&nbsp;</p>`+
 	`<p style="text-align:justify">&nbsp;</p>`+
 	

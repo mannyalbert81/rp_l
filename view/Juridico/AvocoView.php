@@ -275,7 +275,7 @@
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
 	<script type="text/javascript" src="view/bootstrap/smartwizard/dist/js/jquery.smartWizard.min.js"></script>
-	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.82"></script>
+	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.83"></script>
 	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.70"></script>
   
   
