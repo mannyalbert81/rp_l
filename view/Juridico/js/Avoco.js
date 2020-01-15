@@ -34,7 +34,7 @@ $(document).ready(function(){
 	var dia = f.getDate();
 	var hora = f.getHours();
 	var minutos = f.getMinutes();
-    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+    var meses = new Array ("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
     var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
     
     
@@ -163,8 +163,12 @@ $(document).ready(function(){
     
     
     // capturo la fecha actual en letras
-     fecha_actual = diasSemana[f.getDay()] + ", " + dia + " de " + meses[f.getMonth()] + " del " + f.getFullYear() + ", las " + hora + "H" + minutos;
-     fecha_razon = diasSemana[fecha.getDay()] + ", " + dia_razon + " de " + meses[fecha.getMonth()] + " del " + fecha.getFullYear();
+     //fecha_actual = diasSemana[f.getDay()] + ", " + dia + " de " + meses[f.getMonth()] + " del " + f.getFullYear() + ", las " + hora + "H" + minutos;
+     fecha_actual = dia + " de " + meses[f.getMonth()] + " del " + f.getFullYear() + ", las " + hora + "H" + minutos;
+     
+     //fecha_razon = diasSemana[fecha.getDay()] + ", " + dia_razon + " de " + meses[fecha.getMonth()] + " del " + fecha.getFullYear();
+     fecha_razon = dia_razon + " de " + meses[fecha.getMonth()] + " del " + fecha.getFullYear();
+     
      fecha_auto_pago_nueva = textoseparado[2] + " de " + meses[textoseparado[1]-1] + " del " + textoseparado[0];
      fecha_inicio_proceso_juicios_nueva  = textoseparado1[2] + " de " + meses[textoseparado1[1]-1] + " del " + textoseparado1[0];
    
