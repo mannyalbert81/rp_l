@@ -289,9 +289,9 @@
 	       $html.='<div style="position: fixed; top: -40px; left: 45px; right: 0px;">'.$logo.'</div>';
 	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:11.5pt; color:#000000; text-align: justify;">'.$cuerpo.'</div>';
 	       $html.='<div style="page-break-after:always;"></div>';
-	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:30px;">'.$oficio1.'</div>';
+	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:40px;">'.$oficio1.'</div>';
 	       $html.='<div style="page-break-after:always;"></div>';
-	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:30px;">'.$oficio2.'</div>';
+	       $html.='<div style="margin-left: 70px; margin-right: 70px; font-family: Arial; font-size:9.5pt; color:#000000; text-align: justify; margin-top:40px;">'.$oficio2.'</div>';
 	        
 	    }
 	    

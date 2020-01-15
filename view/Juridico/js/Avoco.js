@@ -287,7 +287,7 @@ $(document).ready(function(){
 	$('#editor2').val("");
 	
 	formato_1 = 
-	`<p style="text-align: left;">Oficio No. ${numero_juicios}<br>`+
+	`<p style="text-align: left;">Oficio No. 0000-JNC-PIC-2020-LGLC<br>`+
 	`D.M. de Quito, a ${fecha_razon}</p>`+
 	`<p style="text-align: left;">Señor</p>`+
 	
@@ -355,7 +355,7 @@ $(document).ready(function(){
 		$('#editor3').val("");
 		
 		formato_2 = 
-		`<p style="text-align: left;">Oficio No. ${numero_juicios}<br>`+
+		`<p style="text-align: left;">Oficio No. 0000-JNC-PIC-2020-LGLC<br>`+
 		`D.M. de Quito, a ${fecha_razon}</p>`+
 		`<p style="text-align: left;">Señor</p>`+
 		
