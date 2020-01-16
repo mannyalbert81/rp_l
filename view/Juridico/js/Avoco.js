@@ -227,7 +227,7 @@ $(document).ready(function(){
 	`<p style="text-align:justify">&nbsp;</p>`+
 	
 	`<p style="text-align:left">Abogado<br>`+
-	`Andrés Abuja Tintín<br>`+
+	`Andrés Albuja Tintín<br>`+
 	`<b>JEFE DE COACTIVA</b><br>`+
 	`<b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES - CNT EP.</b></p>`+
 	
