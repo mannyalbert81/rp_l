@@ -209,7 +209,7 @@ $(document).ready(function(){
      ` monto de <b>${monto_letras}</b>, para dicho efecto`+
      ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
      ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas; <b>b).-</b> Ofíciese al`+
-     ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
+     ` señor Director Ejecutivo de la Agencia Nacional de Transporte Terrestre, Tránsito y Seguridad Vial,`+
      ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
      ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
      ` <b>c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
@@ -324,7 +324,7 @@ $(document).ready(function(){
     ` monto de <b>${monto_letras}</b>, para dicho efecto`+
     ` remítase atento oficio a la Superintendencia de Bancos y a la Superintendencia de Economía Popular y Solidaria, para`+
     ` su cumplimiento inmediato, entidades que informarán a esta Jefatura sobre las retenciones realizadas;<b> b).-</b> Ofíciese al`+
-    ` señor Director Ejecutivo de la Agencia Nacional de Regulación del Transporte Terrestre, Tránsito y Seguridad Vial,`+
+    ` señor Director Ejecutivo de la Agencia Nacional de Transporte Terrestre, Tránsito y Seguridad Vial,`+
     ` a fin de que inscriba la prohibición de enajenar sobre los vehículos que tenga o llegare a obtener el coactivado <b>${nombre_clientes},`+
     ` con cédula de ciudadanía No. ${identificacion_clientes}</b> y dispongan a quien corresponda, que un plazo de ocho días, certifiquen sobre los vehículos registrados a su nombre.-`+
     ` <b> c).-</b> En atención a la disposición del artículo 9 de la Ley Orgánica de Servicio Público, referente a la inhabilidad por mora`+
