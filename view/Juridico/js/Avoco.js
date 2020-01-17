@@ -336,7 +336,7 @@ $(document).ready(function(){
     ` <b>2.-</b> Remítase atento oficio al Servicio de Rentas Internas (SRI), a fin que se retenga la devolución de valores concernientes al I.V.A., así como del impuesto a la renta, que hayan sido generados a favor del coactivado <b>${nombre_clientes},`+
     ` con cédula de ciudadanía No. ${identificacion_clientes}</b>.-`+
     
-    ` <b>3.-</b> Remítase atento oficio al Instituto De Seguridad Social a fin de emitir la historia laboral del coactivado <b>${nombre_clientes},`+
+    ` <b>3.-</b> Remítase atento oficio al Instituto Ecuatoriano de Seguridad Social a fin de que emita la historia laboral del coactivado <b>${nombre_clientes},`+
     ` con cédula de ciudadanía No. ${identificacion_clientes}</b>.-`+
    
     ` <b>4.-</b> Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información suficiente respecto del domicilio actual, del coactivado <b>${nombre_clientes},`+
