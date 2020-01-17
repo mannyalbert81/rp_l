@@ -197,7 +197,7 @@ $(document).ready(function(){
 	`<p style="text-align:justify">&nbsp;</p>`+
 
 	`<p style="text-align: justify;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES - CNT EP. - JEFATURA DE COACTIVA.-</b> Quito, ${fecha_actual}`+
-	` Vistos. - Avoco conocimiento en la calidad en que suscribo en conformidad con la acción de personal No. ${numero_juicios}`+
+	` Vistos. - Avoco conocimiento en la calidad en que suscribo en conformidad con la acción de personal No. GTH-NSP-10657-2019`+
 	 ` de ${fecha_inicio_proceso_juicios_nueva}. El presente proceso coactivo se tramitará de acuerdo a lo previsto en la Segunda Disposición Transitoria del`+
 	 ` Código Orgánico Administrativo (COA), que textualmente dice: <em><b>"SEGUNDA.-</b> Los procedimientos que se encuentran en trámite a la fecha de`+
 	 ` vigencia de este Código, continuarán sustanciándose hasta su conclusión conforme con la normativa vigente al momento de su inicio<b>"</b></em>.`+
