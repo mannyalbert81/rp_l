@@ -62,9 +62,6 @@
 	
 	public function ConsultaDocumentosGenerados(){
 	    
-	    
-	    
-	    
 	    session_start();
 	    
 	    

@@ -194,7 +194,7 @@ $(document).ready(function(){
 
 	
 	
-	`<p style="text-align:justify">&nbsp;</p>`+
+	//`<p style="text-align:justify">&nbsp;</p>`+
 
 	`<p style="text-align: justify;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES - CNT EP. - JEFATURA DE COACTIVA.-</b> Quito, ${fecha_actual}`+
 	` Vistos. - Avoco conocimiento en la calidad en que suscribo en conformidad con la acción de personal No. GTH-NSP-10657-2019`+
