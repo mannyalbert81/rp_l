@@ -966,6 +966,192 @@ class TesCuentasPagarController extends ControladorBase{
     	   	
 	}
 	
+	public function genXml(){
+	    
+	    $texto .='<?xml version="1.0" encoding="UTF-8"?>';
+	    $texto .= '<iva>';
+	    $texto .= '<TipoIDInformante>R</TipoIDInformante>';
+	    $texto .= '<IdInformante>'.'1791700376001'.'</IdInformante>';
+	    $texto .= '<razonSocial>'.'FONDO COMPLEMENTARIO PREVISIONAL CERRADO DE CESANTIA DE SERVIDORES Y TRABAJADORES PUBLICOS DE FUERZAS ARMADAS-CAPREMCI'.'</razonSocial>';
+	    $texto .= '<Anio>'.$anioDiario.'</Anio>';
+	    $texto .= '<Mes>'.$mesperiodofiscal.'</Mes>';
+	    $texto .= '<totalVentas>'.'0.00'.'</totalVentas>';
+	    $texto .= '<codigoOperativo>'.'IVA'.'</codigoOperativo>';
+	    
+	    $texto .= '<compras>';
+	    
+	    echo json_encode("Cabeza");
+	    
+	    
+	    
+	    foreach ($rsHistorial as $res){
+	        
+	        $texto .= '<detalleCompras>';
+	        
+	        $texto .= '<codSustento>'.'01'.'</codSustento>';
+	        $texto .= '<tpIdProv>'.$res->infocompretencion_tipoidentificacionsujetoretenido.'</tpIdProv>';
+	        $texto .= '<idProv>'.$res->infocompretencion_identificacionsujetoretenido.'</idProv>';
+	        $texto .= '<tipoComprobante>'.'19'.'</tipoComprobante>';
+	        if ( $res->infocompretencion_tipoidentificacionsujetoretenido == "01" || $res->infocompretencion_tipoidentificacionsujetoretenido == "02" || $res->infocompretencion_tipoidentificacionsujetoretenido == "03")
+	        {
+	            $texto .= '<parteRel>'.'NO'.'</parteRel>';
+	            
+	        }
+	        else
+	        {
+	            $texto .= '<parteRel>'.'SI'.'</parteRel>';
+	        }
+	        //$_establecimiento = ;
+	        $originalDate_fechaemision = $res->infocompretencion_fechaemision;
+	        $newDate_fechaemision = date("d/m/Y", strtotime($originalDate_fechaemision));
+	        $texto .= '<fechaRegistro>'.$newDate_fechaemision.'</fechaRegistro>';
+	        $texto .= '<establecimiento>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),1,3).'</establecimiento>';
+	        $texto .= '<puntoEmision>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),4,3).'</puntoEmision>';
+	        $texto .= '<secuencial>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),6,9).'</secuencial>';
+	        $originalDate_fechaemision = $res->infocompretencion_fechaemision;
+	        $newDate_fechaemision = date("d/m/Y", strtotime($originalDate_fechaemision));
+	        $texto .= '<fechaEmision>'.$newDate_fechaemision.'</fechaEmision>';
+	        $texto .= '<autorizacion>'.$res->infotributaria_claveacceso.'</autorizacion>';
+	        
+	        $where_detalle = "id_tri_retenciones = '$res->id_tri_retenciones' ";
+	        $rsDetalle = $Participes->getCondiciones($columnas_detalle, $tablas_detalle, $where_detalle, $id_detalle);
+	        foreach ($rsDetalle as $resDetalle){
+	            if ($resDetalle->impuesto_codigo == "1") //es renta
+	            {
+	                $_baseImpGrav =  $resDetalle->impuestos_baseimponible;
+	                
+	                $_codRetAir = $resDetalle->impuesto_codigoretencion;
+	                $_baseImpAir = $resDetalle->impuestos_baseimponible;
+	                $_porcentajeAir = $resDetalle->impuestos_porcentajeretener;
+	                $_valRetAir = $resDetalle->impuestos_valorretenido;
+	                
+	            }
+	            else // IVA
+	            {
+	                $_montoIva  = $resDetalle->impuestos_baseimponible;
+	                //$_valRetBien10 = 20;//$resDetalle->impuestos_valorretenido;
+	                switch ($resDetalle->impuestos_porcentajeretener) {
+	                    case "10.00":
+	                        $_valRetBien10 = $resDetalle->impuestos_valorretenido;
+	                        break;
+	                    case "20.00":
+	                        $_valRetServ20 = $resDetalle->impuestos_valorretenido;
+	                        break;
+	                    case "30.00":
+	                        $_valorRetBienes= $resDetalle->impuestos_valorretenido;
+	                        break;
+	                    case "50.00":
+	                        $_valRetServ50= $resDetalle->impuestos_valorretenido;
+	                        break;
+	                    case "70.00":
+	                        $_valorRetServicios= $resDetalle->impuestos_valorretenido;
+	                        break;
+	                    case "100.00":
+	                        $_valRetServ100= $resDetalle->impuestos_valorretenido;
+	                        break;
+	                }
+	            }
+	        }
+	        
+	        $texto .= '<baseNoGraIva>'.'0.00'.'</baseNoGraIva>';
+	        $texto .= '<baseImponible>'.'0.00'.'</baseImponible>';
+	        $texto .= '<baseImpGrav>'.$_baseImpGrav.'</baseImpGrav>';
+	        $texto .= '<baseImpExe>'.'0.00'.'</baseImpExe>';
+	        $texto .= '<montoIce>'.'0.00'.'</montoIce>';
+	        $texto .= '<montoIva>'.$_montoIva.'</montoIva>';
+	        
+	        $texto .= '<valRetBien10>'.$_valRetBien10.'</valRetBien10>';
+	        $texto .= '<valRetServ20>'.$_valRetServ20.'</valRetServ20>';
+	        $texto .= '<valorRetBienes>'.$_valorRetBienes.'</valorRetBienes>';
+	        $texto .= '<valRetServ50>'.$_valRetServ50.'</valRetServ50>';
+	        $texto .= '<valorRetServicios>'.$_valorRetServicios.'</valorRetServicios>';
+	        $texto .= '<valRetServ100>'.$_valRetServ100.'</valRetServ100>';
+	        $texto .= '<totbasesImpReemb>'.'0'.'</totbasesImpReemb>';
+	        
+	        $texto .= '<pagoExterior>';
+	        $texto .= '<pagoLocExt>'.'01'.'</pagoLocExt>';
+	        $texto .= '<paisEfecPago>'.'NA'.'</paisEfecPago>';
+	        $texto .= '<aplicConvDobTrib>'.'NA'.'</aplicConvDobTrib>';
+	        $texto .= '<pagExtSujRetNorLeg>'.'NA'.'</pagExtSujRetNorLeg>';
+	        
+	        $texto .= '</pagoExterior>';
+	        
+	        $texto .= '<formasDepago>';
+	        $texto .= '<formaPago>'.'20'.'</formaPago>';
+	        $texto .= '</formasDepago>';
+	        
+	        $texto .= '<air>';
+	        $texto .= '<detalleAir>';
+	        $texto .= '<codRetAir>'.$_codRetAir.'</codRetAir>';
+	        $texto .= '<baseImpAir>'.$_baseImpAir.'</baseImpAir>';
+	        $texto .= '<porcentajeAir>'.$_porcentajeAir.'</porcentajeAir>';
+	        $texto .= '<valRetAir>'.$_valRetAir.'</valRetAir>';
+	        
+	        $texto .= '</detalleAir>';
+	        $texto .= '</air>';
+	        /*
+	         <estabRetencion1>003</estabRetencion1>
+	         
+	         <ptoEmiRetencion1>002</ptoEmiRetencion1>
+	         
+	         <secRetencion1>0002948</secRetencion1>
+	         
+	         <autRetencion1>3008201907171170737000120030020000029480000000110</autRetencion1>
+	         
+	         <fechaEmiRet1>30/08/2019</fechaEmiRet1>
+	         */
+	        
+	        $texto .= '</detalleCompras>';
+	        
+	        
+	    }
+	    
+	    
+	    $texto .= '</compras>';
+	    
+	    
+	    
+	    $texto .= '</iva>';
+	    
+	    
+	    $nombre_archivo = "ATS-".$mesperiodofiscal.$anioDiario.".xml";
+	    
+	    $ubicacionServer = $_SERVER['DOCUMENT_ROOT']."\\rp_c\\DOCUMENTOS_GENERADOS\\ATS\\";
+	    $ubicacion = $ubicacionServer.$nombre_archivo;
+	    
+	    
+	    $textoXML = mb_convert_encoding($texto, "UTF-8");
+	    
+	    // Grabamos el XML en el servidor como un fichero plano, para
+	    // poder ser leido por otra aplicación.
+	    $gestor = fopen($ubicacionServer.$nombre_archivo, 'w');
+	    fwrite($gestor, $textoXML);
+	    fclose($gestor);
+	    
+	    
+	    
+	    header("Content-disposition: attachment; filename=$nombre_archivo");
+	    header("Content-type: MIME");
+	    ob_clean();
+	    flush();
+	    // Read the file
+	    //echo $ubicacion;
+	    //print_r($_POST);
+	    //echo  "******llego--",$_tipo_archivo_recaudaciones,"***" ;
+	    //echo "parametro id ---",$_id_archivo_recaudaciones,"**";
+	    readfile($ubicacion);
+	    exit;
+	    
+	    
+	    
+	    
+	}
+	
+	public function pRetenciones(){
+	    
+	    
+	}
+	
 	
 }
 ?>
