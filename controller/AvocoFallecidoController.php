@@ -63,7 +63,7 @@
 	        else
 	        {
 	            $this->view("Error",array(
-	                "resultado"=>"No tiene Permisos de Acceso."
+	                "resultado"=>"No tiene Permisos de Acceso"
 	                
 	            ));
 	            
@@ -179,7 +179,7 @@
 	
 	
 	
-	public function InsertAvoco(){
+	public function InsertAvocoFallecido(){
 	    
 	    session_start();
 	    $juicios = new JuiciosModel();
