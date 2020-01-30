@@ -1,6 +1,6 @@
 	<?php
 
-	class AvocoController extends ControladorBase{
+	class AvocoFallecidoController extends ControladorBase{
 	public function __construct() {
 		parent::__construct();
 		
@@ -18,7 +18,7 @@
 	        
 	        $juicios = new LegalDocumentosGeneradosModel();
 	        $controladores = new ControladoresModel();
-	        $nombre_controladores = "Avoco";
+	        $nombre_controladores = "AvocoFallecido";
 	        $id_rol= $_SESSION['id_rol'];
 	        $resultPer = $controladores->getPermisosVer("controladores.nombre_controladores = '$nombre_controladores' AND permisos_rol.id_rol = '$id_rol' " );
 	        
@@ -55,7 +55,7 @@
 	            
 	            
 	            
-	            $this->view_Juridico("Avoco",array(
+	            $this->view_Juridico("AvocoFallecido",array(
 	                "resultEdit"=>$resultEdit
 	            ));
 	            
@@ -63,7 +63,7 @@
 	        else
 	        {
 	            $this->view("Error",array(
-	                "resultado"=>"No tiene Permisos de Acceso."
+	                "resultado"=>"No tiene Permisos de Acceso"
 	                
 	            ));
 	            
@@ -179,7 +179,7 @@
 	
 	
 	
-	public function InsertAvoco(){
+	public function InsertAvocoFallecido(){
 	    
 	    session_start();
 	    $juicios = new JuiciosModel();

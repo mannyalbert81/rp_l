@@ -7,6 +7,7 @@
  CKEDITOR.editorConfig = function( config ) {
 	 
 	 config.extraPlugins = 'justify';
+	 //config.extraPlugins = 'save-to-pdf';
 	config.toolbarGroups = [
 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
     { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },

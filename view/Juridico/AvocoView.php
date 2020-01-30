@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,14 +75,207 @@
         
         
         <section class="content">
-    <form id="frm_avoco" action="<?php echo $helper->url("Avoco","InsertAvoco"); ?>" method="post" enctype="multipart/form-data"  class="form form-horizontal">
+          <form id="frm_avoco" action="<?php echo $helper->url("Avoco","InsertAvoco"); ?>" method="post" enctype="multipart/form-data"  class="form form-horizontal">
+  
+        <?php if(!empty($resultEdit)){ foreach($resultEdit as $resEdit) {?>
+        
+        
     
     	<div id="smartwizard">
             <ul>
                 <li><a href="#step-1">Datos Cliente<br /><small> </small></a></li>
                 <li><a href="#step-2">Revisión Providencia<br /><small></small></a></li>
-                <li><a href="#step-3">Revisión Primer Oficio<br /><small></small></a></li>
-                <li><a href="#step-4">Revisión Segundo Oficio<br /><small></small></a></li>
+                <li><a href="#step-3">Revisión Oficio<br /><small></small></a></li>
+                <!-- <li><a href="#step-4">Revisión Segundo Oficio<br /><small></small></a></li> -->
+            </ul>
+         
+            <div>
+                <div id="step-1" class="">
+                
+                	<div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"></h3>
+                          <div class="box-tools pull-right"> </div>
+                        </div>
+                    
+                    <div class="box-body">
+                    	
+                    <div class="row">
+        	    	  <div class="col-lg-6 col-md-6 col-xs-12">
+                		
+                		 <div class="form-group "> 
+                    			 <div class="form-group-sm">
+                    				<label for="numero_juicios" class="col-sm-4 control-label" >N° Juicio:</label>
+                    				<div class="col-sm-4">
+                    				  <input type="text" class="form-control" id="numero_juicios" name="numero_juicios"  value="<?php echo $resEdit->numero_juicios; ?>" readonly>
+                                      <input type="hidden" id="id_juicios" name="id_juicios" value="<?php echo $resEdit->id_juicios; ?>" readonly>
+                                      <input type="hidden" id="id_documentos_generados" name="id_documentos_generados" value="<?php echo $resEdit->id_documentos_generados; ?>" readonly>
+                                    </div>
+                    			 </div>        			 
+                		  </div>
+                		
+                		
+                			<div class="form-group "> 
+                    			 <div class="form-group-sm">
+                    				<label for="identificacion_clientes" class="col-sm-4 control-label" >Identificación:</label>
+                    				<div class="col-sm-4">
+                    				  <input type="text" class="form-control" id="identificacion_clientes" name="identificacion_clientes"  value="<?php echo $resEdit->identificacion_clientes; ?>" readonly>
+                                      <input type="hidden" id="id_clientes" name="id_clientes" value="<?php echo $resEdit->id_clientes; ?>" readonly>
+                    				</div>
+                    			 </div>        			 
+                			</div>
+                         
+                           <div class="form-group "> 
+                    			 <div class="form-group-sm">
+                    				<label for="nombre_clientes" class="col-sm-4 control-label" >Apellidos y Nombres:</label>
+                    				<div class="col-sm-6">
+                    				  <input type="text" class="form-control" id="nombre_clientes" name="nombre_clientes"  value="<?php echo $resEdit->nombre_clientes; ?>" readonly>
+                                    </div>
+                    			 </div>        			 
+                		  </div>
+                      
+                      </div>
+                            
+                            
+                            
+                            
+                                	
+                		<div class="col-lg-6 col-md-6 col-xs-12">
+                		   <div class="form-group "> 
+                    			 <div class="form-group-sm">
+                    				<label for="numero_titulo_credito_juicios" class="col-sm-4 control-label" >N° Titulo Crédito:</label>
+                    				<div class="col-sm-4">
+                    				   <input type="text" class="form-control" id="numero_titulo_credito_juicios" name="numero_titulo_credito_juicios"  value="<?php echo $resEdit->numero_titulo_credito_juicios; ?>" readonly>
+                                    </div>
+                    			 </div>        			 
+                		  </div>
+                         
+                         <div class="form-group "> 
+                    			 <div class="form-group-sm">
+                    				<label for="fecha_inicio_proceso_juicios" class="col-sm-4 control-label" > Fecha Inicio Proceso:</label>
+                    				<div class="col-sm-4">
+                    				  <input type="text" class="form-control" id="fecha_inicio_proceso_juicios" name="fecha_inicio_proceso_juicios" value="<?php echo $resEdit->fecha_inicio_proceso_juicios; ?>" readonly>
+                    				</div>
+                    			 </div>        			 
+                			</div> 
+                         
+                         
+                			<div class="form-group "> 
+                    			 <div class="form-group-sm">
+                    				<label for="fecha_auto_pago_juicios" class="col-sm-4 control-label" > Fecha Auto Pago:</label>
+                    				<div class="col-sm-4">
+                    				  <input type="text" class="form-control" id="fecha_auto_pago_juicios" name="fecha_auto_pago_juicios" value="<?php echo $resEdit->fecha_auto_pago_juicios; ?>" readonly>
+                    				</div>
+                    			 </div>        			 
+                			</div> 
+                    		
+                			
+                			<div class="form-group "> 
+                    			 <div class="form-group-sm">
+                    				<label for="valor_retencion_fondos" class="col-sm-4 control-label" > Valor Retención:</label>
+                    				<div class="col-sm-4">
+                    				  <input type="text" class="form-control" id="valor_retencion_fondos" name="valor_retencion_fondos" value="<?php echo $resEdit->valor_retencion_fondos; ?>" readonly>
+                    				</div>
+                    			 </div>        			 
+                			</div> 
+                		</div>
+        		
+        		
+        		
+        			</div>
+            	</div>
+            </div>
+                	
+                	
+                </div>
+                <div id="step-2" class="">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"></h3>
+                          <div class="box-tools pull-right"> </div>
+                        </div>
+                    
+                    	<div class="box-body">
+                          <div class="row">
+            	
+            	        	<div class="col-lg-12 col-md-12 col-xs-12">
+            	            <div class="box-body pad">
+            	                    <textarea id="editor1" name="editor1" rows="15" cols="80"><?php echo $resEdit->cuerpo_documentos_generados; ?></textarea>
+            	                    <div id="mensaje_editor1" class="errores"></div>
+            	            </div>
+            	       		</div>
+	        
+               			  </div>
+               			</div>
+               		</div>
+                </div>
+                
+                  <div id="step-3" class="">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"></h3>
+                          <div class="box-tools pull-right"> </div>
+                        </div>
+                    
+                    	<div class="box-body">
+                          <div class="row">
+            	
+            	        	<div class="col-lg-12 col-md-12 col-xs-12">
+            	            <div class="box-body pad">
+            	                    <textarea id="editor2" name="editor2" rows="15" cols="80"><?php echo $resEdit->oficio_uno_documentos_generados; ?></textarea>
+            	                    <div id="mensaje_editor2" class="errores"></div>
+            	            </div>
+            	       		</div>
+	        
+               			  </div>
+               			</div>
+               		</div>
+                </div>
+                
+                
+                <!-- 
+                  <div id="step-4" class="">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"></h3>
+                          <div class="box-tools pull-right"> </div>
+                        </div>
+                    
+                    	<div class="box-body">
+                          <div class="row">
+            	
+            	        	<div class="col-lg-12 col-md-12 col-xs-12">
+            	            <div class="box-body pad">
+            	                    <textarea id="editor3" name="editor3" rows="15" cols="80"></textarea>
+            	                    <div id="mensaje_editor3" class="errores"></div>
+            	            </div>
+            	       		</div>
+	        
+               			  </div>
+               			</div>
+               		</div>
+                </div>
+                
+                 -->
+                
+                
+            </div>
+        </div>
+    		
+       
+        
+        
+        
+        <?php }}else{?>
+        
+        
+    
+    	<div id="smartwizard">
+            <ul>
+                <li><a href="#step-1">Datos Cliente<br /><small> </small></a></li>
+                <li><a href="#step-2">Revisión Providencia<br /><small></small></a></li>
+                <li><a href="#step-3">Revisión Oficio<br /><small></small></a></li>
+                <!-- <li><a href="#step-4">Revisión Segundo Oficio<br /><small></small></a></li> -->
             </ul>
          
             <div>
@@ -101,6 +298,8 @@
                     				<div class="col-sm-4">
                     				  <input type="text" class="form-control" id="numero_juicios" name="numero_juicios"  value="">
                                       <input type="hidden" id="id_juicios" name="id_juicios" value="0">
+                                      <input type="hidden" id="id_documentos_generados" name="id_documentos_generados" value="0">
+                                  
                                     </div>
                     			 </div>        			 
                 		  </div>
@@ -222,6 +421,9 @@
                			</div>
                		</div>
                 </div>
+                
+                
+                <!-- 
                   <div id="step-4" class="">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -244,10 +446,24 @@
                		</div>
                 </div>
                 
+                 -->
+                
+                
             </div>
         </div>
     		
-    </form>
+   
+    
+    
+    
+    <?php } ?>
+    
+      </form>
+   
+    
+    
+    
+    
     </section>
     
         
@@ -265,12 +481,10 @@
     <script src="view/bootstrap/bower_components/jquery-ui-1.12.1/jquery-ui.js"></script> 
     <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
 	<script type="text/javascript" src="view/bootstrap/smartwizard/dist/js/jquery.smartWizard.min.js"></script>
-	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.70"></script>
-	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.67"></script>
-  
-  
-    <script src="view/bootstrap/bower_components/ckeditor/ckeditor.js"></script>
-	<script src="view/bootstrap/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+	<script type="text/javascript" src="view/Juridico/js/Avoco.js?0.92"></script>
+	<script type="text/javascript" src="view/Juridico/js/wizardAvoco.js?0.75"></script>
+    <script src="view/bootstrap/bower_components/ckeditor/ckeditor.js?0.1"></script>
+    <script src="view/bootstrap/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
   
   
   

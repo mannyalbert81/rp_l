@@ -58,11 +58,11 @@ $(document).ready(function(){
 			return validaPaso2();
 			
 		}
-      if(stepNumber==2){
+      /*if(stepNumber==2){
 			
 			return validaPaso3();
 			
-		}
+		}*/
     });
 	
 	
@@ -81,6 +81,8 @@ $(document).ready(function(){
     
    function validaPaso1(){
 	   
+	   
+	   let id_documentos_generados = $("#id_documentos_generados").val();
 	   let id_juicios = $("#id_juicios").val();
 	   let identificacion_clientes = $("#identificacion_clientes").val();
 	   let nombre_clientes = $("#nombre_clientes").val();
@@ -90,7 +92,7 @@ $(document).ready(function(){
 	   let valor_retencion_fondos = $("#valor_retencion_fondos").val();
 	   let editor1 = $("#editor1").val();
 	   let editor2 = $("#editor2").val();
-	   let editor3 = $("#editor3").val();
+	   //let editor3 = $("#editor3").val();
 		  
 	   
 	   
@@ -142,13 +144,13 @@ $(document).ready(function(){
 			return false;
 	   }
 	  
-		$("#aplicar").attr({disabled:true});
+		$("#aplicar").attr({disabled:false});
 		
 		   
 	   return true;
    }
    
-   
+   /*
    function validaPaso3(){
 	   
 		
@@ -164,7 +166,7 @@ $(document).ready(function(){
 	   
 	  
 	   return true;
-   }
+   }*/
 	
 })
 

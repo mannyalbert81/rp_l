@@ -62,9 +62,6 @@
 	
 	public function ConsultaDocumentosGenerados(){
 	    
-	    
-	    
-	    
 	    session_start();
 	    
 	    
@@ -87,6 +84,7 @@
                       usuarios.nombre_usuarios, 
                       usuarios.apellidos_usuarios, 
                       legal_documentos_generados.fecha_documentos_generados, 
+                      TO_CHAR(legal_documentos_generados.creado,'YYYY-MM-DD HH:MI:SS') as \"creado\",
                       legal_documentos_generados.cuerpo_documentos_generados, 
                       legal_documentos_generados.firma_secretario_documentos_generados, 
                       legal_documentos_generados.firma_cnt_documentos_generados, 
@@ -139,7 +137,7 @@
 	        
 	        $limit = " LIMIT   '$per_page' OFFSET '$offset'";
 	        
-	        $resultSet=$documentos_generados->getCondicionesPag($columnas, $tablas, $where_to, $id, $limit);
+	        $resultSet=$documentos_generados->getCondicionesPagDesc($columnas, $tablas, $where_to, $id, $limit);
 	        $total_pages = ceil($cantidadResult/$per_page);
 	        
 	        if($cantidadResult > 0)
@@ -154,9 +152,8 @@
 	            $html.= "<table id='tabla_bancos' class='tablesorter table table-striped table-bordered dt-responsive nowrap dataTables-example'>";
 	            $html.= "<thead>";
 	            $html.= "<tr>";
-	            $html.='<th style="text-align: left;  font-size: 12px;"></th>';
+	            $html.='<th style="text-align: center;  font-size: 12px;">Acciones</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">#</th>';
-	      
 	            $html.='<th style="text-align: left;  font-size: 12px;">Identificación</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">Nombre</th>';
 	            $html.='<th style="text-align: left;  font-size: 12px;">N° Juicio</th>';
@@ -180,7 +177,8 @@
 	                $i++;
 	                $html.='<tr>';
 	               
-	                $html.='<td style="font-size: 18px;"><span class="pull-right"><a href="index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados='.$res->id_documentos_generados.'" target="_blank" class="btn btn-info" style="font-size:65%;"><i class="glyphicon glyphicon-print"></i></a></span></td>';
+	                $html.='<td style="font-size: 14px;"><span class="pull-left"><a href="index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados='.$res->id_documentos_generados.'" target="_blank" class="btn btn-info" style="font-size:65%;" title="Imprimir"><i class="glyphicon glyphicon-print"></i></a></span>
+                                                         <span class="pull-right"><a href="index.php?controller=Avoco&action=index&id_documentos_generados='.$res->id_documentos_generados.'" class="btn btn-warning" style="font-size:65%;" title="Editar"><i class="glyphicon glyphicon-edit"></i></a></span></td>';
 	                
 	                $html.='<td style="font-size: 11px;">'.$i.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->identificacion_clientes.'</td>';
@@ -189,7 +187,7 @@
 	                $html.='<td style="font-size: 11px;">'.$res->numero_titulo_credito_juicios.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->cuantia_inicial_juicios.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_tipo_documentos_generados.'</td>';
-	                $html.='<td style="font-size: 11px;">'.$res->fecha_documentos_generados.'</td>';
+	                $html.='<td style="font-size: 11px;">'.$res->creado.'</td>';
 	                
 	                
 	                
