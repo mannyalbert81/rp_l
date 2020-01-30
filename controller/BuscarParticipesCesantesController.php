@@ -387,7 +387,31 @@ class BuscarParticipesCesantesController extends ControladorBase{
 		                       		}
 		                       	
 		                       }
+		                       if ($estado_del_credito == 1) //mora
+		                       {
 		                       
+		                       	if ($_id_tipo_creditos == 3)  //hipotecarios
+		                       	{
+		                       		$_saldo_capital = $participes->devuelve_saldo_capital($_id_creditos) ;
+		                       		$_tasa_interes = $this->devuelve_tasa_credito($_id_creditos);
+		                       		$_dias = date("d", strtotime($fecha_prestaciones));
+		                       		//	$fecha_cuota_actual =
+		                       		$_interes_ordinario = $participes->devuelve_interes_ord_x_capital($_dias, $_saldo_capital, $_tasa_interes);
+		                       
+		                       	}
+		                       	else
+		                       	{
+		                       		//$_fecha_ultimo_pago = $this->Buscar_fecha_Ultimo_Pago($_id_creditos);
+		                       		$_saldo_capital = $participes->devuelve_saldo_capital($_id_creditos) ;
+		                       		$_tasa_interes = $this->devuelve_tasa_credito($_id_creditos);
+		                       		$_dias = date("d", strtotime($fecha_prestaciones));
+		                       		//	$fecha_cuota_actual =
+		                       		$_interes_ordinario = $participes->devuelve_interes_ord_x_capital($_dias, $_saldo_capital, $_tasa_interes);
+		                       		$_seguro_desgravamen = $participes->devuelve_seguro_desgravamen($_saldo_capital);
+		                       
+		                       	}
+		                       
+		                       }
 		                       ////DETERMINAR ESTADO DEL CREDITO
 		                       
 		                       $html.='';
