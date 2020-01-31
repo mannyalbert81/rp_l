@@ -174,12 +174,27 @@
 	            foreach ($resultSet as $res)
 	            {
 	                
+	                
+	                $_id_tipo_documentos_generados = $res->id_tipo_documentos_generados;
+	                
+	                
 	                $i++;
 	                $html.='<tr>';
 	               
-	                $html.='<td style="font-size: 14px;"><span class="pull-left"><a href="index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados='.$res->id_documentos_generados.'" target="_blank" class="btn btn-info" style="font-size:65%;" title="Imprimir"><i class="glyphicon glyphicon-print"></i></a></span>
-                                                         <span class="pull-right"><a href="index.php?controller=Avoco&action=index&id_documentos_generados='.$res->id_documentos_generados.'" class="btn btn-warning" style="font-size:65%;" title="Editar"><i class="glyphicon glyphicon-edit"></i></a></span></td>';
 	                
+	                if($_id_tipo_documentos_generados==1){
+	                    //AVOCOS
+	                    $html.='<td style="font-size: 14px;"><span class="pull-left"><a href="index.php?controller=Avoco&action=Reporte_Documentos_Generados&id_documentos_generados='.$res->id_documentos_generados.'" target="_blank" class="btn btn-info" style="font-size:65%;" title="Imprimir"><i class="glyphicon glyphicon-print"></i></a></span>
+                                                         <span class="pull-right"><a href="index.php?controller=Avoco&action=index&id_documentos_generados='.$res->id_documentos_generados.'" class="btn btn-warning" style="font-size:65%;" title="Editar"><i class="glyphicon glyphicon-edit"></i></a></span></td>';
+	                    
+	                }else if($_id_tipo_documentos_generados==2){
+	                    //ORDEN DE PAGO INMEDIATO
+	                    $html.='<td style="font-size: 14px;"><span class="pull-left"><a href="index.php?controller=AvocoOrdenPago&action=Reporte_Documentos_Generados&id_documentos_generados='.$res->id_documentos_generados.'" target="_blank" class="btn btn-info" style="font-size:65%;" title="Imprimir"><i class="glyphicon glyphicon-print"></i></a></span>
+                                                         <span class="pull-right"><a href="index.php?controller=AvocoOrdenPago&action=index&id_documentos_generados='.$res->id_documentos_generados.'" class="btn btn-warning" style="font-size:65%;" title="Editar"><i class="glyphicon glyphicon-edit"></i></a></span></td>';
+	                    
+	                }
+	                
+	               
 	                $html.='<td style="font-size: 11px;">'.$i.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->identificacion_clientes.'</td>';
 	                $html.='<td style="font-size: 11px;">'.$res->nombre_clientes.'</td>';
