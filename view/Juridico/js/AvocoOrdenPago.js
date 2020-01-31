@@ -337,7 +337,7 @@ $(document).ready(function(){
 	
 	formato_1 = 
 	`<p style="text-align: left;">Oficio No. 0000-JC-PIC-2020-LGLC<br>`+
-	`D.M. de Quito, a 03 de febrero de 2020</p>`+
+	`D.M. de Quito, a 04 de febrero de 2020</p>`+
 	`<p style="text-align: left;">Señor</p>`+
 	
 	`<p style="text-align:left"><b>SUPERINTENDENTE DE BANCOS<br>`+
