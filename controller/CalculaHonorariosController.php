@@ -62,10 +62,13 @@ class CalculaHonorariosController extends ControladorBase{
 		$_numero_titulo_credito_juicios = "";
 		$_cuantia_inicial_juicios = 0;
 		$_id_juicios = 0;
+		$_fecha_vencimiento_juicios = "";
+		$_fecha_calculo = "";
+		$_creado = "";
 		//validar los campos recibidos para generar diario
 		$arrayTabla = array();
 		$cantidad = 0;
-		$columnas = ' legal_clientes.id_clientes, 
+		$columnas = " legal_clientes.id_clientes, 
 					  legal_juicios.id_juicios, 
 					  legal_clientes.identificacion_clientes, 
 					  legal_clientes.nombre_clientes, 
@@ -84,7 +87,10 @@ class CalculaHonorariosController extends ControladorBase{
 					  legal_juicios.observaciones_juicios, 
 					  legal_estado_procesal.nombre_estado_procesal, 
 					  usuarios.nombre_usuarios, 
-					  usuarios.usuario_usuarios';
+					  usuarios.usuario_usuarios,
+					  legal_juicios.fecha_vencimiento_juicios,
+					  TO_CHAR(current_date + interval   '1 year', 'YYYY-MM-DD')  AS fecha_calculo,
+						legal_juicios.creado";
 		$tablas = "public.legal_juicios, 
 					  public.legal_clientes, 
 					  public.legal_etapa_procesal, 
@@ -109,6 +115,9 @@ class CalculaHonorariosController extends ControladorBase{
 				$_numero_titulo_credito_juicios = $res->numero_titulo_credito_juicios;
 				$_cuantia_inicial_juicios = $res->cuantia_inicial_juicios;
 				$_id_juicios = $res->id_juicios;
+				$_fecha_vencimiento_juicios = $res->fecha_vencimiento_juicios;
+				$_fecha_calculo = $res->fecha_calculo;
+				$_creado = $res->creado;
 			}
 			
 			$html.='<div class="row">';
@@ -145,6 +154,65 @@ class CalculaHonorariosController extends ControladorBase{
 			$html.='</div>';
 			
 			$html.='</div>';
+			
+			$html.='<br>';
+			
+			
+			$html.='<div class="row">';
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="form-group">';
+			$html.='<label for="meses_mora" class="control-label">INGRESO DE INFORMACIÓN:</label>';
+			
+			
+			//$_fecha_calculo->format('Y-m-d');
+			$html.='</div>';
+			$html.='</div>';
+			$html.='</div>';
+			$html.='<div class="row">';
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="input-group input-group-lg">';
+			$html.='<label for="id_juicios" class="control-label">Fecha de Cálculo Coactiva:</label>';
+			$html.='<input type="date" id="fecha_calculo_coactiva" name="fecha_calculo_coactiva"  value="'.$_fecha_calculo.'" class="form-control">';
+			$html.='</div>';
+			$html.='</div>';
+				
+				
+				
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="form-group">';
+			$html.='<label for="tasa_interes" class="control-label">Tasa de Interés Legal:</label>';
+			$html.='<div class="input-group input-group-lg">';
+			$html.='<input readonly type="text" id="tasa_interes" name="tasa_interes"  value="8.02" class="form-control">';
+			$html.='<span class="input-group-addon">%</span>';
+			$html.='</div>';
+			
+			
+			$html.='</div>';
+			$html.='</div>';
+			
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="form-group">';
+			$html.='<label for="tasa_mora" class="control-label">Tasa de interés por Mora:</label>';
+			$html.='<div class="input-group input-group-lg">';
+			$_tasa_mora = 8.02*1.5;
+			
+			$html.='<input readonly 	type="text" id="tasa_mora" name="tasa_mora"  value="'.$_tasa_mora.'" class="form-control">';
+			$html.='<span class="input-group-addon">%</span>';
+			$html.='</div>';
+			
+			$html.='</div>';
+			$html.='</div>';
+			
+			
+			$html.='<div class="col-md-3 col-lg-3 col-xs-12">';
+			$html.='<div class="input-group input-group-lg">';
+			$html.='<label for="tasa_mora" class="control-label">Fecha Vencimiento:</label>';
+			$html.='<input type="date" id="fecha_vencimiento" name="fecha_vencimiento"  value="'.$_fecha_vencimiento_juicios.'" class="form-control">';
+			
+			$html.='</div>';
+			$html.='</div>';
+			$html.='</div>';
+				
 			
 			
 			
@@ -287,7 +355,7 @@ class CalculaHonorariosController extends ControladorBase{
 					$_interes_porcentaje_tabla_honorarios = $res->porcentaje;
 					$_minimo_tabla_honorarios = $res->minimo;
 					$_calculo_porcentaje_exedente = round($_variable_honorarios_secretario * ($_interes_porcentaje_tabla_honorarios/100),2);
-					$_valor_aplicar = $_minimo_tabla_honorarios + $_calculo_porcentaje_exedente + 30; 
+					$_valor_aplicar = round($_minimo_tabla_honorarios + $_calculo_porcentaje_exedente, 0);  
 					
 				}
 				else 
@@ -298,13 +366,13 @@ class CalculaHonorariosController extends ControladorBase{
 					$_exedente_tabla_honorarios = $_variable_honorarios_secretario - $_valor_min_recuperado;
 					$_minimo_tabla_honorarios = $res->minimo;
 					$_calculo_porcentaje_exedente = round($_exedente_tabla_honorarios * ($_interes_porcentaje_tabla_honorarios/100),2);
-					$_valor_aplicar = $_minimo_tabla_honorarios + $_calculo_porcentaje_exedente + 30;
+					$_valor_aplicar = round($_minimo_tabla_honorarios + $_calculo_porcentaje_exedente, 0, PHP_ROUND_HALF_UP);
 							
 				}
 				
 				
 				$_iva_factura = round($_valor_aplicar * 12 / 100 , 2);
-				$_valor_retencion_fondos =round( $_cuantia_inicial_juicios + $_valor_aplicar + $_interes_mora + $_iva_factura , 2);
+				$_valor_retencion_fondos =round( $_cuantia_inicial_juicios + $_valor_aplicar + $_interes_mora + $_iva_factura , 0, PHP_ROUND_HALF_UP);
 			}
 		
 		}

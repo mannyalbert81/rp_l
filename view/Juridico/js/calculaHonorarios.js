@@ -2,8 +2,8 @@ $(document).ready(function(){
 	
 	let tasa_interes = $("#tasa_interes");
 	let tasa_mora = $("#tasa_mora");
-	let _mora = tasa_interes.val() * 1.5;
-	$("#tasa_mora").val(_mora) ;
+	//let _mora = tasa_interes.val() * 1.5;
+	//$("#tasa_mora").val(_mora) ;
 	
 	
 	$('#div_ingreso_informacion').fadeOut()
@@ -184,6 +184,7 @@ $("#btnGuardar").on("click",function(event){
 			
 			$('#div_detalle_calculo').fadeOut();
 			$('#div_detalle_calculo_boton').fadeOut();
+			location.reload(true);
 			
 		 //console.log(JSON.stringify(x));
 		// console.log(x);
