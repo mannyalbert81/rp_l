@@ -190,9 +190,8 @@ class TesCuentasPagarController extends ControladorBase{
 	        $_id_frecuencia = 1; //cambiara si en la tabla frecuencia lote cambia 
 	        
 	        $funcion = "tes_genera_lote";
-	        $parametros = "'$_nombre_lote','$_descripcion_lote', $_id_frecuencia , $_id_usuarios";
-	        $queryFuncion  = $lote->getconsultaPG($funcion, $parametros);
-	        
+	        $parametros = "'$_nombre_lote','$_descripcion_lote', $_id_frecuencia , $_id_usuarios";	        
+	        $queryFuncion  = $lote->getconsultaPG($funcion, $parametros);	        
 	        $resultado = $lote->llamarconsultaPG($queryFuncion);
 	        
 	        $pgError = pg_last_error();
@@ -966,164 +965,183 @@ class TesCuentasPagarController extends ControladorBase{
     	   	
 	}
 	
-	public function genXml(){
+	/***
+	 * @return boolean 
+	 * @desc met que permite la generacion xml
+	 * @param integer $_id_lote
+	 */
+	public function genXmlRetencion($_id_lote=null){
+	    
+	    $_id_lote = 141;
+	    $respuesta = null;
+	    	    
+	    $cuentasPagar  = new CuentasPagarModel();
+	    /** buscar los datos de la retencion **/
+	    
+	    //impuestos de tipo retencion
+	    $col1  = " aa.id_impuestos,aa.base_cuentas_pagar_impuestos,aa.valor_base_cuentas_pagar_impuestos,aa.valor_cuentas_pagar_impuestos,
+               bb.codigo_impuestos, bb.codretencion_impuestos, bb.codigo_impuestos,bb.porcentaje_impuestos,bb.tipo_impuestos";
+	    $tab1  = " tes_cuentas_pagar_impuestos aa
+	           INNER JOIN tes_impuestos bb ON bb.id_impuestos = aa.id_impuestos";
+	    $whe1  = " 1 = 1
+	           AND UPPER(bb.tipo_impuestos) in ('RETIVA','RET')
+               AND aa.id_lote = $_id_lote";
+	    $id1   = " aa.creado";
+	    $rsConsulta1   = $cuentasPagar->getCondiciones($col1, $tab1, $whe1, $id1); //array de impuestos
+	    
+	    //datos de proveedor para el comprobante 
+	    $col2  = " aa.id_cuentas_pagar,  aa.numero_cuentas_pagar, aa.id_tipo_documento, aa.descripcion_cuentas_pagar, aa.fecha_cuentas_pagar,
+                aa.numero_documento_cuentas_pagar,aa.compras_cuentas_pagar, bb.id_proveedores, bb.identificacion_proveedores, bb.nombre_proveedores,
+                bb.razon_social_proveedores,bb.tipo_identificacion_proveedores";
+	    $tab2  = " tes_cuentas_pagar aa
+	           INNER JOIN proveedores bb ON bb.id_proveedores = aa.id_proveedor";
+	    $whe2  = " 1 = 1
+               AND aa.id_lote = $_id_lote";
+	    $id2   = " aa.creado";
+	    $rsConsulta2   = $cuentasPagar->getCondiciones($col2, $tab2, $whe2, $id2); //array de proveedor
+	    
+	    //datos de la empresa
+	    $col3  = " id_entidades, ruc_entidades, nombre_entidades, telefono_entidades, direccion_entidades, ciudad_entidades, razon_social_entidades";
+	    $tab3  = " entidades";
+	    $whe3  = " 1 = 1
+               AND nombre_entidades = 'LIVENTSIVAL CIA LTDA'";
+	    $id3   = " creado";
+	    $rsConsulta3   = $cuentasPagar->getCondiciones($col3, $tab3, $whe3, $id3); //array de empresa
+	    
+	    /*echo "resultset1 <br>";
+	    print_r($rsConsulta1);	    
+	    echo "<br>";
+	    
+	    echo "resultset2 <br>";
+	    print_r($rsConsulta2);
+	    echo "<br>";
+	    
+	    echo "resultset3 <br>";
+	    print_r($rsConsulta3);
+	    echo "<br>";*/
+	 
+	    /** validacion de parametros **/
+	    if( empty($rsConsulta1) || empty($rsConsulta2) || empty($rsConsulta3) ){
+	        echo "Error validacion llego ";
+	        return array('error' => true, 'mensaje' => 'Parametro no valido');
+	    }
+	    	   
+	    /** AUX de VARIABLES **/
+	    $_auxFecha = $rsConsulta2[0]->fecha_cuentas_pagar;
+	    $_fechaDocumento = new DateTime($_auxFecha); 
+        
+	    /** VARIABLES DE XML **/
+	    $_ambiente = 1; //1 pruebas  2 produccion
+	    $_tipoEmision = 1; //1 emision normal
+	    $_rucEntidad  = $rsConsulta3[0]->ruc_entidades;
+	    $_razonSocial = $rsConsulta3[0]->razon_social_entidades;
+	    $_nomComercial= $rsConsulta3[0]->nombre_entidades;
+	    $_claveAcceso = "noimplementyet";//$this->genClaveAcceso();
+	    $_codDocumento= ""; // no definido !!!!------>NOTA
+	    $_establecimiento = "001"; //definir de la estructura  001-001-000000 -- factura !!!!------>NOTA
+	    $_puntoEmision    = "001"; //solo existe un establecimiento
+	    $_secuencial      = "";    // es un secuencial tiene que definirse
+	    $_dirMatriz       = $rsConsulta3[0]->direccion_entidades;
+	    $_fechaEmision    = date_format($_fechaDocumento, 'd/m/Y'); //definir la fecha 
+	    $_dirEstablecimiento   = $rsConsulta3[0]->direccion_entidades;
+	    
+	    // /** informacion rtencion **/ //datos obtener de la tabla proveedores
+	    $_contriEspecial  = "624";  //numero definir para otra empresa !!!!------>NOTA
+	    $_obligadoContabilidad = "SI";
+	    $_tipoIdentificacionRetenido   = $rsConsulta2[0]->tipo_identificacion_proveedores;
+	    $_razonSocialRetenido  = $rsConsulta2[0]->razon_social_proveedores;
+	    $_identificacionSocialRetenido = $rsConsulta2[0]->identificacion_proveedores;
+	    $_periodoFiscal        = date_format($_fechaDocumento, 'm/Y'); 
+	    
 	    
 	    $texto .='<?xml version="1.0" encoding="UTF-8"?>';
-	    $texto .= '<iva>';
-	    $texto .= '<TipoIDInformante>R</TipoIDInformante>';
-	    $texto .= '<IdInformante>'.'1791700376001'.'</IdInformante>';
-	    $texto .= '<razonSocial>'.'FONDO COMPLEMENTARIO PREVISIONAL CERRADO DE CESANTIA DE SERVIDORES Y TRABAJADORES PUBLICOS DE FUERZAS ARMADAS-CAPREMCI'.'</razonSocial>';
-	    $texto .= '<Anio>'.$anioDiario.'</Anio>';
-	    $texto .= '<Mes>'.$mesperiodofiscal.'</Mes>';
-	    $texto .= '<totalVentas>'.'0.00'.'</totalVentas>';
-	    $texto .= '<codigoOperativo>'.'IVA'.'</codigoOperativo>';
+	    $texto .= '<comprobanteRetencion id="comprobante" version="1.0.0">';
 	    
-	    $texto .= '<compras>';
+	    $texto .= '<infoTributaria>';
+	    $texto .= '<ambiente>'.$_ambiente.'</ambiente>'; //conforme a la tabla 4
+	    $texto .= '<tipoEmision>'.$_tipoEmision.'</tipoEmision>'; //conforme a la tabla 2
+	    $texto .= '<razonSocial>'.$_razonSocial.'</razonSocial>';
+	    $texto .= '<nombreComercial>'.$_nomComercial.'</nombreComercial>';
+	    $texto .= '<ruc>'.$_rucEntidad.'</ruc>';
+	    $texto .= '<claveAcceso>'.$_claveAcceso.'</claveAcceso>'; //conforme a la tabla 1
+	    $texto .= '<codDoc>'.$_codDocumento.'</codDoc>'; //conforme a la tabla 3
+	    $texto .= '<estab>'.$_establecimiento.'</estab>';
+	    $texto .= '<ptoEmi>'.$_puntoEmision.'</ptoEmi>';
+	    $texto .= '<secuencial>'.$_secuencial.'</secuencial>';
+	    $texto .= '<dirMatriz>'.$_dirMatriz.'</dirMatriz>';
+	    $texto .= '</infoTributaria>';
 	    
-	    echo json_encode("Cabeza");
+	    $texto .= '<infoCompRetencion>';
+	    $texto .= '<fechaEmision>'.$_fechaEmision.'</fechaEmision>'; //conforme al formato -- dd/mm/aaaa
+	    $texto .= '<dirEstablecimiento>'.$_dirEstablecimiento.'</dirEstablecimiento>';
+	    $texto .= '<contribuyenteEspecial>'.$_contriEspecial.'</contribuyenteEspecial>';
+	    $texto .= '<obligadoContabilidad>'.$_obligadoContabilidad.'</obligadoContabilidad>';
+	    $texto .= '<tipoIdentificacionSujetoRetenido>'.$_tipoIdentificacionRetenido.'</tipoIdentificacionSujetoRetenido>'; // conforme a la tabla 6
+	    $texto .= '<razonSocialSujetoRetenido>'.$_razonSocialRetenido.'</razonSocialSujetoRetenido>';
+	    $texto .= '<identificacionSocialSujetoRetenido>'.$_identificacionSocialRetenido.'</identificacionSocialSujetoRetenido>';
+	    $texto .= '<periodoFiscal>'.$_periodoFiscal.'</periodoFiscal>'; //conforme a formato mm/aaaa
+	    $texto .= '</infoCompRetencion>';
 	    
+	    $texto .= '<impuestos>'; //aqui comienza el foreach de impuestos
 	    
+	    /** VARIABLES PARA CADA IMPUESTO **/
+	    $_impCodigo = "";
+	    $_impCodRetencion = "";
+	    $_impBaseImponible = "";
+	    $_impPorcetajeRet  = "";
+	    $_impValorRet      = "";
+	    $_impCodDocumentoSustentoRet = "01"; //!NOTA
+	    $_impNumDocumentoSustentoRet = "";
+	    $_impfechaEmisionRet   = $_fechaEmision;
 	    
-	    foreach ($rsHistorial as $res){
+	    $_impNumDocumentoSustentoRet = $rsConsulta2[0]->numero_documento_cuentas_pagar;
+	    $_impNumDocumentoSustentoRet = str_replace("-", "", $_impNumDocumentoSustentoRet);	    
+	    
+	    foreach ($rsConsulta1 as $res) {
 	        
-	        $texto .= '<detalleCompras>';
+	        $_impCodigo = $res->codigo_impuestos;
+	        $_impCodRetencion = $res->codretencion_impuestos;
+	        $_impBaseImponible = $res->valor_base_cuentas_pagar_impuestos;
+	        $_impPorcetajeRet = $res->porcentaje_impuestos;
+	        $_impValorRet = $res->valor_cuentas_pagar_impuestos;
 	        
-	        $texto .= '<codSustento>'.'01'.'</codSustento>';
-	        $texto .= '<tpIdProv>'.$res->infocompretencion_tipoidentificacionsujetoretenido.'</tpIdProv>';
-	        $texto .= '<idProv>'.$res->infocompretencion_identificacionsujetoretenido.'</idProv>';
-	        $texto .= '<tipoComprobante>'.'19'.'</tipoComprobante>';
-	        if ( $res->infocompretencion_tipoidentificacionsujetoretenido == "01" || $res->infocompretencion_tipoidentificacionsujetoretenido == "02" || $res->infocompretencion_tipoidentificacionsujetoretenido == "03")
-	        {
-	            $texto .= '<parteRel>'.'NO'.'</parteRel>';
-	            
-	        }
-	        else
-	        {
-	            $texto .= '<parteRel>'.'SI'.'</parteRel>';
-	        }
-	        //$_establecimiento = ;
-	        $originalDate_fechaemision = $res->infocompretencion_fechaemision;
-	        $newDate_fechaemision = date("d/m/Y", strtotime($originalDate_fechaemision));
-	        $texto .= '<fechaRegistro>'.$newDate_fechaemision.'</fechaRegistro>';
-	        $texto .= '<establecimiento>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),1,3).'</establecimiento>';
-	        $texto .= '<puntoEmision>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),4,3).'</puntoEmision>';
-	        $texto .= '<secuencial>'.substr( $this->devuelveDocumentoFactura($res->id_tri_retenciones),6,9).'</secuencial>';
-	        $originalDate_fechaemision = $res->infocompretencion_fechaemision;
-	        $newDate_fechaemision = date("d/m/Y", strtotime($originalDate_fechaemision));
-	        $texto .= '<fechaEmision>'.$newDate_fechaemision.'</fechaEmision>';
-	        $texto .= '<autorizacion>'.$res->infotributaria_claveacceso.'</autorizacion>';
-	        
-	        $where_detalle = "id_tri_retenciones = '$res->id_tri_retenciones' ";
-	        $rsDetalle = $Participes->getCondiciones($columnas_detalle, $tablas_detalle, $where_detalle, $id_detalle);
-	        foreach ($rsDetalle as $resDetalle){
-	            if ($resDetalle->impuesto_codigo == "1") //es renta
-	            {
-	                $_baseImpGrav =  $resDetalle->impuestos_baseimponible;
-	                
-	                $_codRetAir = $resDetalle->impuesto_codigoretencion;
-	                $_baseImpAir = $resDetalle->impuestos_baseimponible;
-	                $_porcentajeAir = $resDetalle->impuestos_porcentajeretener;
-	                $_valRetAir = $resDetalle->impuestos_valorretenido;
-	                
-	            }
-	            else // IVA
-	            {
-	                $_montoIva  = $resDetalle->impuestos_baseimponible;
-	                //$_valRetBien10 = 20;//$resDetalle->impuestos_valorretenido;
-	                switch ($resDetalle->impuestos_porcentajeretener) {
-	                    case "10.00":
-	                        $_valRetBien10 = $resDetalle->impuestos_valorretenido;
-	                        break;
-	                    case "20.00":
-	                        $_valRetServ20 = $resDetalle->impuestos_valorretenido;
-	                        break;
-	                    case "30.00":
-	                        $_valorRetBienes= $resDetalle->impuestos_valorretenido;
-	                        break;
-	                    case "50.00":
-	                        $_valRetServ50= $resDetalle->impuestos_valorretenido;
-	                        break;
-	                    case "70.00":
-	                        $_valorRetServicios= $resDetalle->impuestos_valorretenido;
-	                        break;
-	                    case "100.00":
-	                        $_valRetServ100= $resDetalle->impuestos_valorretenido;
-	                        break;
-	                }
-	            }
-	        }
-	        
-	        $texto .= '<baseNoGraIva>'.'0.00'.'</baseNoGraIva>';
-	        $texto .= '<baseImponible>'.'0.00'.'</baseImponible>';
-	        $texto .= '<baseImpGrav>'.$_baseImpGrav.'</baseImpGrav>';
-	        $texto .= '<baseImpExe>'.'0.00'.'</baseImpExe>';
-	        $texto .= '<montoIce>'.'0.00'.'</montoIce>';
-	        $texto .= '<montoIva>'.$_montoIva.'</montoIva>';
-	        
-	        $texto .= '<valRetBien10>'.$_valRetBien10.'</valRetBien10>';
-	        $texto .= '<valRetServ20>'.$_valRetServ20.'</valRetServ20>';
-	        $texto .= '<valorRetBienes>'.$_valorRetBienes.'</valorRetBienes>';
-	        $texto .= '<valRetServ50>'.$_valRetServ50.'</valRetServ50>';
-	        $texto .= '<valorRetServicios>'.$_valorRetServicios.'</valorRetServicios>';
-	        $texto .= '<valRetServ100>'.$_valRetServ100.'</valRetServ100>';
-	        $texto .= '<totbasesImpReemb>'.'0'.'</totbasesImpReemb>';
-	        
-	        $texto .= '<pagoExterior>';
-	        $texto .= '<pagoLocExt>'.'01'.'</pagoLocExt>';
-	        $texto .= '<paisEfecPago>'.'NA'.'</paisEfecPago>';
-	        $texto .= '<aplicConvDobTrib>'.'NA'.'</aplicConvDobTrib>';
-	        $texto .= '<pagExtSujRetNorLeg>'.'NA'.'</pagExtSujRetNorLeg>';
-	        
-	        $texto .= '</pagoExterior>';
-	        
-	        $texto .= '<formasDepago>';
-	        $texto .= '<formaPago>'.'20'.'</formaPago>';
-	        $texto .= '</formasDepago>';
-	        
-	        $texto .= '<air>';
-	        $texto .= '<detalleAir>';
-	        $texto .= '<codRetAir>'.$_codRetAir.'</codRetAir>';
-	        $texto .= '<baseImpAir>'.$_baseImpAir.'</baseImpAir>';
-	        $texto .= '<porcentajeAir>'.$_porcentajeAir.'</porcentajeAir>';
-	        $texto .= '<valRetAir>'.$_valRetAir.'</valRetAir>';
-	        
-	        $texto .= '</detalleAir>';
-	        $texto .= '</air>';
-	        /*
-	         <estabRetencion1>003</estabRetencion1>
-	         
-	         <ptoEmiRetencion1>002</ptoEmiRetencion1>
-	         
-	         <secRetencion1>0002948</secRetencion1>
-	         
-	         <autRetencion1>3008201907171170737000120030020000029480000000110</autRetencion1>
-	         
-	         <fechaEmiRet1>30/08/2019</fechaEmiRet1>
-	         */
-	        
-	        $texto .= '</detalleCompras>';
-	        
+	        $texto .= '<impuesto>';
+	        $texto .= '<codigo>'.$_impCodigo.'</codigo>'; //conforme a la tabla 20
+	        $texto .= '<codigoRetencion>'.$_impCodRetencion.'</codigoRetencion>'; //conforme a la tabla 21
+	        $texto .= '<baseImponible>'.$_impBaseImponible.'</baseImponible>';
+	        $texto .= '<porcentajeRetener>'.$_impPorcetajeRet.'</porcentajeRetener>';//conforme a la tabla 21
+	        $texto .= '<valorRetenido>'.$_impValorRet.'</valorRetenido>';
+	        $texto .= '<codDocSustento>'.$_impCodDocumentoSustentoRet.'</codDocSustento>';
+	        $texto .= '<numDocSustento>'.$_impNumDocumentoSustentoRet.'</numDocSustento>'; //num documento soporte sin '-'
+	        $texto .= '<fechaEmisionDocSustento>'.$_impfechaEmisionRet.'</fechaEmisionDocSustento>'; //obligatorio cuando corresponda **formato dd/mm/aaaa
+	        $texto .= '</impuesto>';
 	        
 	    }
 	    
+	    $texto .= '</impuestos>';
 	    
-	    $texto .= '</compras>';
+	    /**CAMPOS ADICIONALES **/
+	    $_adicional1 = "";
+	    $_adicional2 = "";
+	    $_adicional3 = "";
+	    
+	    /** obligatorio cuando corresponda **/
+	    $texto .= '<infoAdicional>';
+	    $texto .= '<campoAdicional nombre="ConvenioDobleTributacion">'.$_adicional1.'</campoAdicional>';
+	    $texto .= '<campoAdicional nombre="documentoIFIS">'.$_adicional2.'</campoAdicional>';
+	    $texto .= '<campoAdicional nombre="valorpagadoIRsociedaddividendos">'.$_adicional3.'</campoAdicional>';
+	    $texto .= '</infoAdicional>';
+	    /** termina obligatorio cuando corresponda **/
+	    
+	    $texto .= '</comprobanteRetencion>';
 	    
 	    
-	    
-	    $texto .= '</iva>';
-	    
-	    
-	    $nombre_archivo = "ATS-".$mesperiodofiscal.$anioDiario.".xml";
-	    
-	    $ubicacionServer = $_SERVER['DOCUMENT_ROOT']."\\rp_c\\DOCUMENTOS_GENERADOS\\ATS\\";
+	    $nombre_archivo = $_claveAcceso.".xml";	    
+	    $ubicacionServer = $_SERVER['DOCUMENT_ROOT']."\\rp_l\\DOCUMENTOS_GENERADOS\\RETENCIONES\\";
 	    $ubicacion = $ubicacionServer.$nombre_archivo;
-	    
 	    
 	    $textoXML = mb_convert_encoding($texto, "UTF-8");
 	    
-	    // Grabamos el XML en el servidor como un fichero plano, para
-	    // poder ser leido por otra aplicación.
 	    $gestor = fopen($ubicacionServer.$nombre_archivo, 'w');
 	    fwrite($gestor, $textoXML);
 	    fclose($gestor);
@@ -1134,22 +1152,61 @@ class TesCuentasPagarController extends ControladorBase{
 	    header("Content-type: MIME");
 	    ob_clean();
 	    flush();
-	    // Read the file
-	    //echo $ubicacion;
-	    //print_r($_POST);
-	    //echo  "******llego--",$_tipo_archivo_recaudaciones,"***" ;
-	    //echo "parametro id ---",$_id_archivo_recaudaciones,"**";
+	    
 	    readfile($ubicacion);
 	    exit;
 	    
-	    
-	    
-	    
+	}
+	
+	/***
+	 * @desc metodo retorna la cadena de Clave Acceso Xml
+	 * @return string
+	 */
+	public function genClaveAcceso(){
+	    return "";
 	}
 	
 	public function pRetenciones(){
 	    
 	    
+	    $date = date_create('2000-1-1');
+	    echo date_format($date, 'd/m/Y');
+	    
+	    $_impNumDocumentoSustentoRet = "001-001-5623";
+	    echo $_impNumDocumentoSustentoRet;
+	    $_impNumDocumentoSustentoRet = str_replace("-", "", $_impNumDocumentoSustentoRet);
+	    
+	    echo $_impNumDocumentoSustentoRet;
+	
+	}
+	
+	public function PruebaXmlXsd(){
+	    
+	    /**$doc = new DOMDocument('1.0');
+	    // queremos una impresión buena
+	    $doc->formatOutput = true;
+	    
+	    $root = $doc->createElement('book');
+	    $root = $doc->appendChild($root);
+	    
+	    $title = $doc->createElement('title');
+	    $title = $root->appendChild($title);
+	    
+	    $text = $doc->createTextNode('Este es el título');
+	    $text = $title->appendChild($text);
+	    
+	    echo "Guardando todo el documento:\n";
+	    echo $doc->saveXML() . "\n";
+	    
+	    echo "Guardando sólo la parte del título:\n";
+	    echo $doc->saveXML($title);**/
+	    
+	    header ("content-type: text/xml");
+	    echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
+        <caja>
+        <ja>". "POR ACA"."</ja>
+        </caja>";
+	   
 	}
 	
 	
