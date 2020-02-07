@@ -112,7 +112,7 @@ class Comprobante
         $firma = new Firma($config, $clave);
 
         $resp = $firma->verificarCertPKey();
-
+                
         if ($resp["error"] === true)
             return $resp;
 
@@ -136,16 +136,17 @@ class Comprobante
             $documento = new DOMDocument();
             $documento->loadXML($xmlString);
 
-            if (!$documento->schemaValidate($pathXsdName)) {
+            if (!$documento->schemaValidate($pathXsdName)) {               
                 $aux = '<b>DOMDocument::schemaValidate() Genero Errores!</b>' . "\n";
                 $aux .= Comprobante::libxml_display_errors();
                 $resp = array('error' => true, 'mensaje' => $aux);
                 return $resp;
             }
+            
         } catch (Exception $ex) {
             $resp = array('error' => true, 'mensaje' => $ex->getMessage());
         }
-
+  
         return $resp;
     }
 

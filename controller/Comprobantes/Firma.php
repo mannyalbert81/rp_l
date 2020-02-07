@@ -55,7 +55,7 @@ class Firma
             $pathFirma = $this->config['file'];
 
             if (openssl_pkcs12_read(file_get_contents($pathFirma, FILE_USE_INCLUDE_PATH), $certs, $this->config['pass'])) {
-
+                
                 $x509cert = openssl_x509_read($certs['cert']);
                 $certf = openssl_x509_parse($x509cert);
                 $subject = $certf['subject']['CN'];
@@ -83,8 +83,7 @@ class Firma
                         $this->certData = $certf;
                     //}
                 }
-
-
+               
                 if ($this->certificate === null || $this->certificate === false)
                     return array('error' => true, 'mensaje' => "No existe certificado valido.");
 
@@ -105,8 +104,7 @@ class Firma
             $resp = $this->getPrivateKey();
 
             if ($resp["error"] === true)
-                return array('error' => true, 'mensaje' => $resp["mensaje"]);
-
+                return array('error' => true, 'mensaje' => $resp["mensaje"]);            
 
             $fecha_actual = strtotime(date("Y-m-d H:i:s", time()));
             $fecha_entrada = strtotime(date("Y-m-d H:i:s", $this->certData['validTo_time_t']));
@@ -153,10 +151,10 @@ class Firma
                 unlink($nombreKey);
 
             $salida = shell_exec('openssl pkcs12 -in ' . $pfx . ' -nocerts -out ' . $nombreKey . ' -passin pass:' . $password . ' -passout pass:' . $password . ' 2>&1');
-
+                        
             //IMPORTANTE ESTE MENSAJE 'MAC verified OK' DEPENDE DEL SERVIDOR WEB USADO
             //HAY QUE HACER DEBUG PARA REALIZAR LA COMPARACION
-            if (strpos($salida, 'MAC verified OK') !== false) {
+            if (strpos($salida, 'MAC verified OK') !== false || empty($salida) ) {
 
                 $pemChain = file_get_contents($nombreKey);
 

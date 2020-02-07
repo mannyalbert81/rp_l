@@ -148,14 +148,13 @@ class ComprobantesController
                     $pathXsdName = $this->config['xsd'] . DIRECTORY_SEPARATOR . 'comprobanteRetencion.xsd';
                     break;
             }
-
+            
             $resp = Comprobante::validarXml($xmlString, $pathXsdName);
 
-            if ($resp != null) return $resp;
-
+            if ($resp != null) return $resp;            
+            
             if (file_put_contents($this->config['generados'] . DIRECTORY_SEPARATOR . $clave . ".xml", $xmlString) === false)
                 return array('error' => true, 'mensaje' => 'no se puede crear el archivo xml en: ' . $this->config['generados']);
-
 
             $firma = array(
                 'file' => $this->config['pathFirma'],
@@ -163,7 +162,7 @@ class ComprobantesController
                 'generados' => $this->config['generados'],
                 'firmados' => $this->config['firmados']
             );
-
+                        
             $resp = Comprobante::firmarComprobante($firma, $clave);
 
             return $resp;
