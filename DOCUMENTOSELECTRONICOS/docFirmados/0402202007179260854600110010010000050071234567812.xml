@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0"><infoTributaria><ambiente>1</ambiente><tipoEmision>1</tipoEmision><razonSocial>LIVENTY FINANCIAL SILVA &amp; SANDOVAL LIVENTSIVAL CIA LTDA</razonSocial><nombreComercial>LIVENTSIVAL CIA LTDA</nombreComercial><ruc>1792608546001</ruc><claveAcceso>0402202007179260854600110010010000050071234567812</claveAcceso><codDoc>07</codDoc><estab>001</estab><ptoEmi>001</ptoEmi><secuencial>000005007</secuencial><dirMatriz>PICHINCHA / QUITO / MARISCAL SUCRE / AV VEINTIMILLA E9-26 Y LEONIDAS PLAZA</dirMatriz></infoTributaria><infoCompRetencion><fechaEmision>04/02/2020</fechaEmision><dirEstablecimiento>PICHINCHA / QUITO / MARISCAL SUCRE / AV VEINTIMILLA E9-26 Y LEONIDAS PLAZA</dirEstablecimiento><contribuyenteEspecial>624</contribuyenteEspecial><obligadoContabilidad>SI</obligadoContabilidad><tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido><razonSocialSujetoRetenido>VIGILANCIA PRIVADA EUROSEGURIDAD CIA. LTDA.</razonSocialSujetoRetenido><identificacionSujetoRetenido>1791700376001</identificacionSujetoRetenido><periodoFiscal>02/2020</periodoFiscal></infoCompRetencion><impuestos><impuesto><codigo>1</codigo><codigoRetencion>344</codigoRetencion><baseImponible>2040.000</baseImponible><porcentajeRetener>2</porcentajeRetener><valorRetenido>40.8</valorRetenido><codDocSustento>01</codDocSustento><numDocSustento>001001012345678</numDocSustento><fechaEmisionDocSustento>04/02/2020</fechaEmisionDocSustento></impuesto><impuesto><codigo>2</codigo><codigoRetencion>2</codigoRetencion><baseImponible>244.800</baseImponible><porcentajeRetener>70</porcentajeRetener><valorRetenido>171.36</valorRetenido><codDocSustento>01</codDocSustento><numDocSustento>001001012345678</numDocSustento><fechaEmisionDocSustento>04/02/2020</fechaEmisionDocSustento></impuesto></impuestos><infoAdicional><campoAdicional nombre="ConvenioDobleTributacion">MOLINOS DE VIENTO 184 Y DE ROCINANTE</campoAdicional><campoAdicional nombre="documentoIFIS">022339776</campoAdicional><campoAdicional nombre="valorpagadoIRsociedaddividendos">pruebaeuroseguridad@hotmail.com</campoAdicional></infoAdicional><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature122906">
+<ds:SignedInfo Id="Signature-SignedInfo432748">
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+<ds:Reference Id="SignedPropertiesID328955" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature122906-SignedProperties477819">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>IQ2Py9pOix07EUCh2IndIqOgP3E=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference URI="#Certificate223431">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>K5ATeqe9vcqUJ8PsUYOAgSCcel0=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference Id="Reference-ID-871212" URI="#comprobante">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>3UThKo7sPLyZZ4hkjkbhXKFVXak=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue Id="SignatureValue870169">
+uNL0d8OC9prYLaEyIqhfmTknurZO6SbdDd/dzWqO7bINoKxJdgcDrbkuhuYCm4uX
+3Nnu8R8M3buf83uNgLraxX5/iDRMEmwkC1SKsZhK6aqv0RJCAbFkGTJDP4uwkMrI
+weSLLX2lgd3sBxlRALfwSB6C14AAOvXTi8tkJJlt2JQGgeZsYQOb0UzdFujKafQ2
+SqftSVdTFyXACFPJCobWJtcUl3n7/F+92q8lH3qEp6kc2cxZ3oCXT/y8MelpvJ+2
+aeycWmkNaFfy7jVcIagpiqEO1SyGdqUpHIJJwG+2ncz04Th/1L8DqQnihjXa+W4a
+8gpAMYM1XD8vK0VFoEEOOw==
+</ds:SignatureValue>
+<ds:KeyInfo Id="Certificate223431">
+<ds:X509Data>
+<ds:X509Certificate>
+MIIKDjCCB/agAwIBAgIEW2JTTTANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMC
+RUMxIjAgBgNVBAoTGUJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxNzA1BgNVBAsT
+LkVOVElEQUQgREUgQ0VSVElGSUNBQ0lPTiBERSBJTkZPUk1BQ0lPTi1FQ0lCQ0Ux
+DjAMBgNVBAcTBVFVSVRPMSUwIwYDVQQDExxBQyBCQU5DTyBDRU5UUkFMIERFTCBF
+Q1VBRE9SMB4XDTIwMDExNDIwMzMyNloXDTIyMDExNDIxMDMyNlowgbIxCzAJBgNV
+BAYTAkVDMSIwIAYDVQQKExlCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMTcwNQYD
+VQQLEy5FTlRJREFEIERFIENFUlRJRklDQUNJT04gREUgSU5GT1JNQUNJT04tRUNJ
+QkNFMQ4wDAYDVQQHEwVRVUlUTzE2MBEGA1UEBRMKMDAwMDQzMjMxMTAhBgNVBAMT
+GlJPTVVMTyBFRFVBUkRPIFNJTFZBIFBBTE1BMIIBIjANBgkqhkiG9w0BAQEFAAOC
+AQ8AMIIBCgKCAQEAuxJEJXsfdxmeqwzsS8j0/OBl9m93RBERnwVNl1gzH/MITOA/
+/dRGNxIXdl34XUeeZ3mIFBd5l4V9xlhunHvON0U13JEyoUOH8KegBb67YXS4bOX6
+cLdAxd0ULKqnxFPndnyVYYw8I5RBHJ7qzHbZrajMmEJfz9WGFR1M3mk/v202LgH8
+iggA5/XSnJmt0+XdQciVAyhhIfbQD8RC6ySZncIKNFoPhkPkufFgsGlVJL98ZzqO
+/Fwyrr9cb3QJFQBng9JjrtEumcQQuXc7SG/ePsn7RxnaaApsc6bh2Rq0xSs54A4D
+izOD9pPEbtCEIC40RlzoXuCxqL2kKNqsHNP3OQIDAQABo4IFOTCCBTUwCwYDVR0P
+BAQDAgeAMGcGA1UdIARgMF4wXAYLKwYBBAGCqDsCAgEwTTBLBggrBgEFBQcCARY/
+aHR0cDovL3d3dy5lY2kuYmNlLmVjL3BvbGl0aWNhLWNlcnRpZmljYWRvL3BlcnNv
+bmEtanVyaWRpY2EucGRmMIGRBggrBgEFBQcBAQSBhDCBgTA+BggrBgEFBQcwAYYy
+aHR0cDovL29jc3AuZWNpLmJjZS5lYy9lamJjYS9wdWJsaWN3ZWIvc3RhdHVzL29j
+c3AwPwYIKwYBBQUHMAGGM2h0dHA6Ly9vY3NwMS5lY2kuYmNlLmVjL2VqYmNhL3B1
+YmxpY3dlYi9zdGF0dXMvb2NzcDBGBgorBgEEAYKoOwMKBDgTNkxJVkVOVFkgRklO
+QU5DSUFMIFNJTFZBICBTQU5ET1ZBTCBMSVZFTlRTSVZBTCBDSUEgTFREQTAdBgor
+BgEEAYKoOwMLBA8TDTE3OTI2MDg1NDYwMDEwGgYKKwYBBAGCqDsDAQQMEwowNjAx
+MDk2MTE4MB4GCisGAQQBgqg7AwIEEBMOUk9NVUxPIEVEVUFSRE8wFQYKKwYBBAGC
+qDsDAwQHEwVTSUxWQTAVBgorBgEEAYKoOwMEBAcTBVBBTE1BMB8GCisGAQQBgqg7
+AwUEERMPR0VSRU5URSBHRU5FUkFMMDQGCisGAQQBgqg7AwcEJhMkQVYgVkVJTlRJ
+TUlMTEEgRTkyNiBZIExFT05JREFTIFBMQVpBMBkGCisGAQQBgqg7AwgECxMJMDIy
+NTI5MjUxMBUGCisGAQQBgqg7AwkEBxMFUXVpdG8wFwYKKwYBBAGCqDsDDAQJEwdF
+Q1VBRE9SMCAGCisGAQQBgqg7AzMEEhMQU09GVFdBUkUtQVJDSElWTzAeBgNVHREE
+FzAVgRNsaXZlbnR5QG91dGxvb2suY29tMIIB3wYDVR0fBIIB1jCCAdIwggHOoIIB
+yqCCAcaGgdVsZGFwOi8vYmNlcWxkYXBzdWJwMS5iY2UuZWMvY249Q1JMOTA2LGNu
+PUFDJTIwQkFOQ08lMjBDRU5UUkFMJTIwREVMJTIwRUNVQURPUixsPVFVSVRPLG91
+PUVOVElEQUQlMjBERSUyMENFUlRJRklDQUNJT04lMjBERSUyMElORk9STUFDSU9O
+LUVDSUJDRSxvPUJBTkNPJTIwQ0VOVFJBTCUyMERFTCUyMEVDVUFET1IsYz1FQz9j
+ZXJ0aWZpY2F0ZVJldm9jYXRpb25MaXN0P2Jhc2WGNGh0dHA6Ly93d3cuZWNpLmJj
+ZS5lYy9DUkwvZWNpX2JjZV9lY19jcmxmaWxlY29tYi5jcmykgbUwgbIxCzAJBgNV
+BAYTAkVDMSIwIAYDVQQKExlCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMTcwNQYD
+VQQLEy5FTlRJREFEIERFIENFUlRJRklDQUNJT04gREUgSU5GT1JNQUNJT04tRUNJ
+QkNFMQ4wDAYDVQQHEwVRVUlUTzElMCMGA1UEAxMcQUMgQkFOQ08gQ0VOVFJBTCBE
+RUwgRUNVQURPUjEPMA0GA1UEAxMGQ1JMOTA2MCsGA1UdEAQkMCKADzIwMjAwMTE0
+MjAzMzI2WoEPMjAyMjAxMTQyMTAzMjZaMB8GA1UdIwQYMBaAFEii3yMfHfgsUXqM
+A81JMqUJwZSrMB0GA1UdDgQWBBRU/AndQyqJpS7dam/itOjGcNKeKDAJBgNVHRME
+AjAAMBkGCSqGSIb2fQdBAAQMMAobBFY4LjEDAgSwMA0GCSqGSIb3DQEBCwUAA4IC
+AQCTkJj2TLFsRsaDlzqphre3LEw571bG65tTweAJ7iZii1EMoO6TaWXz3CRsmguO
+xpVNjgB2w7AKyTAJoCoY+E3qnRuPJz3WxX3PT4nYCjuTnoNUWu0zn1kfasvVA8wc
+Sar8zQ4IoebroWpvJSKb7s19JbJNkl0IDOntD192KqbRi2XR4FINLkZ4MEaVxzjB
+pO6sY/6fo4LdVTH9zyYWGSKFRo3BHWv6PdqHltp7DIo6XMevGLncVoxdGUMmAtvK
+i6yEtavp7GY69br72HeIWWGM51MYENgNwOeQJiarg6Gik412oUw1UQ45TUvf0a7G
+SZcb0GINgcRdsdaQqMco9Xn4bLPNtb232CugWNYth2ImKstpw8VA09TC9BxU+gUl
+03lDBQFgdHZfjyVTc4aUXNdEpS2nJJ8kHwl/xh8HKglmzL5bW3xXvMLAjHYt4FFY
+913wiSqmMTAxlplwCcASidA0lBdsuadG+zKraO3WY7EMD1grAftMgejX8sjQdCHj
+8TdFMnD+j3I3c5KIyyI9Z018ARtvGslcNsmsolox/HVozvrTJlke8mPwOzuC959N
++i3L20zeF263aYKS7by0MTbAJldTSC9iVeZxlfJdlBb+9/UnF2xMlxfbHHPT18uP
+qsoEMI+NEE6Zihkdz7hFgeayUtEIAPvv9CKoVxEqOdAnsQ==
+</ds:X509Certificate>
+</ds:X509Data>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+uxJEJXsfdxmeqwzsS8j0/OBl9m93RBERnwVNl1gzH/MITOA//dRGNxIXdl34XUee
+Z3mIFBd5l4V9xlhunHvON0U13JEyoUOH8KegBb67YXS4bOX6cLdAxd0ULKqnxFPn
+dnyVYYw8I5RBHJ7qzHbZrajMmEJfz9WGFR1M3mk/v202LgH8iggA5/XSnJmt0+Xd
+QciVAyhhIfbQD8RC6ySZncIKNFoPhkPkufFgsGlVJL98ZzqO/Fwyrr9cb3QJFQBn
+g9JjrtEumcQQuXc7SG/ePsn7RxnaaApsc6bh2Rq0xSs54A4DizOD9pPEbtCEIC40
+RlzoXuCxqL2kKNqsHNP3OQ==
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+</ds:KeyInfo>
+<ds:Object Id="Signature122906-Object727676"><etsi:QualifyingProperties Target="#Signature122906"><etsi:SignedProperties Id="Signature122906-SignedProperties477819"><etsi:SignedSignatureProperties><etsi:SigningTime>2020-02-07T14:21:51-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>UnLdXpdAkWB7P/J2C04+K64c+GQ=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1533170509</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-871212"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></comprobanteRetencion>
