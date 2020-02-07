@@ -337,9 +337,9 @@ $(document).ready(function(){
 	
 	formato_1 = 
 		
-		`<p style="text-align: center;"><b>REPÚBLICA DEL ECUADOR</b>`+
-		`style="text-align: center;"><b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES CNT EP.</b>`+
-		`style="text-align: center;"><b>JEFATURA DE COACTIVA</b></p>`+
+		`<p style="text-align: center;"><b>REPÚBLICA DEL ECUADOR</b><br>`+
+		`<b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES CNT EP.</b><br>`+
+		`<b>JEFATURA DE COACTIVA</b></p>`+
 		
 	`<p style="text-align: left;">Oficio No. 0000-JC-PIC-2020-LGLC<br>`+
 	`D.M. de Quito, a 04 de febrero de 2020</p>`+

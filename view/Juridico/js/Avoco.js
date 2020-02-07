@@ -297,6 +297,11 @@ $(document).ready(function(){
 	$('#editor2').val("");
 	
 	formato_1 = 
+		
+	`<p style="text-align: center;"><b>REPÚBLICA DEL ECUADOR</b><br>`+
+	`<b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES CNT EP.</b><br>`+
+	`<b>JEFATURA DE COACTIVA</b></p>`+
+	
 	`<p style="text-align: left;">Oficio No. 0000-JNC-PIC-2020-LGLC<br>`+
 	`D.M. de Quito, a ${fecha_razon}</p>`+
 	`<p style="text-align: left;">Señor</p>`+
