@@ -102,7 +102,57 @@
 				<br>
 		        <div id="div_detalle_juicio"></div>
 			   	<br>
-
+			   	<div  id="div_ingreso_informacion" >
+			   	
+			   	
+			   	<div class="row">
+				<div class="col-md-3 col-lg-3 col-xs-12">
+				<div class="form-group">
+				<label for="meses_mora" class="control-label">INGRESO DE INFORMACIÓN:</label>
+				
+				</div>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-md-3 col-lg-3 col-xs-12">
+				<div class="input-group input-group-lg">
+				<label for="id_juicios" class="control-label">Fecha de Cálculo Coactiva:</label>
+				<input type="date" id="fecha_calculo_coactiva" name="fecha_calculo_coactiva"  value"" class="form-control">
+				</div>
+				</div>
+				 
+				 
+				 
+				<div class="col-md-3 col-lg-3 col-xs-12">
+				<div class="form-group">
+				<label for="tasa_interes" class="control-label">Tasa de Interés Legal:</label>
+				<div class="input-group input-group-lg">
+				<input type="text" id="tasa_interes" name="tasa_interes"  value="8.02" class="form-control">
+				<span class="input-group-addon">%</span>
+				</div>
+				
+				
+				</div>
+				</div>
+				
+				<div class="col-md-3 col-lg-3 col-xs-12">
+				<div class="form-group">
+				<label for="tasa_mora" class="control-label">Tasa de interés por Mora:</label>
+				<div class="input-group input-group-lg">
+				<input readonly 	type="text" id="tasa_mora" name="tasa_mora"  value="" class="form-control">
+				<span class="input-group-addon">%</span>
+				</div>
+				
+				</div>
+				</div>
+				 
+				<div class="col-md-3 col-lg-3 col-xs-12">
+				<div class="input-group input-group-lg">
+				<label for="tasa_mora" class="control-label">Fecha Vencimiento:</label>
+				<input type="date" id="fecha_vencimiento" name="fecha_vencimiento"  value="" class="form-control">
+				</div>
+				</div>
+				</div>
 				 
 				 
 				<div class="row">
@@ -143,36 +193,35 @@
               </div>
             </div>
              <div class="box-body">
-	           <div class="nav-tabs-custom">
-	            <ul class="nav nav-tabs">
-	            </ul>
-	            <div class="col-md-12 col-lg-12 col-xs-12">
-	            <div class="tab-content">
-	            <br>
-	              <div class="tab-pane active" id="honorarios">
-	                
-						<div class="pull-right" style="margin-right:15px;">
-							<input type="text" value="" class="form-control" id="search_honorarios" name="search_honorarios" onkeyup="load_honorarios(1)" placeholder="buscar.."/>
-						</div>
-						<div id="load_honorarios" ></div>	
-						<div id="honorarios_registrados_detalle"></div>	
-						<div id="divLoaderPage"></div>	
-	                
-	              </div>
-	   
-	            </div>
-	            </div>
+           <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+            </ul>
+            <div class="col-md-12 col-lg-12 col-xs-12">
+            <div class="tab-content">
+            <br>
+              <div class="tab-pane active" id="honorarios">
+                
+					<div class="pull-right" style="margin-right:15px;">
+						<input type="text" value="" class="form-control" id="search_honorarios" name="search_honorarios" onkeyup="load_honorarios(1)" placeholder="buscar.."/>
+					</div>
+					<div id="load_honorarios" ></div>	
+					<div id="honorarios_registrados_detalle"></div>	
+					<div id="divLoaderPage"></div>	
+                
+              </div>
+   
+            </div>
+            </div>
           </div>
          
             
             </div>
-           </div>
-       </section>
+            </div>
+            </section>
             
             
             
   		</div>
-  		
  	<?php include("view/modulos/footer.php"); ?>	
 
    <div class="control-sidebar-bg"></div>
@@ -180,7 +229,7 @@
    <?php include("view/modulos/links_js.php"); ?>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="view/bootstrap/otros/notificaciones/notify.js"></script>
-  <script src="view/Juridico/js/calculaHonorarios.js?1.10"></script>
+  <script src="view/Juridico/js/calculaHonorarios.js?1.05"></script>
   
 
   </body>
