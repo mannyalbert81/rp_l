@@ -209,15 +209,15 @@ $(document).ready(function(){
     
     // capturo la fecha actual en letras
      //fecha_actual = diasSemana[f.getDay()] + ", " + dia + " de " + meses[f.getMonth()] + " del " + f.getFullYear() + ", las " + hora + "H" + minutos;
-     fecha_actual = dia + " de " + meses[f.getMonth()] + " del " + f.getFullYear() + ", las " + hora + "H" + minutos;
+     fecha_actual = dia + " de " + meses[f.getMonth()] + " de " + f.getFullYear() + ", las " + hora + "H" + minutos;
      
      //fecha_razon = diasSemana[fecha.getDay()] + ", " + dia_razon + " de " + meses[fecha.getMonth()] + " del " + fecha.getFullYear();
-     fecha_razon = dia_razon + " de " + meses[fecha.getMonth()] + " del " + fecha.getFullYear();
+     fecha_razon = dia_razon + " de " + meses[fecha.getMonth()] + " de " + fecha.getFullYear();
      
-     fecha_auto_pago_nueva = textoseparado[2] + " de " + meses[textoseparado[1]-1] + " del " + textoseparado[0];
-     fecha_inicio_proceso_juicios_nueva  = textoseparado1[2] + " de " + meses[textoseparado1[1]-1] + " del " + textoseparado1[0];
-     fecha_titulo_credito_juicios_nueva = textoseparado2[2] + " de " + meses[textoseparado2[1]-1] + " del " + textoseparado2[0];
-     fecha_oden_cobro_juicios_nueva  = textoseparado3[2] + " de " + meses[textoseparado3[1]-1] + " del " + textoseparado3[0];
+     fecha_auto_pago_nueva = textoseparado[2] + " de " + meses[textoseparado[1]-1] + " de " + textoseparado[0];
+     fecha_inicio_proceso_juicios_nueva  = textoseparado1[2] + " de " + meses[textoseparado1[1]-1] + " de " + textoseparado1[0];
+     fecha_titulo_credito_juicios_nueva = textoseparado2[2] + " de " + meses[textoseparado2[1]-1] + " de " + textoseparado2[0];
+     fecha_oden_cobro_juicios_nueva  = textoseparado3[2] + " de " + meses[textoseparado3[1]-1] + " de " + textoseparado3[0];
    
     
 	// vacio el texto
@@ -235,11 +235,11 @@ $(document).ready(function(){
 	`<p style="text-align:justify">&nbsp;</p>`+
 
 	`<p style="text-align: justify;"><b>JEFATURA DE COACTIVA.-</b> Quito, 27 de enero de 2020, las 08:30.-`+
-	` VISTOS: Avoco conocimiento en la calidad en que suscribo en conformidad con la acción de personal No. GTH-NSP-10657-2019`+
-	 ` de ${fecha_inicio_proceso_juicios_nueva}. Agréguese a los autos la documentación precedente. En lo principal, de la Orden de Cobro No. ${orden_cobro_juicios} de ${fecha_oden_cobro_juicios_nueva} y el Título de Crédito No. ${numero_titulo_credito_juicios} de ${fecha_titulo_credito_juicios_nueva},`+
+	` VISTOS: Avoco conocimiento del presente proceso en la calidad de Jefe de Coactiva de la Corporación Nacional de Telecomunicaciones CNT EP de conformidad a la Acción de personal: GTH-NSP-10657-2019`+
+	 ` de ${fecha_inicio_proceso_juicios_nueva}. Agréguese a los autos la documentación precedente. En lo principal agréguese: 1.-La Orden de Cobro No. ${orden_cobro_juicios} de ${fecha_oden_cobro_juicios_nueva} y el Título de Crédito No. ${numero_titulo_credito_juicios} de ${fecha_titulo_credito_juicios_nueva},`+
 	 ` del que consta la razón de notificación correspondiente, remitidas por el JEFE DE COBRANZA EXTRAJUDICIAL; se desprende que <b>${nombre_clientes}</b>,`+
-     ` con cédula de ciudadanía No. <b>${identificacion_clientes}</b>, adeuda a la Corporación Nacional de Telecomunicaciones CNT EP., por la prestación de servicios de Telecomunicaciones, sin que a la fecha haya pagado su obligación. Por cuanto la obligación es determinada y actualmente exigible, de conformidad con lo establecido en el artículo 267 del Código Orgánico Administrativo (COA), dicto la presente`+
-     ` <b>ORDEN DE PAGO INMEDIATO</b>, en contra de <b>${nombre_clientes}</b>, con cédula de ciudadanía No. <b>${identificacion_clientes}</b>, disponiendo que pague en la JEFATURA DE COACTIVA, en el término de TRES DÍAS, la cantidad de`+
+     ` con cédula de ciudadanía No. <b>${identificacion_clientes}</b>; adeuda a la Corporación Nacional de Telecomunicaciones CNT EP., por la prestación de servicios de Telecomunicaciones, sin que a la fecha haya pagado su obligación. Por cuanto la obligación es determinada y actualmente exigible, de conformidad con lo establecido en el artículo 267 del Código Orgánico Administrativo (COA), dicto la presente`+
+     ` <b>ORDEN DE PAGO INMEDIATO</b>, en contra de <b>${nombre_clientes}</b>, con cédula de ciudadanía: No. <b>${identificacion_clientes}</b>; disponiendo que pague en la JEFATURA DE COACTIVA, en el término de TRES DÍAS, la cantidad de`+
      ` ${monto_cuantia_letras}, valor al que se sumarán los intereses, honorarios profesionales, derechos y aranceles, gastos procesales y costas judiciales y otros valores adicionales que genere la obligación, hasta la total cancelación de la deuda; o, dimita bienes equivalentes, previniéndole que de no hacerlo se procederá al embargo de bienes. De conformidad a lo previsto en el artículo 281 del Código Orgánico Administrativo (COA), como medidas cautelares, ordeno: a) La retención de los fondos, depósitos e inversiones que el  (la) coactivado (a) mantiene en las entidades del Sistema Financiero, hasta por el valor de`+
      ` <b>${monto_letras}</b>. Para el efecto ofíciese a la Superintendencia de Bancos y Seguros; y, a la Superintendencia de Economía Popular y Solidaria. Las autoridades respectivas comunicarán a esta`+
      ` <b>JEFATURA DE COACTIVA</b>, sobre las cuentas en las que recayeron las retenciones. Designo como Secretaria Abogada Externa a la <b>${secretario}</b>,`+
@@ -336,11 +336,16 @@ $(document).ready(function(){
 	$('#editor2').val("");
 	
 	formato_1 = 
+		
+		`<p style="text-align: center;"><b>REPÚBLICA DEL ECUADOR</b><br>`+
+		`<b>CORPORACIÓN NACIONAL DE TELECOMUNICACIONES CNT EP.</b><br>`+
+		`<b>JEFATURA DE COACTIVA</b></p>`+
+		
 	`<p style="text-align: left;">Oficio No. 0000-JC-PIC-2020-LGLC<br>`+
 	`D.M. de Quito, a 04 de febrero de 2020</p>`+
 	`<p style="text-align: left;">Señor</p>`+
 	
-	`<p style="text-align:left"><b>SUPERINTENDENTE DE BANCOS<br>`+
+	`<p style="text-align:left"><b>SUPERINTENDENCIA DE BANCOS<br>`+
 	`SUPERINTENDENCIA DE ECONOMÍA POPULAR Y SOLIDARIA</b><br>`+
 	`Presente.-</p>`+
 	
