@@ -456,7 +456,7 @@ class ReporteMayorController extends ControladorBase{
 	                    $html.='<th colspan="1" style="text-align:center; font-size: 13px;">FECHA:</th>';
 	                    $html.='<th colspan="1" style="text-align:center; font-size: 13px;">DOC:</th>';
 	                    $html.='<th colspan="1" style="text-align:center; font-size: 13px;">NOMBRE:</th>';
-	                    $html.='<th colspan="1" style="text-align:center; font-size: 13px;">DESCRIPCION:</th>';
+	                    $html.='<th colspan="1" style="text-align:center; font-size: 13px;">DESCRIPCIÓN:</th>';
 	                    $html.='<th colspan="1" style="text-align:center; font-size: 13px;">FACTURA:</th>';
 	                    $html.='<th colspan="1" style="text-align:center; font-size: 13px;">CHEQUE:</th>';
 	                    $html.='<th colspan="1" style="text-align:center; font-size: 13px;">DEBE:</th>';

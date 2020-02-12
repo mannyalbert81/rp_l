@@ -216,9 +216,7 @@ $(document).ready(function(){
      ` para el ingreso al servicio público, y retirada en el artículo 7 del Reglamento General, infórmese al Ministerio de Trabajo`+
      ` que la señora <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, mantiene obligaciones en mora con esta`+
      ` entidad, en tal virtud ofíciese al Ministerio de Trabajo a fin de que se registre en los archivos a su cargo`+
-     ` el impedimento para ejercer cargo público.- <b>2.-</b> Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información`+
-     ` suficiente respecto del domicilio actual, del coactivado <b>${nombre_clientes}, con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos`+
-     ` generales.- <b>CÚMPLASE Y OFÍCIESE.-</b></p>`+
+     ` el impedimento para ejercer cargo público.- <b>CÚMPLASE Y OFÍCIESE.-</b></p>`+
 
 	
 	
@@ -312,7 +310,7 @@ $(document).ready(function(){
 	`MINISTERIO DE TRABAJO<br>`+
 	`DIRECTOR DE SERVICIOS DE RENTAS INTERNAS (SRI)<br>`+
 	`DIRECTOR DEL INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL<br>`+
-	`CONSEJO NACIONAL ELECTORAL</b></p>`+
+	//`CONSEJO NACIONAL ELECTORAL</b></p>`+
 	
 	
 	`<p>Presente.-</p>`+
@@ -344,8 +342,8 @@ $(document).ready(function(){
     ` <b>3.-</b> Remítase atento oficio al Instituto Ecuatoriano de Seguridad Social a fin de que emita la historia laboral del coactivado <b>${nombre_clientes},`+
     ` con cédula de ciudadanía No. ${identificacion_clientes}</b>.-`+
    
-    ` <b>4.-</b> Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información suficiente respecto del domicilio actual, del coactivado <b>${nombre_clientes},`+
-    ` con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos generales.-`+
+    //` <b>4.-</b> Remítase atento oficio al Consejo Nacional Electoral a fin que certifique la información suficiente respecto del domicilio actual, del coactivado <b>${nombre_clientes},`+
+    //` con cédula de ciudadanía No. ${identificacion_clientes}</b>, y más datos generales.-`+
      
      
     ` &quot; F) Abg. Andrés Albuja. JEFE DE COACTIVA - CNT E.P.- Certifico.</p>`+
