@@ -12,6 +12,10 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="icon" type="image/png" href="view/bootstrap/otros/login/images/icons/favicon.ico"/>
     
+     <script lang=javascript src="view/Contable/FuncionesJS/xlsx.full.min.js"></script>
+   <script lang=javascript src="view/Contable/FuncionesJS/FileSaver.min.js"></script>
+  
+    
      <style type="text/css">
  	  .loader {
         position: fixed;
